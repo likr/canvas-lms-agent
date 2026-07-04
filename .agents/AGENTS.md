@@ -20,3 +20,11 @@
 ## Git Workflow & Branch Policy
 - **Branch Protection & Development Branch (`dev`)**: Direct pushes/commits to protected branches (e.g. `master` or main release branches) are restricted. Perform all future feature development, testing, and documentation edits on the `dev` branch.
 - **Pull Request Operation**: Merging changes from the `dev` branch into protected main branches must be handled through Pull Requests (PRs) rather than direct merges or pushes.
+- **Task Completion Workflow (Tests, Commits, & PRs)**: Upon completing any task, you must run all unit tests and create a Pull Request to merge your changes. Follow the detailed instructions in [git_workflow.md](file:///home/likr/src/likr-sandbox/canvas-lms-agent/.agents/references/git_workflow.md).
+
+## Rule Maintenance & Progressive Disclosure
+- **Concise AGENTS.md**: Keep this rules document simple, clean, and highly scannable. Avoid bloat.
+- **Reference Delegation**: When adding new guidelines, learnings, or detailed technical procedures, summarize them in a brief bullet point here, and delegate the comprehensive details (such as command examples, schemas, and scripts) to a separate file under `.agents/references/` or the respective skill's `references/` directory.
+- **Explicit Linking**: Always include a clickable absolute Markdown link (`file://` scheme) from this file to the delegated detailed reference document.
+
+

@@ -320,6 +320,9 @@ Keep going until:
 - The feedback is all empty (everything looks good)
 - You're not making meaningful progress
 
+Once the iteration loop is complete and you are ready to finalize:
+- **Run Unit Tests and Create PR**: You must run regression tests, commit your skill changes, and create a Pull Request to merge them. Follow the detailed steps in [git_workflow.md](file:///home/likr/src/likr-sandbox/canvas-lms-agent/.agents/skills/skill-creator/references/git_workflow.md).
+
 ---
 
 ## Advanced: Blind comparison
@@ -466,6 +469,7 @@ The agents/ directory contains instructions for specialized subagents. Read them
 
 The references/ directory has additional documentation:
 - `references/schemas.md` — JSON structures for evals.json, grading.json, etc.
+- [git_workflow.md](file:///home/likr/src/likr-sandbox/canvas-lms-agent/.agents/skills/skill-creator/references/git_workflow.md) — Steps for unit testing, committing, and creating PRs upon skill completion.
 
 ---
 
@@ -479,6 +483,7 @@ Repeating one more time the core loop here for emphasis:
   - Run quantitative evals
 - Repeat until you and the user are satisfied
 - Package the final skill and return it to the user.
+- Run project-wide unit tests, commit the changes, and create a Pull Request to merge.
 
 Please add steps to your TodoList, if you have such a thing, to make sure you don't forget. If you're in Cowork, please specifically put "Create evals JSON and run `eval-viewer/generate_review.py` so human can review test cases" in your TodoList to make sure it happens.
 
