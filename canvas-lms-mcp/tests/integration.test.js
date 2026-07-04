@@ -91,15 +91,33 @@ test("Canvas LMS MCP Server Integration Tests", { skip: !runIntegration }, async
       const expectedTools = [
         "get_current_user",
         "list_courses",
+        "get_course",
         "list_assignments",
+        "get_assignment",
+        "create_assignment",
+        "update_assignment",
+        "delete_assignment",
         "get_user_grades",
+        "get_submission",
         "list_modules",
+        "get_module",
+        "create_module",
+        "update_module",
+        "delete_module",
         "list_files",
         "list_discussion_topics",
+        "create_discussion_topic",
         "list_announcements",
         "list_pages",
         "get_page",
+        "create_page",
+        "update_page",
+        "delete_page",
         "list_quizzes",
+        "get_quiz",
+        "create_quiz",
+        "update_quiz",
+        "delete_quiz",
         "grade_or_comment_submission",
         "submit_assignment",
         "list_users",
@@ -395,6 +413,271 @@ test("Canvas LMS MCP Server Integration Tests", { skip: !runIntegration }, async
       const rubrics = JSON.parse(result.content[0].text);
       assert.ok(Array.isArray(rubrics));
       console.log(`Found ${rubrics.length} rubrics`);
+    });
+
+    // Step 20: get_course
+    await t.test("get_course execution", async () => {
+      const resp = await client.sendRequest("tools/call", {
+        name: "get_course",
+        arguments: { id: activeCourseId }
+      }, 20);
+      assert.ok(!resp.error);
+      const result = resp.result || {};
+      assert.ok(!result.isError);
+      const course = JSON.parse(result.content[0].text);
+      assert.strictEqual(course.id, activeCourseId);
+    });
+
+    // Step 21: Assignment CRUD lifecycle
+    await t.test("Assignment CRUD integration lifecycle", async () => {
+      // Create
+      const createResp = await client.sendRequest("tools/call", {
+        name: "create_assignment",
+        arguments: {
+          course_id: activeCourseId,
+          name: "Integration Temp Assignment",
+          points_possible: 10,
+        }
+      }, 21);
+      assert.ok(!createResp.error);
+      const createResult = createResp.result || {};
+      if (createResult.isError) {
+        console.log("create_assignment skipped due to role permissions:", createResult.content[0].text);
+        return;
+      }
+      const createdAsm = JSON.parse(createResult.content[0].text);
+      assert.ok(createdAsm.id);
+
+      // Get
+      const getResp = await client.sendRequest("tools/call", {
+        name: "get_assignment",
+        arguments: { course_id: activeCourseId, id: createdAsm.id }
+      }, 22);
+      assert.ok(!getResp.error);
+      const getResult = getResp.result || {};
+      assert.ok(!getResult.isError);
+      const fetchedAsm = JSON.parse(getResult.content[0].text);
+      assert.strictEqual(fetchedAsm.name, "Integration Temp Assignment");
+
+      // Update
+      const updateResp = await client.sendRequest("tools/call", {
+        name: "update_assignment",
+        arguments: {
+          course_id: activeCourseId,
+          id: createdAsm.id,
+          name: "Integration Temp Assignment Updated",
+        }
+      }, 23);
+      assert.ok(!updateResp.error);
+      const updateResult = updateResp.result || {};
+      assert.ok(!updateResult.isError);
+      const updatedAsm = JSON.parse(updateResult.content[0].text);
+      assert.strictEqual(updatedAsm.name, "Integration Temp Assignment Updated");
+
+      // Delete
+      const deleteResp = await client.sendRequest("tools/call", {
+        name: "delete_assignment",
+        arguments: { course_id: activeCourseId, id: createdAsm.id }
+      }, 24);
+      assert.ok(!deleteResp.error);
+      const deleteResult = deleteResp.result || {};
+      assert.ok(!deleteResult.isError);
+    });
+
+    // Step 22: get_submission
+    await t.test("get_submission execution", async () => {
+      const resp = await client.sendRequest("tools/call", {
+        name: "get_submission",
+        arguments: {
+          course_id: activeCourseId,
+          assignment_id: 150469,
+          user_id: studentId,
+        }
+      }, 25);
+      assert.ok(!resp.error);
+      const result = resp.result || {};
+      if (result.isError) {
+        console.log("get_submission returned expected error (e.g. not found or permissions):", result.content[0].text);
+      } else {
+        const sub = JSON.parse(result.content[0].text);
+        assert.ok(sub.user_id);
+      }
+    });
+
+    // Step 23: Module CRUD lifecycle
+    await t.test("Module CRUD integration lifecycle", async () => {
+      // Create
+      const createResp = await client.sendRequest("tools/call", {
+        name: "create_module",
+        arguments: {
+          course_id: activeCourseId,
+          name: "Integration Temp Module",
+        }
+      }, 26);
+      assert.ok(!createResp.error);
+      const createResult = createResp.result || {};
+      if (createResult.isError) {
+        console.log("create_module skipped due to role permissions:", createResult.content[0].text);
+        return;
+      }
+      const createdMod = JSON.parse(createResult.content[0].text);
+      assert.ok(createdMod.id);
+
+      // Get
+      const getResp = await client.sendRequest("tools/call", {
+        name: "get_module",
+        arguments: { course_id: activeCourseId, id: createdMod.id }
+      }, 27);
+      assert.ok(!getResp.error);
+      const getResult = getResp.result || {};
+      assert.ok(!getResult.isError);
+      const fetchedMod = JSON.parse(getResult.content[0].text);
+      assert.strictEqual(fetchedMod.name, "Integration Temp Module");
+
+      // Update
+      const updateResp = await client.sendRequest("tools/call", {
+        name: "update_module",
+        arguments: {
+          course_id: activeCourseId,
+          id: createdMod.id,
+          name: "Integration Temp Module Updated",
+        }
+      }, 28);
+      assert.ok(!updateResp.error);
+      const updateResult = updateResp.result || {};
+      assert.ok(!updateResult.isError);
+      const updatedMod = JSON.parse(updateResult.content[0].text);
+      assert.strictEqual(updatedMod.name, "Integration Temp Module Updated");
+
+      // Delete
+      const deleteResp = await client.sendRequest("tools/call", {
+        name: "delete_module",
+        arguments: { course_id: activeCourseId, id: createdMod.id }
+      }, 29);
+      assert.ok(!deleteResp.error);
+      const deleteResult = deleteResp.result || {};
+      assert.ok(!deleteResult.isError);
+    });
+
+    // Step 24: Wiki Page CRUD lifecycle
+    await t.test("Wiki Page CRUD integration lifecycle", async () => {
+      const pageTitle = "Integration Temp Page";
+      // Create
+      const createResp = await client.sendRequest("tools/call", {
+        name: "create_page",
+        arguments: {
+          course_id: activeCourseId,
+          title: pageTitle,
+          body: "<p>Test Page Body</p>",
+        }
+      }, 30);
+      assert.ok(!createResp.error);
+      const createResult = createResp.result || {};
+      if (createResult.isError) {
+        console.log("create_page skipped due to role permissions:", createResult.content[0].text);
+        return;
+      }
+      const createdPage = JSON.parse(createResult.content[0].text);
+      assert.ok(createdPage.url);
+
+      // Update
+      const updateResp = await client.sendRequest("tools/call", {
+        name: "update_page",
+        arguments: {
+          course_id: activeCourseId,
+          url_or_id: createdPage.url,
+          title: "Integration Temp Page Updated",
+        }
+      }, 31);
+      assert.ok(!updateResp.error);
+      const updateResult = updateResp.result || {};
+      assert.ok(!updateResult.isError);
+      const updatedPage = JSON.parse(updateResult.content[0].text);
+      assert.strictEqual(updatedPage.title, "Integration Temp Page Updated");
+
+      // Delete
+      const deleteResp = await client.sendRequest("tools/call", {
+        name: "delete_page",
+        arguments: { course_id: activeCourseId, url_or_id: createdPage.url }
+      }, 32);
+      assert.ok(!deleteResp.error);
+      const deleteResult = deleteResp.result || {};
+      assert.ok(!deleteResult.isError);
+    });
+
+    // Step 25: Quiz CRUD lifecycle
+    await t.test("Quiz CRUD integration lifecycle", async () => {
+      // Create
+      const createResp = await client.sendRequest("tools/call", {
+        name: "create_quiz",
+        arguments: {
+          course_id: activeCourseId,
+          title: "Integration Temp Quiz",
+        }
+      }, 33);
+      assert.ok(!createResp.error);
+      const createResult = createResp.result || {};
+      if (createResult.isError) {
+        console.log("create_quiz skipped due to role permissions:", createResult.content[0].text);
+        return;
+      }
+      const createdQuiz = JSON.parse(createResult.content[0].text);
+      assert.ok(createdQuiz.id);
+
+      // Get
+      const getResp = await client.sendRequest("tools/call", {
+        name: "get_quiz",
+        arguments: { course_id: activeCourseId, id: createdQuiz.id }
+      }, 34);
+      assert.ok(!getResp.error);
+      const getResult = getResp.result || {};
+      assert.ok(!getResult.isError);
+      const fetchedQuiz = JSON.parse(getResult.content[0].text);
+      assert.strictEqual(fetchedQuiz.title, "Integration Temp Quiz");
+
+      // Update
+      const updateResp = await client.sendRequest("tools/call", {
+        name: "update_quiz",
+        arguments: {
+          course_id: activeCourseId,
+          id: createdQuiz.id,
+          title: "Integration Temp Quiz Updated",
+        }
+      }, 35);
+      assert.ok(!updateResp.error);
+      const updateResult = updateResp.result || {};
+      assert.ok(!updateResult.isError);
+      const updatedQuiz = JSON.parse(updateResult.content[0].text);
+      assert.strictEqual(updatedQuiz.title, "Integration Temp Quiz Updated");
+
+      // Delete
+      const deleteResp = await client.sendRequest("tools/call", {
+        name: "delete_quiz",
+        arguments: { course_id: activeCourseId, id: createdQuiz.id }
+      }, 36);
+      assert.ok(!deleteResp.error);
+      const deleteResult = deleteResp.result || {};
+      assert.ok(!deleteResult.isError);
+    });
+
+    // Step 26: create_discussion_topic
+    await t.test("create_discussion_topic execution", async () => {
+      const resp = await client.sendRequest("tools/call", {
+        name: "create_discussion_topic",
+        arguments: {
+          course_id: activeCourseId,
+          title: "Integration Temp Discussion Topic",
+          message: "<p>Discussion body</p>",
+        }
+      }, 37);
+      assert.ok(!resp.error);
+      const result = resp.result || {};
+      if (result.isError) {
+        console.log("create_discussion_topic skipped due to role permissions:", result.content[0].text);
+      } else {
+        const createdTopic = JSON.parse(result.content[0].text);
+        assert.ok(createdTopic.id);
+      }
     });
 
   } finally {

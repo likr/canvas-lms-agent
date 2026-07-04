@@ -59,3 +59,33 @@ test("list_courses tool calls correct endpoint and filters active courses", asyn
     start_at: "2026-04-01T00:00:00Z",
   });
 });
+
+test("get_course tool calls correct course endpoint and returns course details", async () => {
+  let calledUrl = null;
+  const mockClient = {
+    get: async (url) => {
+      calledUrl = url;
+      return {
+        data: {
+          id: 101,
+          name: "Course A",
+          course_code: "CA",
+          start_at: "2026-04-01T00:00:00Z",
+          end_at: "2026-09-01T00:00:00Z",
+          time_zone: "UTC",
+        },
+      };
+    },
+  };
+
+  const result = await courses.handlers.get_course(mockClient, { id: 101 });
+  assert.strictEqual(calledUrl, "/api/v1/courses/101");
+  assert.deepStrictEqual(result, {
+    id: 101,
+    name: "Course A",
+    course_code: "CA",
+    start_at: "2026-04-01T00:00:00Z",
+    end_at: "2026-09-01T00:00:00Z",
+    time_zone: "UTC",
+  });
+});

@@ -15,6 +15,20 @@ const definitions = [
       properties: {},
     },
   },
+  {
+    name: "get_course",
+    description: "Retrieves details about a specific course by ID.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        id: {
+          type: "number",
+          description: "The unique ID of the Canvas course.",
+        },
+      },
+      required: ["id"],
+    },
+  },
 ];
 
 const handlers = {
@@ -42,6 +56,23 @@ const handlers = {
       course_code: course.course_code,
       start_at: course.start_at,
     }));
+  },
+
+  get_course: async (client, args) => {
+    const id = args.id;
+    if (!id) {
+      throw new Error("Missing required argument: id");
+    }
+    const response = await client.get(`/api/v1/courses/${id}`);
+    const course = response.data || {};
+    return {
+      id: course.id,
+      name: course.name || course.course_code,
+      course_code: course.course_code,
+      start_at: course.start_at,
+      end_at: course.end_at,
+      time_zone: course.time_zone,
+    };
   },
 };
 

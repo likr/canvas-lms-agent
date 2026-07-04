@@ -61,3 +61,28 @@ test("list_announcements lists announcements by querying with only_announcements
     pinned: false,
   });
 });
+
+test("create_discussion_topic tool calls post with correct payload", async () => {
+  let calledUrl = null;
+  let calledPayload = null;
+  const mockClient = {
+    post: async (url, payload) => {
+      calledUrl = url;
+      calledPayload = payload;
+      return {
+        data: { id: 403, title: "Topic 3", message: "Desc", posted_at: "2026-07-04T12:00:00Z", discussion_type: "side_comment", is_announcement: false },
+      };
+    },
+  };
+  const result = await discussions.handlers.create_discussion_topic(mockClient, { course_id: 101, title: "Topic 3", message: "Desc", discussion_type: "side_comment", is_announcement: false });
+  assert.strictEqual(calledUrl, "/api/v1/courses/101/discussion_topics");
+  assert.deepStrictEqual(calledPayload, { title: "Topic 3", message: "Desc", discussion_type: "side_comment", is_announcement: false });
+  assert.deepStrictEqual(result, {
+    id: 403,
+    title: "Topic 3",
+    message: "Desc",
+    posted_at: "2026-07-04T12:00:00Z",
+    discussion_type: "side_comment",
+    is_announcement: false,
+  });
+});
