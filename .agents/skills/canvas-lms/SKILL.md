@@ -60,3 +60,29 @@ When a Canvas LMS task is requested, perform operations in the following logical
 7. **Grade / Modify Submissions**:
    - **Grading and Feedback**: If you are a teacher/TA and need to grade or write a textual comment on a student's submission, call `grade_or_comment_submission` with `course_id`, `assignment_id`, `user_id` (student's user ID), and optional `posted_grade` (e.g. `A-`, `35`) or `text_comment`.
    - **Student Submissions**: If you are a student and want to submit a text entry or URL assignment, call `submit_assignment` with `course_id`, `assignment_id`, `submission_type` (e.g. `online_text_entry`, `online_url`), and the appropriate `body` or `url` content.
+
+---
+
+## Unimplemented APIs (Backlog)
+
+The following major resource areas from the Canvas LMS API documentation (`docs/services/canvas/resources/`) are currently unimplemented in the MCP server. Consider implementing these when new tasks require them:
+
+- **Accounts & Administration**:
+  - Accounts (`accounts.md`)
+  - Admins (`admins.md`)
+  - Roles (`roles.md`)
+- **Communication**:
+  - Conversations / Inbox (`conversations.md`)
+  - Communication Channels (`communication_channels.md`)
+- **Groups & Collaboration**:
+  - Groups (`groups.md`)
+  - Group Categories (`group_categories.md`)
+  - Collaborations (`collaborations.md`)
+- **Outcomes & Alignments**:
+  - Outcomes (`outcomes.md`)
+  - Outcome Groups (`outcome_groups.md`)
+  - Outcome Results (`outcome_results.md`)
+- **Integrations & Data Management**:
+  - SIS Imports & Integration (`sis_imports.md`, `sis_integration.md`)
+  - External Tools / LTI (`external_tools.md`, `lti_registrations.md`)
+  - Custom Gradebook Columns (`custom_gradebook_columns.md`)
