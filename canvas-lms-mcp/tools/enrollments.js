@@ -13,6 +13,10 @@ const definitions = [
         "course_id": {
           "type": "string",
           "description": "Path parameter: course_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -29,6 +33,10 @@ const definitions = [
         "section_id": {
           "type": "string",
           "description": "Path parameter: section_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -89,6 +97,10 @@ const definitions = [
         "created_for_sis_id[]": {
           "type": "boolean",
           "description": "<p>If sis\\_user\\_id is present and created\\_for\\_sis\\_id is true, Returns only<br>enrollments for the specified SIS ID(s).<br>If a user has two sis\\_id's, one enrollment may be created using one of the<br>two ids. This would limit the enrollments returned from the endpoint to<br>enrollments that were created from a sis\\_import with that sis\\_user\\_id</p>"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -109,6 +121,10 @@ const definitions = [
         "id": {
           "type": "number",
           "description": "The ID of the enrollment object"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -383,6 +399,10 @@ const definitions = [
         "account_id": {
           "type": "string",
           "description": "<p>The ID of the account to check for temporary enrollment status.<br>Defaults to the domain root account if not provided.</p>"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -407,6 +427,10 @@ const definitions = [
         "limit": {
           "type": "number",
           "description": "The maximum number of user IDs to process. Defaults to 10, max 100."
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [

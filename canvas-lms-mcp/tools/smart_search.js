@@ -25,6 +25,10 @@ const definitions = [
         "include[]": {
           "type": "string",
           "description": "<p>Optional information to include with each search result:<br>modules:: An array of module objects that the search result belongs to.<br>status:: The published status for all results and the due\\_date for all assignments. Allowed values: <code>status</code>, <code>modules</code></p>"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [

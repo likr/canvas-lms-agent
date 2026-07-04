@@ -9,7 +9,12 @@ const definitions = [
     "description": "**Scope:** `url:GET|/api/v1/users/self/bookmarks` Returns the paginated list of bookmarks. ```bash curl 'https:///api/v1/users/self/bookmarks' \\ -H 'Authorization: Bearer ' ``` Returns a list of [Bookmark](#bookmark) objects. [Bookmarks::BookmarksController#create](https://github.com/instructure/canvas-lms/blob/master/app/controllers/bookmarks/bookmarks_controller.rb)",
     "inputSchema": {
       "type": "object",
-      "properties": {}
+      "properties": {
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
+        }
+      }
     }
   },
   {
@@ -46,6 +51,10 @@ const definitions = [
         "id": {
           "type": "string",
           "description": "Path parameter: id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [

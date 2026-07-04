@@ -21,6 +21,10 @@ const definitions = [
         "course_pace_id": {
           "type": "number",
           "description": "The id of the course\\_pace"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [

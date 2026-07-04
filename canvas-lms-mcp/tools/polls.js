@@ -9,7 +9,12 @@ const definitions = [
     "description": "**Scope:** `url:GET|/api/v1/polls` Returns the paginated list of polls for the current user. ```js { \"polls\": [Poll] } ``` [Polling::PollsController#show](https://github.com/instructure/canvas-lms/blob/master/app/controllers/polling/polls_controller.rb)",
     "inputSchema": {
       "type": "object",
-      "properties": {}
+      "properties": {
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
+        }
+      }
     }
   },
   {
@@ -21,6 +26,10 @@ const definitions = [
         "id": {
           "type": "string",
           "description": "Path parameter: id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [

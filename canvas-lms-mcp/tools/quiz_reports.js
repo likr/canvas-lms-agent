@@ -21,6 +21,10 @@ const definitions = [
         "includes_all_versions": {
           "type": "boolean",
           "description": "<p>Whether to retrieve reports that consider all the submissions or only<br>the most recent. Defaults to false, ignored for item\\_analysis reports.</p>"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -84,6 +88,10 @@ const definitions = [
         "include": {
           "type": "string",
           "description": "<p>Whether the output should include documents for the file and/or progress<br>objects associated with this report. (Note: JSON-API only) Allowed values: <code>file</code>, <code>progress</code></p>"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [

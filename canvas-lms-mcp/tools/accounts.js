@@ -13,6 +13,10 @@ const definitions = [
         "include[]": {
           "type": "string",
           "description": "<p>Array of additional information to include.<br>\"lti\\_guid\":: the 'tool\\_consumer\\_instance\\_guid' that will be sent for this account on LTI launches<br>\"registration\\_settings\":: returns info about the privacy policy and terms of use<br>\"services\":: returns services and whether they are enabled (requires account management permissions)<br>\"course\\_count\":: returns the number of courses directly under each account<br>\"sub\\_account\\_count\":: returns the number of sub-accounts directly under each account Allowed values: <code>lti\\_guid</code>, <code>registration\\_settings</code>, <code>services</code>, <code>course\\_count</code>, <code>sub\\_account\\_count</code></p>"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       }
     }
@@ -26,6 +30,10 @@ const definitions = [
         "include[]": {
           "type": "string",
           "description": "<p>Array of additional information to include.<br>\"lti\\_guid\":: the 'tool\\_consumer\\_instance\\_guid' that will be sent for this account on LTI launches<br>\"registration\\_settings\":: returns info about the privacy policy and terms of use<br>\"services\":: returns services and whether they are enabled (requires account management permissions)<br>\"course\\_count\":: returns the number of courses directly under each account<br>\"sub\\_account\\_count\":: returns the number of sub-accounts directly under each account<br>\"site\\_admin\":: returns true if the account is the Site Admin account (only included if true) Allowed values: <code>lti\\_guid</code>, <code>registration\\_settings</code>, <code>services</code>, <code>course\\_count</code>, <code>sub\\_account\\_count</code>, <code>site\\_admin</code></p>"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       }
     }
@@ -35,7 +43,12 @@ const definitions = [
     "description": "**Scope:** `url:GET|/api/v1/manageable_accounts` A paginated list of accounts where the current user has permission to create or manage courses. List will be empty for students and teachers as only admins can view which accounts they are in. Returns a list of [Account](accounts_-lti.md#account) objects. [AccountsController#course\\_creation\\_accounts](https://github.com/instructure/canvas-lms/blob/master/app/controllers/accounts_controller.rb)",
     "inputSchema": {
       "type": "object",
-      "properties": {}
+      "properties": {
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
+        }
+      }
     }
   },
   {
@@ -43,7 +56,12 @@ const definitions = [
     "description": "**Scope:** `url:GET|/api/v1/course_creation_accounts` A paginated list of accounts where the current user has permission to create courses. Returns a list of [Account](accounts_-lti.md#account) objects. [AccountsController#course\\_accounts](https://github.com/instructure/canvas-lms/blob/master/app/controllers/accounts_controller.rb)",
     "inputSchema": {
       "type": "object",
-      "properties": {}
+      "properties": {
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
+        }
+      }
     }
   },
   {
@@ -51,7 +69,12 @@ const definitions = [
     "description": "**Scope:** `url:GET|/api/v1/course_accounts` A paginated list of accounts that the current user can view through their admin course enrollments. (Teacher, TA, or designer enrollments). Only returns \"id\", \"name\", \"workflow\\_state\", \"root\\_account\\_id\" and \"parent\\_account\\_id\" Returns a list of [Account](accounts_-lti.md#account) objects. [AccountsController#show](https://github.com/instructure/canvas-lms/blob/master/app/controllers/accounts_controller.rb)",
     "inputSchema": {
       "type": "object",
-      "properties": {}
+      "properties": {
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
+        }
+      }
     }
   },
   {
@@ -63,6 +86,10 @@ const definitions = [
         "id": {
           "type": "string",
           "description": "Path parameter: id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -79,6 +106,10 @@ const definitions = [
         "account_id": {
           "type": "string",
           "description": "Path parameter: account_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -91,7 +122,12 @@ const definitions = [
     "description": "**Scope:** `url:GET|/api/v1/settings/environment` Return a hash of global settings for the root account This is the same information supplied to the web interface as +ENV.SETTINGS+. ```bash curl 'http:///api/v1/settings/environment' \\ -H \"Authorization: Bearer \" ``` ```js { \"calendar_contexts_limit\": 10, \"open_registration\": false, ...} ``` [AccountsController#permissions](https://github.com/instructure/canvas-lms/blob/master/app/controllers/accounts_controller.rb)",
     "inputSchema": {
       "type": "object",
-      "properties": {}
+      "properties": {
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
+        }
+      }
     }
   },
   {
@@ -107,6 +143,10 @@ const definitions = [
         "permissions[]": {
           "type": "string",
           "description": "<p>List of permissions to check against the authenticated user.<br>Permission names are documented in the <a href=\"roles.md#method.role_overrides.manageable_permissions\">List assignable permissions</a> endpoint.</p>"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -135,6 +175,10 @@ const definitions = [
         "include[]": {
           "type": "string",
           "description": "<p>Array of additional information to include.<br>\"course\\_count\":: returns the number of courses directly under each account<br>\"sub\\_account\\_count\":: returns the number of sub-accounts directly under each account Allowed values: <code>course\\_count</code>, <code>sub\\_account\\_count</code></p>"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -151,6 +195,10 @@ const definitions = [
         "account_id": {
           "type": "string",
           "description": "Path parameter: account_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -167,6 +215,10 @@ const definitions = [
         "account_id": {
           "type": "string",
           "description": "Path parameter: account_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -179,7 +231,12 @@ const definitions = [
     "description": "**Scope:** `url:GET|/api/v1/manually_created_courses_account` Returns the sub-account that contains manually created courses for the domain root account. Returns an [Account](accounts_-lti.md#account) object. [AccountsController#courses\\_api](https://github.com/instructure/canvas-lms/blob/master/app/controllers/accounts_controller.rb)",
     "inputSchema": {
       "type": "object",
-      "properties": {}
+      "properties": {
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
+        }
+      }
     }
   },
   {
@@ -275,6 +332,10 @@ const definitions = [
         "homeroom": {
           "type": "boolean",
           "description": "If set, only return homeroom courses."
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [

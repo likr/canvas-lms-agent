@@ -25,6 +25,10 @@ const definitions = [
         "workflow_state[]": {
           "type": "string",
           "description": "If set, only returns imports that are in the given state. Allowed values: `initializing`, `created`, `importing`, `cleanup_batch`, `imported`, `imported_with_messages`, `aborted`, `failed`, `failed_with_messages`, `restoring`, `partially_restored`, `restored`"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -41,6 +45,10 @@ const definitions = [
         "account_id": {
           "type": "string",
           "description": "Path parameter: account_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -157,6 +165,10 @@ const definitions = [
         "id": {
           "type": "string",
           "description": "Path parameter: id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [

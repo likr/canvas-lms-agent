@@ -104,6 +104,10 @@ const definitions = [
         "assignment_id": {
           "type": "string",
           "description": "Path parameter: assignment_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -133,6 +137,10 @@ const definitions = [
         "grouped": {
           "type": "boolean",
           "description": "If this argument is true, the response will be grouped by student groups."
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -150,6 +158,10 @@ const definitions = [
         "course_id": {
           "type": "string",
           "description": "Path parameter: course_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -218,6 +230,10 @@ const definitions = [
         "include[]": {
           "type": "string",
           "description": "<p>Associations to include with the group. <code>total\\_scores</code> requires the<br><code>grouped</code> argument. Allowed values: <code>submission\\_history</code>, <code>submission\\_comments</code>, <code>submission\\_html\\_comments</code>, <code>rubric\\_assessment</code>, <code>assignment</code>, <code>total\\_scores</code>, <code>visibility</code>, <code>course</code>, <code>user</code>, <code>sub\\_assignment\\_submissions</code>, <code>peer\\_review\\_submissions</code>, <code>student\\_entered\\_score</code></p>"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -242,6 +258,10 @@ const definitions = [
         "user_id": {
           "type": "string",
           "description": "Path parameter: user_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -272,6 +292,10 @@ const definitions = [
         "include[]": {
           "type": "string",
           "description": "Associations to include with the group. Allowed values: `submission_history`, `submission_comments`, `submission_html_comments`, `rubric_assessment`, `full_rubric_assessment`, `visibility`, `course`, `user`, `read_status`, `student_entered_score`"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -298,6 +322,10 @@ const definitions = [
         "anonymous_id": {
           "type": "string",
           "description": "Path parameter: anonymous_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -328,6 +356,10 @@ const definitions = [
         "include[]": {
           "type": "string",
           "description": "Associations to include with the group. Allowed values: `submission_history`, `submission_comments`, `rubric_assessment`, `full_rubric_assessment`, `visibility`, `course`, `user`, `read_status`"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -618,6 +650,10 @@ const definitions = [
         "order": {
           "type": "string",
           "description": "The sorting order. Defaults to 'asc'. Allowed values: `asc`, `desc`"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -639,6 +675,10 @@ const definitions = [
         "assignment_ids[]": {
           "type": "string",
           "description": "Assignments being requested"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -1017,6 +1057,10 @@ const definitions = [
         "user_id": {
           "type": "string",
           "description": "Path parameter: user_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -1043,6 +1087,10 @@ const definitions = [
         "user_id": {
           "type": "string",
           "description": "Path parameter: user_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -1069,6 +1117,10 @@ const definitions = [
         "user_id": {
           "type": "string",
           "description": "Path parameter: user_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -1095,6 +1147,10 @@ const definitions = [
         "user_id": {
           "type": "string",
           "description": "Path parameter: user_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -1225,6 +1281,10 @@ const definitions = [
         "user_id": {
           "type": "string",
           "description": "Path parameter: user_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -1251,6 +1311,10 @@ const definitions = [
         "user_id": {
           "type": "string",
           "description": "Path parameter: user_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -1325,6 +1389,10 @@ const definitions = [
         "assignment_id": {
           "type": "string",
           "description": "Path parameter: assignment_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -1354,6 +1422,10 @@ const definitions = [
         "include_deactivated": {
           "type": "boolean",
           "description": "<p>If this argument is true, the response will include deactivated students in the summary<br>(defaults to false).</p>"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [

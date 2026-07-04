@@ -17,6 +17,10 @@ const definitions = [
         "quiz_assignment_overrides[][quiz_ids][]": {
           "type": "number",
           "description": "<p>An array of quiz IDs. If omitted, overrides for all quizzes available to<br>the operating user will be returned.</p>"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -37,6 +41,10 @@ const definitions = [
         "quiz_assignment_overrides[][quiz_ids][]": {
           "type": "number",
           "description": "<p>An array of quiz IDs. If omitted, overrides for all quizzes available to<br>the operating user will be returned.</p>"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [

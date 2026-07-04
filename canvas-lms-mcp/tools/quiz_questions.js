@@ -25,6 +25,10 @@ const definitions = [
         "quiz_submission_attempt": {
           "type": "number",
           "description": "The attempt of the submission you want the questions for."
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -50,6 +54,10 @@ const definitions = [
         "id": {
           "type": "number",
           "description": "The quiz question unique identifier."
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [

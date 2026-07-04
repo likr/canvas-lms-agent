@@ -13,6 +13,10 @@ const definitions = [
         "course_id": {
           "type": "number",
           "description": "The id of the contextual course for this API call"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -33,6 +37,10 @@ const definitions = [
         "date": {
           "type": "string",
           "description": "The date for which you would like to see detailed information"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -62,6 +70,10 @@ const definitions = [
         "assignment_id": {
           "type": "number",
           "description": "The ID of the assignment for which you want to see submissions"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -93,6 +105,10 @@ const definitions = [
         "ascending": {
           "type": "boolean",
           "description": "<p>Returns submission versions in ascending date order (oldest first). If<br>absent, returns submission versions in descending date order (newest<br>first).</p>"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [

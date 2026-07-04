@@ -7,7 +7,7 @@ This reference guide covers searching user profiles, scheduling appointments, ma
 ## Users
 
 ### 1. Roster Search
-- **`list_users`**: Lists users enrolled in a course or section.
+- **`get_courses_course_id_users`**: Lists users enrolled in a course or section.
   - *Parameters*: `course_id`, `search_term` (Optional string to match names or emails), `enrollment_type[]` (e.g. `student`, `teacher`).
   - *Usage*: Essential for teachers to lookup a student's canvas `user_id` when grading or commenting on submissions.
 

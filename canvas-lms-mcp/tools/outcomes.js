@@ -17,6 +17,10 @@ const definitions = [
         "add_defaults": {
           "type": "boolean",
           "description": "<p>If defaults are requested, then color and mastery level defaults will be<br>added to outcome ratings in the result. This will only take effect if<br>the Account Level Mastery Scales FF is DISABLED</p>"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -97,6 +101,10 @@ const definitions = [
         "assignment_id": {
           "type": "number",
           "description": "<p>The id of the assignment. When provided without student\\_id, returns all<br>outcome alignments for the assignment (requires manage\\_grades or<br>view\\_all\\_grades permission). When provided with student\\_id, filters to<br>that student's submission.</p>"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [

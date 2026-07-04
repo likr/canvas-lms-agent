@@ -17,6 +17,10 @@ const definitions = [
         "include[]": {
           "type": "string",
           "description": "Associations to include with the quiz submission question. Allowed values: `quiz_question`"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -75,6 +79,10 @@ const definitions = [
         "answer": {
           "type": "string",
           "description": "no description"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [

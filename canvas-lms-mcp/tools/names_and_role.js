@@ -25,6 +25,10 @@ const definitions = [
         "limit": {
           "type": "string",
           "description": "May be used to limit the number of NamesAndRoleMemberships returned in a page. Defaults to 50."
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -53,6 +57,10 @@ const definitions = [
         "limit": {
           "type": "string",
           "description": "May be used to limit the number of NamesAndRoleMemberships returned in a page. Defaults to 50."
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [

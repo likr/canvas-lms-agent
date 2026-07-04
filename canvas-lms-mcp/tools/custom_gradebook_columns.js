@@ -17,6 +17,10 @@ const definitions = [
         "include_hidden": {
           "type": "boolean",
           "description": "Include hidden parameters (defaults to false)"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -141,6 +145,10 @@ const definitions = [
         "include_hidden": {
           "type": "boolean",
           "description": "<p>If true, hidden columns will be included in the<br>result. If false or absent, only visible columns<br>will be returned.</p>"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [

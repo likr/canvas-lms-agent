@@ -21,6 +21,10 @@ const definitions = [
         "all_versions": {
           "type": "boolean",
           "description": "Whether the statistics report should include all submissions attempts."
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [

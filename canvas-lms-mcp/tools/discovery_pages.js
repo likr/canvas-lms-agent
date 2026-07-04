@@ -9,7 +9,12 @@ const definitions = [
     "description": "**Scope:** `url:GET|/api/v1/discovery_pages` Get the discovery page configuration for the domain root account. ```bash curl 'https:///api/v1/discovery_pages' \\ -H 'Authorization: Bearer ' ``` ```js { \"discovery_page\": { \"primary\": [ { \"authentication_provider_id\": 1, \"label\": \"Students\", \"icon\": \"google\" } ], \"secondary\": [ { \"authentication_provider_id\": 3, \"label\": \"Admins\" } ], \"active\": true } } ``` Returns a [DiscoveryPage](#discoverypage) object. [DiscoveryPagesApiController#upsert](htt...",
     "inputSchema": {
       "type": "object",
-      "properties": {}
+      "properties": {
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
+        }
+      }
     }
   },
   {

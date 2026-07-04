@@ -37,6 +37,10 @@ const definitions = [
         "scope_assignments_to_student": {
           "type": "boolean",
           "description": "<p>If true, all assignments returned will apply to the current user in the<br>specified grading period. If assignments apply to other students in the<br>specified grading period, but not the current user, they will not be<br>returned. (Requires the grading\\_period\\_id argument and grading periods to<br>exist. In addition, the current user must be a student.)</p>"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -69,6 +73,10 @@ const definitions = [
         "grading_period_id": {
           "type": "number",
           "description": "<p>The id of the grading period in which assignment groups are being requested<br>(Requires grading periods to exist on the account)</p>"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [

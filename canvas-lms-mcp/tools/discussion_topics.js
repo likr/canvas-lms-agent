@@ -13,6 +13,10 @@ const definitions = [
         "course_id": {
           "type": "string",
           "description": "Path parameter: course_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -57,6 +61,10 @@ const definitions = [
         "exclude_context_module_locked_topics": {
           "type": "boolean",
           "description": "<p>For students, exclude topics that are locked by module progression.<br>Defaults to false.</p>"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -526,6 +534,10 @@ const definitions = [
         "topic_id": {
           "type": "string",
           "description": "Path parameter: topic_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -551,6 +563,10 @@ const definitions = [
         "include[]": {
           "type": "string",
           "description": "<p>If \"all\\_dates\" is passed, all dates associated with graded discussions'<br>assignments will be included.<br>if \"sections\" is passed, includes the course sections that are associated<br>with the topic, if the topic is specific to certain sections of the course.<br>If \"sections\\_user\\_count\" is passed, then:<br>(a) If sections were asked for <em>and</em> the topic is specific to certain<br>course sections, includes the number of users in each<br>section. (as part of the section json asked for above)<br>(b) Else, includes at the root level the total number of users in the<br>topic's context (group or course) that the topic applies to.<br>If \"overrides\" is passed, the overrides for the assignment will be included Allowed values: <code>all\\_dates</code>, <code>sections</code>, <code>sections\\_user\\_count</code>, <code>overrides</code></p>"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -572,6 +588,10 @@ const definitions = [
         "topic_id": {
           "type": "string",
           "description": "Path parameter: topic_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -593,6 +613,10 @@ const definitions = [
         "topic_id": {
           "type": "string",
           "description": "Path parameter: topic_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -762,6 +786,10 @@ const definitions = [
         "topic_id": {
           "type": "string",
           "description": "Path parameter: topic_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -783,6 +811,10 @@ const definitions = [
         "topic_id": {
           "type": "string",
           "description": "Path parameter: topic_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -896,6 +928,10 @@ const definitions = [
         "topic_id": {
           "type": "string",
           "description": "Path parameter: topic_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -917,6 +953,10 @@ const definitions = [
         "topic_id": {
           "type": "string",
           "description": "Path parameter: topic_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -1002,6 +1042,10 @@ const definitions = [
         "entry_id": {
           "type": "string",
           "description": "Path parameter: entry_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -1028,6 +1072,10 @@ const definitions = [
         "entry_id": {
           "type": "string",
           "description": "Path parameter: entry_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -1050,6 +1098,10 @@ const definitions = [
         "topic_id": {
           "type": "string",
           "description": "Path parameter: topic_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -1075,6 +1127,10 @@ const definitions = [
         "ids[]": {
           "type": "string",
           "description": "<p>A list of entry ids to retrieve. Entries will be returned in id order,<br>smallest id first.</p>"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [

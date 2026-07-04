@@ -116,6 +116,10 @@ const definitions = [
         "include[]": {
           "type": "string",
           "description": "<p>Array of additional information to include.<br>\"launch\\_url\":: includes the launch URL for this line item using the \"<https://canvas.instructure.com/lti/launch_url>\" extension Allowed values: <code>launch\\_url</code></p>"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -153,6 +157,10 @@ const definitions = [
         "include[]": {
           "type": "string",
           "description": "<p>Array of additional information to include.<br>\"launch\\_url\":: includes the launch URL for each line item using the \"<https://canvas.instructure.com/lti/launch_url>\" extension Allowed values: <code>launch\\_url</code></p>"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [

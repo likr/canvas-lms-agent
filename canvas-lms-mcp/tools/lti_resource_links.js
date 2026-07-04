@@ -21,6 +21,10 @@ const definitions = [
         "per_page": {
           "type": "number",
           "description": "The number of registrations to return per page. Defaults to 50."
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -45,6 +49,10 @@ const definitions = [
         "include_deleted": {
           "type": "boolean",
           "description": "Include deleted resource links in search. Default is false."
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [

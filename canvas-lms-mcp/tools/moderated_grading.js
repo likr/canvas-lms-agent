@@ -17,6 +17,10 @@ const definitions = [
         "assignment_id": {
           "type": "string",
           "description": "Path parameter: assignment_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -88,6 +92,10 @@ const definitions = [
         "student_id": {
           "type": "number",
           "description": "The id of the student to show the status for"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -160,6 +168,10 @@ const definitions = [
         "anonymous_id": {
           "type": "string",
           "description": "The id of the student to show the status for"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [

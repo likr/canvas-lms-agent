@@ -25,6 +25,10 @@ const definitions = [
         "include[]": {
           "type": "string",
           "description": "<p>Array of additional information to include.<br>\"appointments\":: calendar event time slots for this appointment group<br>\"child\\_events\":: reservations of those time slots<br>\"participant\\_count\":: number of reservations<br>\"reserved\\_times\":: the event id, start time and end time of reservations<br>the current user has made)<br>\"all\\_context\\_codes\":: all context codes associated with this appointment group Allowed values: <code>appointments</code>, <code>child\\_events</code>, <code>participant\\_count</code>, <code>reserved\\_times</code>, <code>all\\_context\\_codes</code></p>"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       }
     }
@@ -107,6 +111,10 @@ const definitions = [
         "include[]": {
           "type": "string",
           "description": "<p>Array of additional information to include. See include\\[] argument of<br>\"List appointment groups\" action.<br>\"child\\_events\":: reservations of time slots time slots<br>\"appointments\":: will always be returned<br>\"all\\_context\\_codes\":: all context codes associated with this appointment group Allowed values: <code>child\\_events</code>, <code>appointments</code>, <code>all\\_context\\_codes</code></p>"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -216,6 +224,10 @@ const definitions = [
         "registration_status": {
           "type": "string",
           "description": "Limits results to the a given participation status, defaults to \"all\" Allowed values: `all`, `registered`, `registered`"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -236,6 +248,10 @@ const definitions = [
         "registration_status": {
           "type": "string",
           "description": "Limits results to the a given participation status, defaults to \"all\" Allowed values: `all`, `registered`, `registered`"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -252,6 +268,10 @@ const definitions = [
         "appointment_group_ids[]": {
           "type": "string",
           "description": "List of ids of appointment groups to search."
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       }
     }

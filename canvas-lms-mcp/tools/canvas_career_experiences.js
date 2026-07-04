@@ -9,7 +9,12 @@ const definitions = [
     "description": "**Scope:** `url:GET|/api/v1/career/enabled` Returns whether the root account has Canvas Career (Horizon) enabled in at least one subaccount. ```bash curl https:///api/v1/career/enabled \\ -H 'Authorization: Bearer ' ``` ```js {\"enabled\": true} ``` [CareerExperienceController#experience\\_summary](https://github.com/instructure/canvas-lms/blob/master/app/controllers/career_experience_controller.rb)",
     "inputSchema": {
       "type": "object",
-      "properties": {}
+      "properties": {
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
+        }
+      }
     }
   },
   {
@@ -17,7 +22,12 @@ const definitions = [
     "description": "**Scope:** `url:GET|/api/v1/career/experience_summary` Returns the current user's active experience and available experiences they can switch to. ```bash curl https:///api/v1/career/experience_summary \\ -H 'Authorization: Bearer ' ``` Returns an [ExperienceSummary](#experiencesummary) object. [CareerExperienceController#switch\\_experience](https://github.com/instructure/canvas-lms/blob/master/app/controllers/career_experience_controller.rb)",
     "inputSchema": {
       "type": "object",
-      "properties": {}
+      "properties": {
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
+        }
+      }
     }
   },
   {

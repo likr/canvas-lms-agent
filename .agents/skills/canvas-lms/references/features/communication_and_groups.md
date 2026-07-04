@@ -9,13 +9,13 @@ This reference guide covers course announcements, discussion boards, inbox conve
 Announcements are technically Discussion Topics that are flagged to display only in the announcements section.
 
 ### 1. View Announcements & Discussions
-- **`list_announcements`**: Retrieves a list of active announcements in the course.
+- **`get_announcements`**: Retrieves a list of active announcements in the course.
   - *Parameters*: `context_codes[]` (Pass `course_XXXX` where `XXXX` is the course ID).
-- **`list_discussion_topics`**: Lists all discussion topics in a course.
+- **`get_courses_course_id_discussion_topics`**: Lists all discussion topics in a course.
   - *Parameters*: `course_id`.
 
 ### 2. Manage Announcements & Discussions
-- **`create_discussion_topic`**: Creates a new discussion topic or announcement.
+- **`post_courses_course_id_discussion_topics`**: Creates a new discussion topic or announcement.
   - *Parameters*: `course_id`, `title`, `message` (HTML body), `discussion_type` (e.g. `side_comment`, `threaded`), `is_announcement` (Set to `true` to make this an Announcement instead of a normal Discussion Topic).
 
 ---
@@ -25,13 +25,13 @@ Announcements are technically Discussion Topics that are flagged to display only
 Conversations represent direct messages sent between users inside Canvas.
 
 ### 1. Read Messages
-- **`list_conversations`**: Lists conversations in the user's Inbox.
+- **`get_conversations`**: Lists conversations in the user's Inbox.
   - *Parameters*: `scope` (e.g. `unread`, `starred`, `archived`), `filter[]` (e.g. filter by course or user).
 - **`get_conversation`**: Retrieves full details of a specific conversation thread including all messages.
   - *Parameters*: `id` (Conversation ID).
 
 ### 2. Send Messages
-- **`create_conversation`**: Sends a message to one or more recipients.
+- **`post_conversations`**: Sends a message to one or more recipients.
   - *Parameters*: `recipients[]` (Array of recipient user IDs), `body` (Message content), `subject` (Optional subject line), `group_conversation` (boolean).
   - *Usage*: Use to communicate directly with students (teachers) or ask instructors questions (students).
 
@@ -44,11 +44,11 @@ Groups allow students to work together on assignments, share files, and hold pri
 ### 1. Groups & Categories
 - **`list_group_categories`**: Lists categories for groups (e.g. "Project 1 Groups").
   - *Parameters*: `course_id`.
-- **`create_group_category`**: Creates a new group category.
+- **`post_courses_course_id_group_categories`**: Creates a new group category.
   - *Parameters*: `course_id`, `name`.
 - **`list_groups`**: Lists groups within a course.
   - *Parameters*: `course_id`.
-- **`create_group`**: Creates a group in a course.
+- **`post_groups`**: Creates a group in a course.
   - *Parameters*: `course_id`, `name`, `description`.
 
 ### 2. Collaborations

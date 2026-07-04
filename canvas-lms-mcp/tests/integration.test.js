@@ -90,41 +90,41 @@ test("Canvas LMS MCP Server Integration Tests", { skip: !runIntegration }, async
 
       const expectedTools = [
         "get_users_id",
-        "get_courses",
-        "get_courses_id",
-        "get_courses_course_id_assignments",
-        "get_courses_course_id_assignments_id",
+        "get_courses_ids",
+        "get_courses_ids_id",
+        "get_courses_ids_course_id_assignments",
+        "get_courses_ids_course_id_assignments_id",
         "post_courses_course_id_assignments",
         "put_courses_course_id_assignments_id",
         "delete_courses_course_id_assignments_id",
-        "get_courses_course_id_students_submissions",
-        "get_courses_course_id_assignments_assignment_id_submissions_user_id",
-        "get_courses_course_id_modules",
-        "get_courses_course_id_modules_id",
+        "get_courses_ids_course_id_students_submissions",
+        "get_courses_ids_course_id_assignments_assignment_id_submissions_user_id",
+        "get_courses_ids_course_id_modules",
+        "get_courses_ids_course_id_modules_id",
         "post_courses_course_id_modules",
         "put_courses_course_id_modules_id",
         "delete_courses_course_id_modules_id",
-        "get_courses_course_id_files",
-        "get_courses_course_id_discussion_topics",
+        "get_courses_ids_course_id_files",
+        "get_courses_ids_course_id_discussion_topics",
         "post_courses_course_id_discussion_topics",
         "get_announcements",
-        "get_courses_course_id_pages",
-        "get_courses_course_id_pages_url_or_id",
+        "get_courses_ids_course_id_pages",
+        "get_courses_ids_course_id_pages_url_or_id",
         "post_courses_course_id_pages",
         "put_courses_course_id_pages_url_or_id",
         "delete_courses_course_id_pages_url_or_id",
-        "get_courses_course_id_quizzes",
-        "get_courses_course_id_quizzes_id",
+        "get_courses_ids_course_id_quizzes",
+        "get_courses_ids_course_id_quizzes_id",
         "post_courses_course_id_quizzes",
         "put_courses_course_id_quizzes_id",
         "delete_courses_course_id_quizzes_id",
         "put_courses_course_id_assignments_assignment_id_submissions_user_id",
         "post_courses_course_id_assignments_assignment_id_submissions",
-        "get_courses_course_id_users",
-        "get_courses_course_id_sections",
-        "get_courses_course_id_enrollments",
+        "get_courses_ids_course_id_users",
+        "get_courses_ids_course_id_sections",
+        "get_courses_ids_course_id_enrollments",
         "get_calendar_events",
-        "get_courses_course_id_rubrics",
+        "get_courses_ids_course_id_rubrics",
       ];
 
       for (const expected of expectedTools) {
@@ -132,13 +132,13 @@ test("Canvas LMS MCP Server Integration Tests", { skip: !runIntegration }, async
       }
     });
 
-    // Step 2: get_current_user
+    // Step 2: get_users_id
     let currentUserId;
-    await t.test("get_current_user returns user details", async () => {
+    await t.test("get_users_id returns user details", async () => {
       const resp = await client.sendRequest("tools/call", { name: "get_users_id", arguments: { id: "self" } }, 2);
-      assert.ok(!resp.error, "get_current_user returned RPC error");
+      assert.ok(!resp.error, "get_users_id returned RPC error");
       const result = resp.result || {};
-      assert.ok(!result.isError, `get_current_user failed: ${JSON.stringify(result)}`);
+      assert.ok(!result.isError, `get_users_id failed: ${JSON.stringify(result)}`);
       
       const contentText = result.content[0].text;
       const userData = JSON.parse(contentText);
@@ -147,13 +147,13 @@ test("Canvas LMS MCP Server Integration Tests", { skip: !runIntegration }, async
       console.log(`Authenticated as user: ${userData.name} (ID: ${userData.id})`);
     });
 
-    // Step 3: list_courses
+    // Step 3: get_courses_ids
     let activeCourseId;
-    await t.test("list_courses returns active courses", async () => {
-      const resp = await client.sendRequest("tools/call", { name: "get_courses", arguments: {} }, 3);
-      assert.ok(!resp.error, "list_courses returned RPC error");
+    await t.test("get_courses_ids returns active courses", async () => {
+      const resp = await client.sendRequest("tools/call", { name: "get_courses_ids", arguments: {} }, 3);
+      assert.ok(!resp.error, "get_courses_ids returned RPC error");
       const result = resp.result || {};
-      assert.ok(!result.isError, `list_courses failed: ${JSON.stringify(result)}`);
+      assert.ok(!result.isError, `get_courses_ids failed: ${JSON.stringify(result)}`);
       
       const courses = JSON.parse(result.content[0].text);
       assert.ok(Array.isArray(courses), "Courses should be an array");
@@ -169,10 +169,10 @@ test("Canvas LMS MCP Server Integration Tests", { skip: !runIntegration }, async
       return;
     }
 
-    // Step 4: list_assignments
-    await t.test("list_assignments returns assignments", async () => {
+    // Step 4: get_courses_ids_course_id_assignments
+    await t.test("get_courses_ids_course_id_assignments returns assignments", async () => {
       const resp = await client.sendRequest("tools/call", {
-        name: "get_courses_course_id_assignments",
+        name: "get_courses_ids_course_id_assignments",
         arguments: { course_id: activeCourseId }
       }, 4);
       assert.ok(!resp.error);
@@ -183,11 +183,11 @@ test("Canvas LMS MCP Server Integration Tests", { skip: !runIntegration }, async
       console.log(`Found ${assignments.length} assignments`);
     });
 
-    // Step 5: get_user_grades
+    // Step 5: get_courses_ids_course_id_students_submissions
     let studentId;
-    await t.test("get_user_grades returns grades", async () => {
+    await t.test("get_courses_ids_course_id_students_submissions returns grades", async () => {
       const resp = await client.sendRequest("tools/call", {
-        name: "get_courses_course_id_students_submissions", arguments: { course_id: activeCourseId, "student_ids[]": "all" }
+        name: "get_courses_ids_course_id_students_submissions", arguments: { course_id: activeCourseId, "student_ids[]": "all" }
       }, 5);
       assert.ok(!resp.error);
       const result = resp.result || {};
@@ -202,10 +202,10 @@ test("Canvas LMS MCP Server Integration Tests", { skip: !runIntegration }, async
       }
     });
 
-    // Step 6: list_modules
-    await t.test("list_modules returns modules with items", async () => {
+    // Step 6: get_courses_ids_course_id_modules
+    await t.test("get_courses_ids_course_id_modules returns modules with items", async () => {
       const resp = await client.sendRequest("tools/call", {
-        name: "get_courses_course_id_modules",
+        name: "get_courses_ids_course_id_modules",
         arguments: { course_id: activeCourseId, include_items: true }
       }, 6);
       assert.ok(!resp.error);
@@ -216,10 +216,10 @@ test("Canvas LMS MCP Server Integration Tests", { skip: !runIntegration }, async
       console.log(`Found ${modules.length} modules`);
     });
 
-    // Step 7: list_files
-    await t.test("list_files returns files", async () => {
+    // Step 7: get_courses_ids_course_id_files
+    await t.test("get_courses_ids_course_id_files returns files", async () => {
       const resp = await client.sendRequest("tools/call", {
-        name: "get_courses_course_id_files",
+        name: "get_courses_ids_course_id_files",
         arguments: { course_id: activeCourseId }
       }, 7);
       assert.ok(!resp.error);
@@ -230,10 +230,10 @@ test("Canvas LMS MCP Server Integration Tests", { skip: !runIntegration }, async
       console.log(`Found ${files.length} files`);
     });
 
-    // Step 8: list_discussion_topics
-    await t.test("list_discussion_topics returns topics", async () => {
+    // Step 8: get_courses_ids_course_id_discussion_topics
+    await t.test("get_courses_ids_course_id_discussion_topics returns topics", async () => {
       const resp = await client.sendRequest("tools/call", {
-        name: "get_courses_course_id_discussion_topics",
+        name: "get_courses_ids_course_id_discussion_topics",
         arguments: { course_id: activeCourseId }
       }, 8);
       assert.ok(!resp.error);
@@ -244,8 +244,8 @@ test("Canvas LMS MCP Server Integration Tests", { skip: !runIntegration }, async
       console.log(`Found ${topics.length} discussion topics`);
     });
 
-    // Step 9: list_announcements
-    await t.test("list_announcements returns announcements", async () => {
+    // Step 9: get_announcements
+    await t.test("get_announcements returns announcements", async () => {
       const resp = await client.sendRequest("tools/call", {
         name: "get_announcements", arguments: { "context_codes[]": ["course_" + activeCourseId] }
       }, 9);
@@ -257,10 +257,10 @@ test("Canvas LMS MCP Server Integration Tests", { skip: !runIntegration }, async
       console.log(`Found ${announcements.length} announcements`);
     });
 
-    // Step 10 & 11: list_pages & get_page
-    await t.test("list_pages and get_page flow", async () => {
+    // Step 10 & 11: get_courses_ids_course_id_pages & get_courses_ids_course_id_pages_url_or_id
+    await t.test("get_courses_ids_course_id_pages and get_courses_ids_course_id_pages_url_or_id flow", async () => {
       const listResp = await client.sendRequest("tools/call", {
-        name: "get_courses_course_id_pages",
+        name: "get_courses_ids_course_id_pages",
         arguments: { course_id: activeCourseId }
       }, 10);
       assert.ok(!listResp.error);
@@ -273,7 +273,7 @@ test("Canvas LMS MCP Server Integration Tests", { skip: !runIntegration }, async
       if (pages.length > 0) {
         const pageUrl = pages[0].url;
         const getResp = await client.sendRequest("tools/call", {
-          name: "get_courses_course_id_pages_url_or_id",
+          name: "get_courses_ids_course_id_pages_url_or_id",
           arguments: { course_id: activeCourseId, url_or_id: pageUrl }
         }, 11);
         assert.ok(!getResp.error);
@@ -285,10 +285,10 @@ test("Canvas LMS MCP Server Integration Tests", { skip: !runIntegration }, async
       }
     });
 
-    // Step 12: list_quizzes
-    await t.test("list_quizzes returns quizzes", async () => {
+    // Step 12: get_courses_ids_course_id_quizzes
+    await t.test("get_courses_ids_course_id_quizzes returns quizzes", async () => {
       const resp = await client.sendRequest("tools/call", {
-        name: "get_courses_course_id_quizzes",
+        name: "get_courses_ids_course_id_quizzes",
         arguments: { course_id: activeCourseId }
       }, 12);
       assert.ok(!resp.error);
@@ -299,8 +299,8 @@ test("Canvas LMS MCP Server Integration Tests", { skip: !runIntegration }, async
       console.log(`Found ${quizzes.length} quizzes`);
     });
 
-    // Step 13: submit_assignment (gracefully handle API restriction or role issue)
-    await t.test("submit_assignment execution", async () => {
+    // Step 13: post_courses_course_id_assignments_assignment_id_submissions (gracefully handle API restriction or role issue)
+    await t.test("post_courses_course_id_assignments_assignment_id_submissions execution", async () => {
       const resp = await client.sendRequest("tools/call", {
         name: "post_courses_course_id_assignments_assignment_id_submissions",
         arguments: {
@@ -313,16 +313,16 @@ test("Canvas LMS MCP Server Integration Tests", { skip: !runIntegration }, async
       assert.ok(!resp.error);
       const result = resp.result || {};
       if (result.isError) {
-        console.log("submit_assignment returned expected restriction or role error:", result.content[0].text);
+        console.log("post_courses_course_id_assignments_assignment_id_submissions returned expected restriction or role error:", result.content[0].text);
       } else {
         const submitData = JSON.parse(result.content[0].text);
         assert.ok(submitData.id);
-        console.log("submit_assignment success:", submitData);
+        console.log("post_courses_course_id_assignments_assignment_id_submissions success:", submitData);
       }
     });
 
-    // Step 14: grade_or_comment_submission (gracefully handle API restriction or role issue)
-    await t.test("grade_or_comment_submission execution", async () => {
+    // Step 14: put_courses_course_id_assignments_assignment_id_submissions_user_id (gracefully handle API restriction or role issue)
+    await t.test("put_courses_course_id_assignments_assignment_id_submissions_user_id execution", async () => {
       const resp = await client.sendRequest("tools/call", {
         name: "put_courses_course_id_assignments_assignment_id_submissions_user_id",
         arguments: {
@@ -333,18 +333,18 @@ test("Canvas LMS MCP Server Integration Tests", { skip: !runIntegration }, async
       assert.ok(!resp.error);
       const result = resp.result || {};
       if (result.isError) {
-        console.log("grade_or_comment_submission returned expected restriction or role error:", result.content[0].text);
+        console.log("put_courses_course_id_assignments_assignment_id_submissions_user_id returned expected restriction or role error:", result.content[0].text);
       } else {
         const gradeData = JSON.parse(result.content[0].text);
         assert.ok(gradeData.user_id);
-        console.log("grade_or_comment_submission success:", gradeData);
+        console.log("put_courses_course_id_assignments_assignment_id_submissions_user_id success:", gradeData);
       }
     });
 
-    // Step 15: list_users
-    await t.test("list_users returns users", async () => {
+    // Step 15: get_courses_ids_course_id_users
+    await t.test("get_courses_ids_course_id_users returns users", async () => {
       const resp = await client.sendRequest("tools/call", {
-        name: "get_courses_course_id_users",
+        name: "get_courses_ids_course_id_users",
         arguments: { course_id: activeCourseId }
       }, 15);
       assert.ok(!resp.error);
@@ -355,10 +355,10 @@ test("Canvas LMS MCP Server Integration Tests", { skip: !runIntegration }, async
       console.log(`Found ${users.length} users`);
     });
 
-    // Step 16: list_sections
-    await t.test("list_sections returns sections", async () => {
+    // Step 16: get_courses_ids_course_id_sections
+    await t.test("get_courses_ids_course_id_sections returns sections", async () => {
       const resp = await client.sendRequest("tools/call", {
-        name: "get_courses_course_id_sections",
+        name: "get_courses_ids_course_id_sections",
         arguments: { course_id: activeCourseId }
       }, 16);
       assert.ok(!resp.error);
@@ -369,10 +369,10 @@ test("Canvas LMS MCP Server Integration Tests", { skip: !runIntegration }, async
       console.log(`Found ${sections.length} sections`);
     });
 
-    // Step 17: list_enrollments
-    await t.test("list_enrollments returns enrollments", async () => {
+    // Step 17: get_courses_ids_course_id_enrollments
+    await t.test("get_courses_ids_course_id_enrollments returns enrollments", async () => {
       const resp = await client.sendRequest("tools/call", {
-        name: "get_courses_course_id_enrollments",
+        name: "get_courses_ids_course_id_enrollments",
         arguments: { course_id: activeCourseId }
       }, 17);
       assert.ok(!resp.error);
@@ -383,8 +383,8 @@ test("Canvas LMS MCP Server Integration Tests", { skip: !runIntegration }, async
       console.log(`Found ${enrollments.length} enrollments`);
     });
 
-    // Step 18: list_calendar_events
-    await t.test("list_calendar_events returns events", async () => {
+    // Step 18: get_calendar_events
+    await t.test("get_calendar_events returns events", async () => {
       const resp = await client.sendRequest("tools/call", {
         name: "get_calendar_events",
         arguments: {}
@@ -397,16 +397,16 @@ test("Canvas LMS MCP Server Integration Tests", { skip: !runIntegration }, async
       console.log(`Found ${events.length} calendar events`);
     });
 
-    // Step 19: list_rubrics
-    await t.test("list_rubrics returns rubrics", async () => {
+    // Step 19: get_courses_ids_course_id_rubrics
+    await t.test("get_courses_ids_course_id_rubrics returns rubrics", async () => {
       const resp = await client.sendRequest("tools/call", {
-        name: "get_courses_course_id_rubrics",
+        name: "get_courses_ids_course_id_rubrics",
         arguments: { course_id: activeCourseId }
       }, 19);
       assert.ok(!resp.error);
       const result = resp.result || {};
       if (result.isError) {
-        console.log("list_rubrics returned expected restriction or role error:", result.content?.[0]?.text);
+        console.log("get_courses_ids_course_id_rubrics returned expected restriction or role error:", result.content?.[0]?.text);
       } else {
         const rubrics = JSON.parse(result.content[0].text);
         assert.ok(Array.isArray(rubrics));
@@ -414,10 +414,10 @@ test("Canvas LMS MCP Server Integration Tests", { skip: !runIntegration }, async
       }
     });
 
-    // Step 20: get_course
-    await t.test("get_course execution", async () => {
+    // Step 20: get_courses_id
+    await t.test("get_courses_id execution", async () => {
       const resp = await client.sendRequest("tools/call", {
-        name: "get_courses_id",
+        name: "get_courses_ids_id",
         arguments: { id: activeCourseId }
       }, 20);
       assert.ok(!resp.error);
@@ -438,7 +438,7 @@ test("Canvas LMS MCP Server Integration Tests", { skip: !runIntegration }, async
       assert.ok(!createResp.error);
       const createResult = createResp.result || {};
       if (createResult.isError) {
-        console.log("create_assignment skipped due to role permissions:", createResult.content[0].text);
+        console.log("post_courses_course_id_assignments skipped due to role permissions:", createResult.content[0].text);
         return;
       }
       const createdAsm = JSON.parse(createResult.content[0].text);
@@ -446,7 +446,7 @@ test("Canvas LMS MCP Server Integration Tests", { skip: !runIntegration }, async
 
       // Get
       const getResp = await client.sendRequest("tools/call", {
-        name: "get_courses_course_id_assignments_id",
+        name: "get_courses_ids_course_id_assignments_id",
         arguments: { course_id: activeCourseId, id: createdAsm.id }
       }, 22);
       assert.ok(!getResp.error);
@@ -478,10 +478,10 @@ test("Canvas LMS MCP Server Integration Tests", { skip: !runIntegration }, async
       assert.ok(!deleteResult.isError, deleteResult.content?.[0]?.text);
     });
 
-    // Step 22: get_submission
-    await t.test("get_submission execution", async () => {
+    // Step 22: get_courses_course_id_assignments_assignment_id_submissions_user_id
+    await t.test("get_courses_course_id_assignments_assignment_id_submissions_user_id execution", async () => {
       const resp = await client.sendRequest("tools/call", {
-        name: "get_courses_course_id_assignments_assignment_id_submissions_user_id",
+        name: "get_courses_ids_course_id_assignments_assignment_id_submissions_user_id",
         arguments: {
           course_id: activeCourseId,
           assignment_id: 150469,
@@ -491,7 +491,7 @@ test("Canvas LMS MCP Server Integration Tests", { skip: !runIntegration }, async
       assert.ok(!resp.error);
       const result = resp.result || {};
       if (result.isError) {
-        console.log("get_submission returned expected error (e.g. not found or permissions):", result.content[0].text);
+        console.log("get_courses_course_id_assignments_assignment_id_submissions_user_id returned expected error (e.g. not found or permissions):", result.content[0].text);
       } else {
         const sub = JSON.parse(result.content[0].text);
         assert.ok(sub.user_id);
@@ -509,7 +509,7 @@ test("Canvas LMS MCP Server Integration Tests", { skip: !runIntegration }, async
       assert.ok(!createResp.error);
       const createResult = createResp.result || {};
       if (createResult.isError) {
-        console.log("create_module skipped due to role permissions:", createResult.content[0].text);
+        console.log("post_courses_course_id_modules skipped due to role permissions:", createResult.content[0].text);
         return;
       }
       const createdMod = JSON.parse(createResult.content[0].text);
@@ -517,7 +517,7 @@ test("Canvas LMS MCP Server Integration Tests", { skip: !runIntegration }, async
 
       // Get
       const getResp = await client.sendRequest("tools/call", {
-        name: "get_courses_course_id_modules_id",
+        name: "get_courses_ids_course_id_modules_id",
         arguments: { course_id: activeCourseId, id: createdMod.id }
       }, 27);
       assert.ok(!getResp.error);
@@ -561,7 +561,7 @@ test("Canvas LMS MCP Server Integration Tests", { skip: !runIntegration }, async
       assert.ok(!createResp.error);
       const createResult = createResp.result || {};
       if (createResult.isError) {
-        console.log("create_page skipped due to role permissions:", createResult.content[0].text);
+        console.log("post_courses_course_id_pages skipped due to role permissions:", createResult.content[0].text);
         return;
       }
       const createdPage = JSON.parse(createResult.content[0].text);
@@ -601,7 +601,7 @@ test("Canvas LMS MCP Server Integration Tests", { skip: !runIntegration }, async
       assert.ok(!createResp.error);
       const createResult = createResp.result || {};
       if (createResult.isError) {
-        console.log("create_quiz skipped due to role permissions:", createResult.content[0].text);
+        console.log("post_courses_course_id_quizzes skipped due to role permissions:", createResult.content[0].text);
         return;
       }
       const createdQuiz = JSON.parse(createResult.content[0].text);
@@ -609,7 +609,7 @@ test("Canvas LMS MCP Server Integration Tests", { skip: !runIntegration }, async
 
       // Get
       const getResp = await client.sendRequest("tools/call", {
-        name: "get_courses_course_id_quizzes_id",
+        name: "get_courses_ids_course_id_quizzes_id",
         arguments: { course_id: activeCourseId, id: createdQuiz.id }
       }, 34);
       assert.ok(!getResp.error);
@@ -641,8 +641,8 @@ test("Canvas LMS MCP Server Integration Tests", { skip: !runIntegration }, async
       assert.ok(!deleteResult.isError, deleteResult.content?.[0]?.text);
     });
 
-    // Step 26: create_discussion_topic
-    await t.test("create_discussion_topic execution", async () => {
+    // Step 26: post_courses_course_id_discussion_topics
+    await t.test("post_courses_course_id_discussion_topics execution", async () => {
       const resp = await client.sendRequest("tools/call", {
         name: "post_courses_course_id_discussion_topics",
         arguments: {
@@ -654,7 +654,7 @@ test("Canvas LMS MCP Server Integration Tests", { skip: !runIntegration }, async
       assert.ok(!resp.error);
       const result = resp.result || {};
       if (result.isError) {
-        console.log("create_discussion_topic skipped due to role permissions:", result.content[0].text);
+        console.log("post_courses_course_id_discussion_topics skipped due to role permissions:", result.content[0].text);
       } else {
         const createdTopic = JSON.parse(result.content[0].text);
         assert.ok(createdTopic.id);

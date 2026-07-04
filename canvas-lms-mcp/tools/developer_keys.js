@@ -17,6 +17,10 @@ const definitions = [
         "inherited": {
           "type": "boolean",
           "description": "<p>Defaults to false. If true, lists keys inherited from<br>Site Admin (and consortium parent account, if applicable).</p>"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [

@@ -17,6 +17,10 @@ const definitions = [
         "include[]": {
           "type": "string",
           "description": "<p>Array of additional information to include.<br>\"description\\_html\":: an HTML description of the report, with example output<br>\"parameters\\_html\":: an HTML form for the report parameters Allowed values: <code>description\\_html</code>, <code>params\\_html</code></p>"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -74,6 +78,10 @@ const definitions = [
         "report": {
           "type": "string",
           "description": "Path parameter: report"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -99,6 +107,10 @@ const definitions = [
         "id": {
           "type": "string",
           "description": "Path parameter: id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [

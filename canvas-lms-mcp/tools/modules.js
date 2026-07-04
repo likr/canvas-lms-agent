@@ -25,6 +25,10 @@ const definitions = [
         "student_id": {
           "type": "string",
           "description": "Returns module completion information for the student with this id."
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -53,6 +57,10 @@ const definitions = [
         "student_id": {
           "type": "string",
           "description": "Returns module completion information for the student with this id."
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -218,6 +226,10 @@ const definitions = [
         "student_id": {
           "type": "string",
           "description": "Returns module completion information for the student with this id."
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -251,6 +263,10 @@ const definitions = [
         "student_id": {
           "type": "string",
           "description": "Returns module completion information for the student with this id."
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -496,6 +512,10 @@ const definitions = [
         "asset_id": {
           "type": "number",
           "description": "The id of the asset (or the url in the case of a Page)"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -542,6 +562,10 @@ const definitions = [
         "context_module_id": {
           "type": "string",
           "description": "Path parameter: context_module_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [

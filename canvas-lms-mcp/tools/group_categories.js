@@ -13,6 +13,10 @@ const definitions = [
         "account_id": {
           "type": "string",
           "description": "Path parameter: account_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -33,6 +37,10 @@ const definitions = [
         "collaboration_state": {
           "type": "string",
           "description": "<p>Filter group categories by their collaboration state:<br>- \"all\": Return both collaborative and non-collaborative group categories<br>- \"collaborative\": Return only collaborative group categories (default)<br>- \"non\\_collaborative\": Return only non-collaborative group categories</p>"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -49,6 +57,10 @@ const definitions = [
         "group_category_id": {
           "type": "string",
           "description": "Path parameter: group_category_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -256,6 +268,10 @@ const definitions = [
         "group_category_id": {
           "type": "string",
           "description": "Path parameter: group_category_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -272,6 +288,10 @@ const definitions = [
         "group_category_id": {
           "type": "string",
           "description": "Path parameter: group_category_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -288,6 +308,10 @@ const definitions = [
         "course_id": {
           "type": "string",
           "description": "Path parameter: course_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -312,6 +336,10 @@ const definitions = [
         "unassigned": {
           "type": "boolean",
           "description": "<p>Set this value to true if you wish only to search unassigned users in the<br>group category.</p>"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [

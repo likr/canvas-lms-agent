@@ -16,6 +16,11 @@
 - **Dynamic Test ID Resolution**:
   - Avoid hardcoding static student IDs or user IDs in verification scripts.
   - Retrieve lists dynamically (e.g. fetching grades/courses first), select a valid student `user_id` from the active response data, and pass it dynamically to subsequent write/grading test cases.
+- **Strict Auto-Generated Tool Usage**:
+  - All Canvas LMS MCP tools are strictly auto-generated. Manual implementations (e.g., `list_courses`, `get_current_user`) are deprecated. Always use the auto-generated naming convention (e.g., `get_courses`, `get_users_id`).
+  - Do not create manual tool implementations; any new Canvas API capabilities must be introduced by updating the API definition markdown files in `docs/services/canvas/resources/` and running the `generate_tools.py` script.
+- **Automatic Pagination**:
+  - All `GET` endpoints support a `fetch_all_pages: boolean` parameter. Set this to `true` to automatically traverse Canvas LMS `Link` headers (`rel="next"`) and fetch all results without writing manual pagination loops.
 
 ## Git Workflow & Branch Policy
 - **Branch Protection & Development Branch (`dev`)**: Direct pushes/commits to protected branches (e.g. `master` or main release branches) are restricted. Perform all future feature development, testing, and documentation edits on the `dev` branch.

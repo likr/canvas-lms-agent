@@ -13,6 +13,10 @@ const definitions = [
         "search_term": {
           "type": "string",
           "description": "<p>When included, searches available account calendars for the term. Returns matching<br>results. Term must be at least 2 characters.</p>"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       }
     }
@@ -26,6 +30,10 @@ const definitions = [
         "account_id": {
           "type": "string",
           "description": "Path parameter: account_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -90,6 +98,10 @@ const definitions = [
         "filter": {
           "type": "string",
           "description": "<p>When included, only returns calendars that are either visible or hidden. Can<br>be combined with a search term. Allowed values: <code>visible</code>, <code>hidden</code></p>"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -106,6 +118,10 @@ const definitions = [
         "account_id": {
           "type": "string",
           "description": "Path parameter: account_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [

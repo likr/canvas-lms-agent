@@ -13,6 +13,10 @@ const definitions = [
         "user_id": {
           "type": "string",
           "description": "<p>The ID of the user, or \"self\" for the current user.<br>The requesting user may only retrieve their own statistics.</p>"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [

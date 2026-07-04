@@ -56,6 +56,10 @@ const definitions = [
         "attempt": {
           "type": "number",
           "description": "<p>The specific submission attempt to look up the events for. If unspecified,<br>the latest attempt will be used.</p>"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
