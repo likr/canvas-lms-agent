@@ -37,7 +37,7 @@ Add the following configuration to your Claude Desktop configuration file:
       "command": "npx",
       "args": [
         "-y",
-        "canvas-lms-mcp"
+        "@likr/canvas-lms-mcp"
       ],
       "env": {
         "CANVAS_BASE_URL": "https://canvas.instructure.com",
@@ -55,7 +55,7 @@ Add the following configuration to your Claude Desktop configuration file:
 3. Configure the following:
    - **Name**: `canvas-lms`
    - **Type**: `command`
-   - **Command**: `npx -y canvas-lms-mcp`
+   - **Command**: `npx -y @likr/canvas-lms-mcp`
 4. Set the following Environment Variables in the Cursor interface:
    - `CANVAS_BASE_URL`: `https://canvas.instructure.com` (or your custom instance URL)
    - `CANVAS_API_TOKEN`: `YOUR_CANVAS_API_TOKEN_HERE`
@@ -71,7 +71,7 @@ Add the server configuration to your Cline MCP settings file (typically at `~/.c
       "command": "npx",
       "args": [
         "-y",
-        "canvas-lms-mcp"
+        "@likr/canvas-lms-mcp"
       ],
       "env": {
         "CANVAS_BASE_URL": "https://canvas.instructure.com",
