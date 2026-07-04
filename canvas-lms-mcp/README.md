@@ -84,6 +84,18 @@ Add the server configuration to your Cline MCP settings file (typically at `~/.c
 
 ---
 
+## Canvas LMS Skill
+
+This repository provides a dedicated `canvas-lms` skill for AI agents (supporting Antigravity or standard skill configurations). This skill provides the agent with structured best practices, role-adaptive behaviors (student vs. educator workflows), and reference guides to interact with the Canvas LMS APIs effectively.
+
+To install this skill in your agent workspace, run:
+
+```bash
+npx skills add likr-sandbox/canvas-lms-agent@canvas-lms
+```
+
+---
+
 ## Environment Variables
 
 | Variable | Description | Default |
