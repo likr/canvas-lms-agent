@@ -219,5 +219,8 @@ __marimo__/
 # Streamlit
 .streamlit/secrets.toml
 
-
 docs/*
+
+# Node.js
+node_modules/
+**/node_modules/

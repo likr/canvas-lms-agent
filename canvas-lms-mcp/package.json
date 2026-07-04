@@ -1,0 +1,14 @@
+{
+  "name": "canvas-lms-mcp",
+  "version": "1.0.0",
+  "description": "MCP Server for Canvas LMS",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.1",
+    "axios": "^1.7.9",
+    "dotenv": "^16.4.7"
+  }
+}
