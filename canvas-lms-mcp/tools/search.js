@@ -9,7 +9,12 @@ const definitions = [
     "description": "**Scope:** `url:GET|/api/v1/conversations/find_recipients`",
     "inputSchema": {
       "type": "object",
-      "properties": {}
+      "properties": {
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
+        }
+      }
     }
   },
   {
@@ -45,6 +50,10 @@ const definitions = [
         "permissions[]": {
           "type": "string",
           "description": "<p>Array of permission strings to be checked for each matched context (e.g.<br>\"send\\_messages\"). This argument determines which permissions may be<br>returned in the response; it won't prevent contexts from being returned if<br>they don't grant the permission(s).</p>"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       }
     }
@@ -66,6 +75,10 @@ const definitions = [
         "open_enrollment_only": {
           "type": "boolean",
           "description": "Only return courses that allow self enrollment. Defaults to false."
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       }
     }

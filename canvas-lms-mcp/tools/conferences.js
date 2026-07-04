@@ -13,6 +13,10 @@ const definitions = [
         "course_id": {
           "type": "string",
           "description": "Path parameter: course_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -29,6 +33,10 @@ const definitions = [
         "group_id": {
           "type": "string",
           "description": "Path parameter: group_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -45,6 +53,10 @@ const definitions = [
         "state": {
           "type": "string",
           "description": "<p>If set to \"live\", returns only conferences that are live (i.e., have<br>started and not finished yet). If omitted, returns all conferences for<br>this user's groups and courses.</p>"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       }
     }

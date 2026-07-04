@@ -17,6 +17,10 @@ const definitions = [
         "context_module_id": {
           "type": "string",
           "description": "Path parameter: context_module_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -38,6 +42,10 @@ const definitions = [
         "assignment_id": {
           "type": "string",
           "description": "Path parameter: assignment_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -59,6 +67,10 @@ const definitions = [
         "quiz_id": {
           "type": "string",
           "description": "Path parameter: quiz_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -80,6 +92,10 @@ const definitions = [
         "discussion_topic_id": {
           "type": "string",
           "description": "Path parameter: discussion_topic_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -101,6 +117,10 @@ const definitions = [
         "url_or_id": {
           "type": "string",
           "description": "Path parameter: url_or_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -130,6 +150,10 @@ const definitions = [
         "exclude[]": {
           "type": "array",
           "description": "<p>Array of strings indicating what data to exclude from the response.<br>Valid values:<br>- \"peer\\_review\\_overrides\": when include\\[]=peer\\_review is also specified, the<br>peer\\_review\\_sub\\_assignment object will not include the overrides array, reducing the<br>response payload size. This is useful when using include\\[]=child\\_peer\\_review\\_override\\_dates<br>since the peer review override data is already embedded in the parent assignment overrides.<br>- \"child\\_override\\_due\\_dates\": prevents the sub\\_assignment\\_due\\_dates field from being included<br>in assignment override responses, even when discussion checkpoints are enabled. This reduces<br>response payload size when checkpoint due date information is not needed.</p>"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [

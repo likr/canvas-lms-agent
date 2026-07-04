@@ -37,6 +37,10 @@ const definitions = [
         "uuids": {
           "type": "array",
           "description": "<p>When set, only return users with the specified UUIDs. UUIDs after the first 100<br>are ignored.</p>"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -49,7 +53,12 @@ const definitions = [
     "description": "**Scope:** `url:GET|/api/v1/users/self/activity_stream`",
     "inputSchema": {
       "type": "object",
-      "properties": {}
+      "properties": {
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
+        }
+      }
     }
   },
   {
@@ -61,6 +70,10 @@ const definitions = [
         "only_active_courses": {
           "type": "boolean",
           "description": "If true, will only return objects for courses the user is actively participating in"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       }
     }
@@ -74,6 +87,10 @@ const definitions = [
         "only_active_courses": {
           "type": "boolean",
           "description": "If true, will only return objects for courses the user is actively participating in"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       }
     }
@@ -91,6 +108,10 @@ const definitions = [
         "course_ids[]": {
           "type": "string",
           "description": "<p>Restrict results to todo items in the given courses. Accepts numeric IDs<br>and SIS IDs of the form +sis\\_course\\_id:foo+. Applies to grading, submitting,<br>checkpoint, and ungraded quiz items alike. Courses the user is not enrolled<br>in (or that cannot be resolved) are silently dropped. When the parameter is<br>present but no valid courses resolve, an empty list is returned rather than<br>the unfiltered list.</p>"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       }
     }
@@ -104,6 +125,10 @@ const definitions = [
         "include[]": {
           "type": "string",
           "description": "<p>\"ungraded\\_quizzes\":: Optionally include ungraded quizzes (such as practice quizzes and surveys) in the list.<br>These will be returned under a +quiz+ key instead of an +assignment+ key in response elements. Allowed values: <code>ungraded\\_quizzes</code></p>"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       }
     }
@@ -113,7 +138,12 @@ const definitions = [
     "description": "**Scope:** `url:GET|/api/v1/users/self/upcoming_events` A paginated list of the current user's upcoming events. ```js [ { \"id\"=>597, \"title\"=>\"Upcoming Course Event\", \"description\"=>\"Attendance is correlated with passing!\", \"start_at\"=>\"2013-04-27T14:33:14Z\", \"end_at\"=>\"2013-04-27T14:33:14Z\", \"location_name\"=>\"Red brick house\", \"location_address\"=>\"110 Top of the Hill Dr.\", \"all_day\"=>false, \"all_day_date\"=>nil, \"created_at\"=>\"2013-04-26T14:33:14Z\", \"updated_at\"=>\"2013-04-26T14:33:14Z\", \"work...",
     "inputSchema": {
       "type": "object",
-      "properties": {}
+      "properties": {
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
+        }
+      }
     }
   },
   {
@@ -141,6 +171,10 @@ const definitions = [
         "course_ids[]": {
           "type": "string",
           "description": "<p>Optionally restricts the list of past-due assignments to only those associated with the specified<br>course IDs. Required if observed\\_user\\_id is passed.</p>"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -201,6 +235,10 @@ const definitions = [
         "include[]": {
           "type": "string",
           "description": "<p>Array of additional information to include on the user record.<br>\"locale\", \"avatar\\_url\", \"permissions\", \"email\", and \"effective\\_locale\"<br>will always be returned Allowed values: <code>uuid</code>, <code>last\\_login</code></p>"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -381,6 +419,10 @@ const definitions = [
         "id": {
           "type": "string",
           "description": "Path parameter: id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -449,6 +491,10 @@ const definitions = [
         "id": {
           "type": "string",
           "description": "Path parameter: id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -469,6 +515,10 @@ const definitions = [
         "asset_string": {
           "type": "string",
           "description": "Path parameter: asset_string"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -551,6 +601,10 @@ const definitions = [
         "id": {
           "type": "string",
           "description": "Path parameter: id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -791,6 +845,10 @@ const definitions = [
         "only_published_assignments": {
           "type": "boolean",
           "description": "Returns submissions for only published assignments"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -811,6 +869,10 @@ const definitions = [
         "include[]": {
           "type": "string",
           "description": "<p>Array of additional information to include.<br>\"links\":: include the user's profile links in the response<br>as an array of objects with +url+ and +title+ fields<br>\"user\\_services\":: include names and links for the user's connected services<br>\"uuid\":: include the user's uuid in the response Allowed values: <code>links</code>, <code>user\\_services</code>, <code>uuid</code></p>"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -827,6 +889,10 @@ const definitions = [
         "user_id": {
           "type": "string",
           "description": "Path parameter: user_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -851,6 +917,10 @@ const definitions = [
         "end_time": {
           "type": "string",
           "description": "The end of the time range from which you want page views."
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -899,6 +969,10 @@ const definitions = [
         "query_id": {
           "type": "string",
           "description": "The UUID of the query to check status for"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -920,6 +994,10 @@ const definitions = [
         "query_id": {
           "type": "string",
           "description": "The UUID of the completed query to retrieve results for"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -962,6 +1040,10 @@ const definitions = [
         "query_id": {
           "type": "string",
           "description": "The UUID of the query to check status for"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -978,6 +1060,10 @@ const definitions = [
         "query_id": {
           "type": "string",
           "description": "The UUID of the completed query to retrieve results for"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -1033,6 +1119,10 @@ const definitions = [
         "ns": {
           "type": "string",
           "description": "<p>The namespace from which to retrieve the data. This should be something other<br>Canvas API apps aren't likely to use, such as a reverse DNS for your organization.</p>"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -1073,7 +1163,12 @@ const definitions = [
     "description": "**Scope:** `url:GET|/api/v1/users/self/course_nicknames` Returns all course nicknames you have set. ```bash curl 'https:///api/v1/users/self/course_nicknames \\ -H 'Authorization: Bearer ' ``` Returns a list of [CourseNickname](#coursenickname) objects. [CourseNicknamesController#show](https://github.com/instructure/canvas-lms/blob/master/app/controllers/course_nicknames_controller.rb)",
     "inputSchema": {
       "type": "object",
-      "properties": {}
+      "properties": {
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
+        }
+      }
     }
   },
   {
@@ -1085,6 +1180,10 @@ const definitions = [
         "course_id": {
           "type": "string",
           "description": "Path parameter: course_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [

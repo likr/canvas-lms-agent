@@ -13,6 +13,10 @@ const definitions = [
         "user_id": {
           "type": "string",
           "description": "Path parameter: user_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [

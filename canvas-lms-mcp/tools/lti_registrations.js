@@ -33,6 +33,10 @@ const definitions = [
         "include[]": {
           "type": "string",
           "description": "<p>Array of additional data to include. Always includes \\[account\\_binding].<br>\"account\\_binding\":: the registration's binding to the given account<br>\"configuration\":: the registration's Canvas-style tool configuration, without any overlays applied.<br>\"overlaid\\_configuration\":: the registration's Canvas-style tool configuration, with all overlays applied.<br>\"overlay\":: the registration's admin-defined configuration overlay</p>"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -57,6 +61,10 @@ const definitions = [
         "include[]": {
           "type": "string",
           "description": "<p>Array of additional data to include. Always includes \\[account\\_binding configuration].<br>\"account\\_binding\":: the registration's binding to the given account<br>\"configuration\":: the registration's Canvas-style tool configuration, without any overlays applied.<br>\"overlaid\\_configuration\":: the registration's Canvas-style tool configuration, with all overlays applied.<br>\"overlaid\\_legacy\\_configuration\":: the registration's legacy-style configuration, with all overlays applied.<br>\"overlay\":: the registration's admin-defined configuration overlay<br>\"overlay\\_versions\":: the registration's overlay's edit history</p>"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -130,6 +138,10 @@ const definitions = [
         "client_id": {
           "type": "string",
           "description": "Path parameter: client_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -151,6 +163,10 @@ const definitions = [
         "utid": {
           "type": "string",
           "description": "Path parameter: utid"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -172,6 +188,10 @@ const definitions = [
         "client_id": {
           "type": "string",
           "description": "Path parameter: client_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -368,6 +388,10 @@ const definitions = [
         "search_term": {
           "type": "string",
           "description": "String to search for in account names, SIS ids, or course codes."
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -394,6 +418,10 @@ const definitions = [
         "limit": {
           "type": "number",
           "description": "The maximum number of history items to return. Defaults to 10. Maximum allowed is 100."
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -415,6 +443,10 @@ const definitions = [
         "id": {
           "type": "string",
           "description": "Path parameter: id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -444,6 +476,10 @@ const definitions = [
         "include": {
           "type": "string",
           "description": "no description Allowed values: `String] Array of additional information to include [configuration`, `lti_registration`"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -466,6 +502,10 @@ const definitions = [
         "id": {
           "type": "number",
           "description": "The id of the registration."
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [

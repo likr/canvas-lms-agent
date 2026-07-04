@@ -21,6 +21,10 @@ const definitions = [
         "end_time": {
           "type": "string",
           "description": "<p>The end of the time range you want to retrieve messages for.<br>Up to a year prior to the current date is available.</p>"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [

@@ -17,6 +17,10 @@ const definitions = [
         "include[]": {
           "type": "string",
           "description": "<p>- \"tabs\": Include the list of tabs configured for each group. See the<br><a href=\"tabs.md#method.tabs.index\">List available tabs API</a> for more information. Allowed values: <code>tabs</code></p>"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       }
     }
@@ -30,6 +34,10 @@ const definitions = [
         "account_id": {
           "type": "string",
           "description": "Path parameter: account_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -58,6 +66,10 @@ const definitions = [
         "collaboration_state": {
           "type": "string",
           "description": "<p>Filter groups by their collaboration state:<br>- \"all\": Return both collaborative and non-collaborative groups<br>- \"collaborative\": Return only collaborative groups (default)<br>- \"non\\_collaborative\": Return only non-collaborative groups</p>"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -78,6 +90,10 @@ const definitions = [
         "user_ids[]": {
           "type": "number",
           "description": "An array of user IDs to fetch tags for."
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -98,6 +114,10 @@ const definitions = [
         "include[]": {
           "type": "string",
           "description": "<p>- \"permissions\": Include permissions the current user has<br>for the group.<br>- \"tabs\": Include the list of tabs configured for each group. See the<br><a href=\"tabs.md#method.tabs.index\">List available tabs API</a> for more information. Allowed values: <code>permissions</code>, <code>tabs</code></p>"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -263,6 +283,10 @@ const definitions = [
         "exclude_inactive": {
           "type": "boolean",
           "description": "<p>Whether to filter out inactive users from the results. Defaults to<br>false unless explicitly provided.</p>"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -315,6 +339,10 @@ const definitions = [
         "group_id": {
           "type": "string",
           "description": "Path parameter: group_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -331,6 +359,10 @@ const definitions = [
         "group_id": {
           "type": "string",
           "description": "Path parameter: group_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -351,6 +383,10 @@ const definitions = [
         "permissions[]": {
           "type": "string",
           "description": "<p>List of permissions to check against the authenticated user.<br>Permission names are documented in the <a href=\"roles.md#method.role_overrides.manageable_permissions\">List assignable permissions</a> endpoint.</p>"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -371,6 +407,10 @@ const definitions = [
         "filter_states[]": {
           "type": "string",
           "description": "<p>Only list memberships with the given workflow\\_states. By default it will<br>return all memberships. Allowed values: <code>accepted</code>, <code>invited</code>, <code>requested</code></p>"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -391,6 +431,10 @@ const definitions = [
         "membership_id": {
           "type": "string",
           "description": "Path parameter: membership_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -412,6 +456,10 @@ const definitions = [
         "user_id": {
           "type": "string",
           "description": "Path parameter: user_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [

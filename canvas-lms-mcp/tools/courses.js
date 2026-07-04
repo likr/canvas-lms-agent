@@ -37,6 +37,10 @@ const definitions = [
         "state[]": {
           "type": "string",
           "description": "<p>If set, only return courses that are in the given state(s).<br>By default, \"available\" is returned for students and observers, and<br>anything except \"deleted\", for all other enrollment types Allowed values: <code>unpublished</code>, <code>available</code>, <code>completed</code>, <code>deleted</code></p>"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       }
     }
@@ -70,6 +74,10 @@ const definitions = [
         "account_id": {
           "type": "string",
           "description": "If set, only include courses associated with this account"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -90,6 +98,10 @@ const definitions = [
         "user_id": {
           "type": "string",
           "description": "Path parameter: user_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -267,6 +279,10 @@ const definitions = [
         "course_id": {
           "type": "string",
           "description": "Path parameter: course_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -283,6 +299,10 @@ const definitions = [
         "course_id": {
           "type": "string",
           "description": "Path parameter: course_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -339,6 +359,10 @@ const definitions = [
         "enrollment_state[]": {
           "type": "string",
           "description": "<p>When set, only return users where the enrollment workflow state is of one of the given types.<br>\"active\" and \"invited\" enrollments are returned by default. Allowed values: <code>active</code>, <code>invited</code>, <code>rejected</code>, <code>completed</code>, <code>inactive</code></p>"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -355,6 +379,10 @@ const definitions = [
         "course_id": {
           "type": "string",
           "description": "Path parameter: course_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -375,6 +403,10 @@ const definitions = [
         "id": {
           "type": "string",
           "description": "Path parameter: id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -396,6 +428,10 @@ const definitions = [
         "search_term": {
           "type": "string",
           "description": "Term used to find users. Will search available share users with the search term in their name."
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -433,6 +469,10 @@ const definitions = [
         "course_id": {
           "type": "string",
           "description": "Path parameter: course_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -449,6 +489,10 @@ const definitions = [
         "course_id": {
           "type": "string",
           "description": "Path parameter: course_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -465,6 +509,10 @@ const definitions = [
         "course_id": {
           "type": "string",
           "description": "Path parameter: course_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -502,6 +550,10 @@ const definitions = [
         "course_id": {
           "type": "string",
           "description": "Path parameter: course_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -614,6 +666,10 @@ const definitions = [
         "course_id": {
           "type": "string",
           "description": "Path parameter: course_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -630,6 +686,10 @@ const definitions = [
         "id": {
           "type": "string",
           "description": "Path parameter: id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -658,6 +718,10 @@ const definitions = [
         "teacher_limit": {
           "type": "number",
           "description": "<p>The maximum number of teacher enrollments to show.<br>If the course contains more teachers than this, instead of giving the teacher<br>enrollments, the count of teachers will be given under a <em>teacher\\_count</em> key.</p>"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -937,6 +1001,10 @@ const definitions = [
         "assignment_ids[]": {
           "type": "string",
           "description": "no description"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -957,6 +1025,10 @@ const definitions = [
         "permissions[]": {
           "type": "string",
           "description": "<p>List of permissions to check against the authenticated user.<br>Permission names are documented in the <a href=\"roles.md#method.role_overrides.manageable_permissions\">List assignable permissions</a> endpoint.</p>"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -973,6 +1045,10 @@ const definitions = [
         "course_id": {
           "type": "string",
           "description": "Path parameter: course_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -1030,6 +1106,10 @@ const definitions = [
         "id": {
           "type": "string",
           "description": "Path parameter: id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [

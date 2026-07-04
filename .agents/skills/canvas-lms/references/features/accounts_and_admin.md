@@ -48,14 +48,14 @@ Used to extract audit data, participation statistics, and grade distributions.
 
 ### 1. Generating Reports
 Reports are processed asynchronously. First start the report, then poll the status until complete.
-- **`start_course_report`** / **`start_account_report`**: Triggers a report run.
+- **`post_courses_course_id_reports_report_type`** / **`post_accounts_account_id_reports_report`**: Triggers a report run.
   - *Parameters*: `course_id`/`account_id`, `report_type` (e.g., `"student_guidelines"`, `"grade_export"`).
 - **`get_course_report_status`** / **`get_account_report_status`**: Poll this to check if the file is ready.
   - *Returns*: Report object with `status` (`completed`, `running`) and `file_url`.
 
 ### 2. Analytics
-- **`get_course_participation_data`**: Returns daily page view hits and participation numbers.
-- **`get_course_grade_data`**: Returns distribution of grades for the course.
+- **`get_courses_course_id_analytics_activity`**: Returns daily page view hits and participation numbers.
+- **`get_courses_course_id_analytics_assignments`**: Returns distribution of grades for the course.
 - **`get_course_student_summaries`**: Summarizes grades and participation per student.
   - *Parameters*: `course_id`.
 
@@ -66,7 +66,7 @@ Reports are processed asynchronously. First start the report, then poll the stat
 Configures third-party integrations and batch imports.
 
 ### 1. SIS Imports
-- **`create_sis_import`**: Uploads CSV files to provision users, courses, sections, and enrollments in bulk.
+- **`post_accounts_account_id_sis_imports`**: Uploads CSV files to provision users, courses, sections, and enrollments in bulk.
   - *Parameters*: `account_id`, `import_type`, `attachment` (CSV file data).
 - **`get_sis_import`**: Retrieves status of a SIS import thread.
 

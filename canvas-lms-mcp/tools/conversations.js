@@ -33,6 +33,10 @@ const definitions = [
         "include[]": {
           "type": "string",
           "description": "<p>\"participant\\_avatars\":: Optionally include an \"avatar\\_url\" key for each user participating in the conversation<br>\"uuid\":: Optionally include an \"uuid\" key for each user participating in the conversation Allowed values: <code>participant\\_avatars</code>, <code>uuid</code></p>"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       }
     }
@@ -115,7 +119,12 @@ const definitions = [
     "description": "**Scope:** `url:GET|/api/v1/conversations/batches` Returns any currently running conversation batches for the current user. Conversation batches are created when a bulk private message is sent asynchronously (see the mode argument to the [create API action](#method.conversations.create)). ```js [ { \"id\": 1, \"subject\": \"conversations api example\", \"workflow_state\": \"created\", \"completion\": 0.1234, \"tags\": [], \"message\": { \"id\": 1, \"created_at\": \"2011-09-02T10:00:00Z\", \"body\": \"quick reminder, ...",
     "inputSchema": {
       "type": "object",
-      "properties": {}
+      "properties": {
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
+        }
+      }
     }
   },
   {
@@ -147,6 +156,10 @@ const definitions = [
         "auto_mark_as_read": {
           "type": "boolean",
           "description": "<p>Default true. If true, unread<br>conversations will be automatically marked as read. This will default<br>to false in a future API release, so clients should explicitly send<br>true if that is the desired behavior.</p>"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -327,7 +340,12 @@ const definitions = [
     "description": "**Scope:** `url:GET|/api/v1/conversations/find_recipients` Deprecated, see the [Find recipients endpoint](search.md#method.search.recipients) in the Search API [ConversationsController#unread\\_count](https://github.com/instructure/canvas-lms/blob/master/app/controllers/conversations_controller.rb)",
     "inputSchema": {
       "type": "object",
-      "properties": {}
+      "properties": {
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
+        }
+      }
     }
   },
   {
@@ -335,7 +353,12 @@ const definitions = [
     "description": "**Scope:** `url:GET|/api/v1/conversations/unread_count` Get the number of unread conversations for the current user ```js {'unread_count': '7'} ``` *** This documentation is generated directly from the Canvas LMS source code, available [on Github](https://github.com/instructure/canvas-lms). --- This documentation is published with GitBook. GitBook is the documentation platform designed so that both humans and AI agents can read, navigate, and reason over technical content effectively. Learn m...",
     "inputSchema": {
       "type": "object",
-      "properties": {}
+      "properties": {
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
+        }
+      }
     }
   }
 ];

@@ -13,6 +13,10 @@ const definitions = [
         "exclude_blueprint_courses": {
           "type": "boolean",
           "description": "When set, only return courses that are not configured as blueprint courses."
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       }
     }
@@ -22,7 +26,12 @@ const definitions = [
     "description": "**Scope:** `url:GET|/api/v1/users/self/favorites/groups` Retrieve the paginated list of favorite groups for the current user. If the user has not chosen any favorites, then a selection of groups that the user is a member of will be returned. ```bash curl https:///api/v1/users/self/favorites/groups \\ -H 'Authorization: Bearer ' ``` Returns a list of [Group](groups.md#group) objects. [FavoritesController#add\\_favorite\\_course](https://github.com/instructure/canvas-lms/blob/master/app/controller...",
     "inputSchema": {
       "type": "object",
-      "properties": {}
+      "properties": {
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
+        }
+      }
     }
   },
   {

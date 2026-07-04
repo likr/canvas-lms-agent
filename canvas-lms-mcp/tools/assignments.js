@@ -34,6 +34,10 @@ const definitions = [
         "course_id": {
           "type": "string",
           "description": "Path parameter: course_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -90,6 +94,10 @@ const definitions = [
         "new_quizzes": {
           "type": "boolean",
           "description": "Return only New Quizzes assignments"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -111,6 +119,10 @@ const definitions = [
         "course_id": {
           "type": "string",
           "description": "Path parameter: course_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -161,6 +173,10 @@ const definitions = [
         "user_id": {
           "type": "string",
           "description": "Path parameter: user_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -199,6 +215,10 @@ const definitions = [
         "all_dates": {
           "type": "boolean",
           "description": "All dates associated with the assignment, if applicable"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -638,6 +658,10 @@ const definitions = [
         "assignment_id": {
           "type": "string",
           "description": "Path parameter: assignment_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -663,6 +687,10 @@ const definitions = [
         "id": {
           "type": "string",
           "description": "Path parameter: id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -685,6 +713,10 @@ const definitions = [
         "assignment_id": {
           "type": "string",
           "description": "Path parameter: assignment_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -706,6 +738,10 @@ const definitions = [
         "assignment_id": {
           "type": "string",
           "description": "Path parameter: assignment_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -852,6 +888,10 @@ const definitions = [
         "assignment_overrides[][assignment_id]": {
           "type": "string",
           "description": "Ids of assignments for each override"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [

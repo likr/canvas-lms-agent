@@ -29,6 +29,10 @@ const definitions = [
         "include_hidden": {
           "type": "boolean",
           "description": "<p>If true, results that are hidden from the learning mastery gradebook and student rollup<br>scores will be included</p>"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -105,6 +109,10 @@ const definitions = [
         "contributing_scores": {
           "type": "boolean",
           "description": "<p><strong>DEPRECATED</strong>: This parameter is deprecated. Use the separate<br>GET /api/v1/courses/:course\\_id/outcomes/:outcome\\_id/contributing\\_scores<br>endpoint instead to fetch contributing scores for a specific outcome.<br>If contributing scores are requested, then each individual outcome score will<br>also include all graded artifacts that contributed to the outcome score</p>"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -137,6 +145,10 @@ const definitions = [
         "show_unpublished_assignments": {
           "type": "boolean",
           "description": "If true, unpublished assignments will be included in the results. Defaults to false."
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -182,6 +194,10 @@ const definitions = [
         "add_defaults": {
           "type": "boolean",
           "description": "<p>If defaults are requested, then color and mastery level defaults will be<br>added to outcome ratings in the result. This will only take effect if<br>the Account Level Mastery Scales FF is DISABLED</p>"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [

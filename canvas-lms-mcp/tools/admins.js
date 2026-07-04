@@ -25,6 +25,10 @@ const definitions = [
         "include_deleted": {
           "type": "boolean",
           "description": "When set to true, returns admins who have been deleted"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -104,6 +108,10 @@ const definitions = [
         "account_id": {
           "type": "string",
           "description": "Path parameter: account_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [

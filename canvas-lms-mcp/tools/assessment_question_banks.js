@@ -21,6 +21,10 @@ const definitions = [
         "include_question_count": {
           "type": "boolean",
           "description": "Whether to include the number of questions in each bank."
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -42,6 +46,10 @@ const definitions = [
         "include_question_count": {
           "type": "boolean",
           "description": "Whether to include the number of questions in the bank."
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -58,6 +66,10 @@ const definitions = [
         "id": {
           "type": "number",
           "description": "The question bank unique identifier."
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [

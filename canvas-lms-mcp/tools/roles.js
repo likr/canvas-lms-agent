@@ -21,6 +21,10 @@ const definitions = [
         "show_inherited": {
           "type": "boolean",
           "description": "<p>If this argument is true, all roles inherited from parent accounts will<br>be included.</p>"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -49,6 +53,10 @@ const definitions = [
         "role": {
           "type": "string",
           "description": "The name for the role"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -221,6 +229,10 @@ const definitions = [
         "search_term": {
           "type": "string",
           "description": "If provided, return only permissions whose key, label, group, or group\\_label match the search string."
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -241,6 +253,10 @@ const definitions = [
         "permission": {
           "type": "string",
           "description": "Path parameter: permission"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -254,7 +270,12 @@ const definitions = [
     "description": "**Scope:** `url:GET|/api/v1/permissions/groups` Retrieve information about groups of granular permissions The return value is a dictionary of permission group keys to objects containing +label+ and +subtitle+ keys. *** This documentation is generated directly from the Canvas LMS source code, available [on Github](https://github.com/instructure/canvas-lms). --- This documentation is published with GitBook. GitBook is the documentation platform designed so that both humans and AI agents can rea...",
     "inputSchema": {
       "type": "object",
-      "properties": {}
+      "properties": {
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
+        }
+      }
     }
   }
 ];

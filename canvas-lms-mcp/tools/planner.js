@@ -9,7 +9,12 @@ const definitions = [
     "description": "**Scope:** `url:GET|/api/v1/planner/items`",
     "inputSchema": {
       "type": "object",
-      "properties": {}
+      "properties": {
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
+        }
+      }
     }
   },
   {
@@ -41,6 +46,10 @@ const definitions = [
         "filter": {
           "type": "string",
           "description": "Only return items that are completed (includes items with planner\\_override.marked\\_complete = true or submitted assignments) Allowed values: `complete_items`"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -65,6 +74,10 @@ const definitions = [
         "context_codes[]": {
           "type": "string",
           "description": "<p>List of context codes of courses whose notes you want to see.<br>If not specified, defaults to all contexts that the user belongs to.<br>The format of this field is the context type, followed by an<br>underscore, followed by the context id. For example: course\\_42<br>Including a code matching the user's own context code (e.g. user\\_1)<br>will include notes that are not associated with any particular course.</p>"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       }
     }
@@ -78,6 +91,10 @@ const definitions = [
         "id": {
           "type": "string",
           "description": "Path parameter: id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -171,7 +188,12 @@ const definitions = [
     "description": "**Scope:** `url:GET|/api/v1/planner/overrides` Retrieve a planner override for the current user Returns a list of [PlannerOverride](#planneroverride) objects. [PlannerOverridesController#show](https://github.com/instructure/canvas-lms/blob/master/app/controllers/planner_overrides_controller.rb)",
     "inputSchema": {
       "type": "object",
-      "properties": {}
+      "properties": {
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
+        }
+      }
     }
   },
   {
@@ -183,6 +205,10 @@ const definitions = [
         "id": {
           "type": "string",
           "description": "Path parameter: id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [

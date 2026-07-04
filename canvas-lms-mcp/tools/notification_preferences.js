@@ -17,6 +17,10 @@ const definitions = [
         "communication_channel_id": {
           "type": "string",
           "description": "Path parameter: communication_channel_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -42,6 +46,10 @@ const definitions = [
         "address": {
           "type": "string",
           "description": "Path parameter: address"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -64,6 +72,10 @@ const definitions = [
         "communication_channel_id": {
           "type": "string",
           "description": "Path parameter: communication_channel_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -89,6 +101,10 @@ const definitions = [
         "notification": {
           "type": "string",
           "description": "Path parameter: notification"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -119,6 +135,10 @@ const definitions = [
         "notification": {
           "type": "string",
           "description": "Path parameter: notification"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [

@@ -13,6 +13,10 @@ const definitions = [
         "media_object_id": {
           "type": "string",
           "description": "Path parameter: media_object_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -33,6 +37,10 @@ const definitions = [
         "include[]": {
           "type": "string",
           "description": "<p>By default, index returns id, locale, kind, media\\_object\\_id, and user\\_id for each of the<br>result MediaTracks. Use include\\[] to<br>add additional fields. For example include\\[]=content Allowed values: <code>content</code>, <code>webvtt\\_content</code>, <code>updated\\_at</code>, <code>created\\_at</code></p>"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -81,7 +89,12 @@ const definitions = [
     "description": "**Scope:** `url:GET|/api/v1/media_objects`",
     "inputSchema": {
       "type": "object",
-      "properties": {}
+      "properties": {
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
+        }
+      }
     }
   },
   {
@@ -93,6 +106,10 @@ const definitions = [
         "course_id": {
           "type": "string",
           "description": "Path parameter: course_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -109,6 +126,10 @@ const definitions = [
         "group_id": {
           "type": "string",
           "description": "Path parameter: group_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -121,7 +142,12 @@ const definitions = [
     "description": "**Scope:** `url:GET|/api/v1/media_attachments`",
     "inputSchema": {
       "type": "object",
-      "properties": {}
+      "properties": {
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
+        }
+      }
     }
   },
   {
@@ -133,6 +159,10 @@ const definitions = [
         "course_id": {
           "type": "string",
           "description": "Path parameter: course_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -161,6 +191,10 @@ const definitions = [
         "exclude[]": {
           "type": "string",
           "description": "<p>Array of data to exclude. By excluding \"sources\" and \"tracks\",<br>the api will not need to query kaltura, which greatly<br>speeds up its response.<br>sources:: Do not query kaltura for media\\_sources<br>tracks:: Do not query kaltura for media\\_tracks Allowed values: <code>sources</code>, <code>tracks</code></p>"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [

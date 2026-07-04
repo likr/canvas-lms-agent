@@ -21,6 +21,10 @@ const definitions = [
         "end_time": {
           "type": "string",
           "description": "The end of the time range from which you want events."
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -45,6 +49,10 @@ const definitions = [
         "end_time": {
           "type": "string",
           "description": "The end of the time range from which you want events."
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [

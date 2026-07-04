@@ -13,6 +13,10 @@ const definitions = [
         "course_id": {
           "type": "string",
           "description": "Path parameter: course_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -29,6 +33,10 @@ const definitions = [
         "account_id": {
           "type": "string",
           "description": "Path parameter: account_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -49,6 +57,10 @@ const definitions = [
         "hide_inherited_enabled": {
           "type": "boolean",
           "description": "<p>When true, feature flags that are enabled in a higher context and cannot<br>be overridden will be omitted.</p>"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -65,6 +77,10 @@ const definitions = [
         "course_id": {
           "type": "string",
           "description": "Path parameter: course_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -81,6 +97,10 @@ const definitions = [
         "account_id": {
           "type": "string",
           "description": "Path parameter: account_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -97,6 +117,10 @@ const definitions = [
         "user_id": {
           "type": "string",
           "description": "Path parameter: user_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -109,7 +133,12 @@ const definitions = [
     "description": "**Scope:** `url:GET|/api/v1/features/environment` Return a hash of global feature options that pertain to the Canvas user interface. This is the same information supplied to the web interface as +ENV.FEATURES+. ```bash curl 'http:///api/v1/features/environment' \\ -H \"Authorization: Bearer \" ``` ```js { \"telepathic_navigation\": true, \"fancy_wickets\": true, \"automatic_essay_grading\": false } ``` [FeatureFlagsController#show](https://github.com/instructure/canvas-lms/blob/master/app/controllers/...",
     "inputSchema": {
       "type": "object",
-      "properties": {}
+      "properties": {
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
+        }
+      }
     }
   },
   {
@@ -125,6 +154,10 @@ const definitions = [
         "feature": {
           "type": "string",
           "description": "Path parameter: feature"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -146,6 +179,10 @@ const definitions = [
         "feature": {
           "type": "string",
           "description": "Path parameter: feature"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -167,6 +204,10 @@ const definitions = [
         "feature": {
           "type": "string",
           "description": "Path parameter: feature"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [

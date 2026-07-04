@@ -17,6 +17,10 @@ const definitions = [
         "assignment_id": {
           "type": "string",
           "description": "Path parameter: assignment_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -38,6 +42,10 @@ const definitions = [
         "assignment_id": {
           "type": "string",
           "description": "Path parameter: assignment_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -63,6 +71,10 @@ const definitions = [
         "submission_id": {
           "type": "string",
           "description": "Path parameter: submission_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -93,6 +105,10 @@ const definitions = [
         "include[]": {
           "type": "string",
           "description": "Associations to include with the peer review. Allowed values: `submission_comments`, `user`"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [

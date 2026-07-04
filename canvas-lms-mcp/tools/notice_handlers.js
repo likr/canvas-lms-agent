@@ -13,6 +13,10 @@ const definitions = [
         "context_external_tool_id": {
           "type": "string",
           "description": "Path parameter: context_external_tool_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [

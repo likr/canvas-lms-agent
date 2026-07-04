@@ -17,6 +17,10 @@ const definitions = [
         "include[]": {
           "type": "string",
           "description": "- \"avatar\\_url\": Optionally include avatar\\_url. Allowed values: `avatar_url`"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -37,6 +41,10 @@ const definitions = [
         "include[]": {
           "type": "string",
           "description": "- \"avatar\\_url\": Optionally include avatar\\_url. Allowed values: `avatar_url`"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -93,6 +101,10 @@ const definitions = [
         "observee_id": {
           "type": "string",
           "description": "Path parameter: observee_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -114,6 +126,10 @@ const definitions = [
         "observer_id": {
           "type": "string",
           "description": "Path parameter: observer_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [

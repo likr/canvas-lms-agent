@@ -21,6 +21,10 @@ const definitions = [
         "search_term": {
           "type": "string",
           "description": "<p>When included, searches course sections for the term. Returns only matching<br>results. Term must be at least 2 characters.</p>"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -174,6 +178,10 @@ const definitions = [
         "id": {
           "type": "string",
           "description": "Path parameter: id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -195,6 +203,10 @@ const definitions = [
         "include[]": {
           "type": "string",
           "description": "<p>- \"students\": Associations to include with the group. Note: this is only<br>available if you have permission to view users or grades in the course<br>- \"avatar\\_url\": Include the avatar URLs for students returned.<br>- \"enrollments\": If 'students' is also included, return the section<br>enrollment for each student<br>- \"total\\_students\": Returns the total amount of active and invited students<br>for the course section<br>- \"passback\\_status\": Include the grade passback status.<br>- \"permissions\": Include whether section grants :manage\\_calendar permission<br>to the caller Allowed values: <code>students</code>, <code>avatar\\_url</code>, <code>enrollments</code>, <code>total\\_students</code>, <code>passback\\_status</code>, <code>permissions</code></p>"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -243,6 +255,10 @@ const definitions = [
         "enrollment_type": {
           "type": "string",
           "description": "When set, only return users with the specified enrollment type for the given section. Allowed values: `teacher`, `student`, `ta`, `observer`, `designer`"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [

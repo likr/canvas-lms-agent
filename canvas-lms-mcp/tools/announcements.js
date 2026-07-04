@@ -37,6 +37,10 @@ const definitions = [
         "include": {
           "type": "array",
           "description": "<p>Optional list of resources to include with the response. May include<br>a string of the name of the resource. Possible values are:<br>\"sections\", \"sections\\_user\\_count\"<br>if \"sections\" is passed, includes the course sections that are associated<br>with the topic, if the topic is specific to certain sections of the course.<br>If \"sections\\_user\\_count\" is passed, then:<br>(a) If sections were asked for <em>and</em> the topic is specific to certain<br>course sections sections, includes the number of users in each<br>section. (as part of the section json asked for above)<br>(b) Else, includes at the root level the total number of users in the<br>topic's context (group or course) that the topic applies to.</p>"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [

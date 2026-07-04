@@ -9,14 +9,14 @@ This reference guide covers operations related to creating, updating, and queryi
 Assignments define due dates, grading schemes, and submission formats.
 
 ### 1. View Assignments
-- **`list_assignments`**: Lists assignments in a course.
+- **`get_courses_course_id_assignments`**: Lists assignments in a course.
   - *Parameters*: `course_id`, `search_term` (Optional).
   - *Returns*: A list of Assignment objects containing `id`, `name`, `due_at`, `points_possible`, `submission_types`.
-- **`get_assignment`**: Retrieves details of a specific assignment.
+- **`get_courses_course_id_assignments_id`**: Retrieves details of a specific assignment.
   - *Parameters*: `course_id`, `id` (Assignment ID).
 
 ### 2. Manage Assignments (Teacher Only)
-- **`create_assignment`**: Creates a new assignment.
+- **`post_courses_course_id_assignments`**: Creates a new assignment.
   - *Parameters*: `course_id`, `assignment[name]`, `assignment[points_possible]`, `assignment[due_at]`, `assignment[submission_types][]` (e.g. `online_text_entry`, `online_url`, `online_upload`, `none`), `assignment[published]` (boolean).
 
   > [!IMPORTANT]
@@ -33,9 +33,9 @@ Assignments define due dates, grading schemes, and submission formats.
   >   }
   > }
   > ```
-- **`update_assignment`**: Updates an existing assignment.
+- **`put_courses_course_id_assignments_id`**: Updates an existing assignment.
   - *Parameters*: `course_id`, `id`, `assignment[name]`, `assignment[published]`, etc.
-- **`delete_assignment`**: Deletes an assignment.
+- **`delete_courses_course_id_assignments_id`**: Deletes an assignment.
   - *Parameters*: `course_id`, `id`.
 
 ---
@@ -45,16 +45,16 @@ Assignments define due dates, grading schemes, and submission formats.
 Quizzes consist of online assessments, surveys, or exams.
 
 ### 1. View Quizzes
-- **`list_quizzes`**: Lists quizzes in a course.
+- **`get_courses_course_id_quizzes`**: Lists quizzes in a course.
   - *Parameters*: `course_id`.
   - *Returns*: Quiz objects containing `id`, `title`, `quiz_type`, `due_at`, `allowed_attempts`.
 - **`get_quiz`**: Retrieves details of a specific quiz.
   - *Parameters*: `course_id`, `id` (Quiz ID).
 
 ### 2. Manage Quizzes (Teacher Only)
-- **`create_quiz`**: Creates a new quiz.
+- **`post_courses_course_id_quizzes`**: Creates a new quiz.
   - *Parameters*: `course_id`, `quiz[title]`, `quiz[description]`, `quiz[quiz_type]` (e.g. `assignment`, `practice_quiz`), `quiz[published]` (boolean).
-- **`update_quiz`**: Updates an existing quiz.
+- **`put_courses_course_id_quizzes_id`**: Updates an existing quiz.
   - *Parameters*: `course_id`, `id`, `quiz[published]`, etc.
 - **`delete_quiz`**: Deletes a quiz.
   - *Parameters*: `course_id`, `id`.

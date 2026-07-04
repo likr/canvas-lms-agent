@@ -17,6 +17,10 @@ const definitions = [
         "group_by": {
           "type": "string",
           "description": "The attribute to group the scopes by. By default no grouping is done. Allowed values: `resource_name`"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [

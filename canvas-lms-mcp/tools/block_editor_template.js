@@ -33,6 +33,10 @@ const definitions = [
         "include[]": {
           "type": "string",
           "description": "no description Allowed values: `node_tree`, `thumbnail`"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [

@@ -9,7 +9,12 @@ const definitions = [
     "description": "**Scope:** `url:GET|/api/lti/uuid_map` This endpoint returns a CSV file with the UUID mapping for the sandbox. The CSV has three columns: * `type` - The object type * `original_uuid` - The UUID of an object from the template * `new_uuid` - The UUID of the corresponding object in the sandbox *** This documentation is generated directly from the Canvas LMS source code, available [on Github](https://github.com/instructure/canvas-lms). --- This documentation is published with GitBook. GitBook is ...",
     "inputSchema": {
       "type": "object",
-      "properties": {}
+      "properties": {
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
+        }
+      }
     }
   }
 ];

@@ -137,6 +137,12 @@ def parse_markdown_doc(doc_path):
                 if is_req and pname not in required:
                     required.append(pname)
                     
+        if method == "GET":
+            properties["fetch_all_pages"] = {
+                "type": "boolean",
+                "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
+            }
+
         parsed_endpoints[(method, path)] = {
             "description": description,
             "properties": properties,
@@ -161,7 +167,7 @@ def make_test_case(category_var, tool_name, method, path, info):
         
     other_params = {}
     for name, prop in info["properties"].items():
-        if name not in path_params:
+        if name not in path_params and name != "fetch_all_pages":
             ptype = prop.get("type", "string")
             if ptype == "number":
                 other_params[name] = 123

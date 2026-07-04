@@ -9,7 +9,12 @@ const definitions = [
     "description": "**Scope:** `url:GET|/api/v1/services/kaltura` Return the config information for the Kaltura plugin in json format. * enabled Enabled state of the Kaltura plugin * domain Main domain of the Kaltura instance (This is the URL where the Kaltura API resides) * resources\\_domain Kaltura URL for grabbing thumbnails and other resources * rtmp\\_domain Hostname to be used for RTMP recording * partner\\_id Partner ID used for communicating with the Kaltura instance ```js { 'domain': 'kaltura.example.com'...",
     "inputSchema": {
       "type": "object",
-      "properties": {}
+      "properties": {
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
+        }
+      }
     }
   },
   {

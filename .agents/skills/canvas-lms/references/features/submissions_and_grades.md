@@ -9,7 +9,7 @@ This reference guide covers submitting work, grading student submissions, sendin
 > [!IMPORTANT]
 > The Canvas API logic for grades and submissions depends heavily on the calling user's enrollment role (Student vs. Teacher/TA). Follow these guidelines to avoid permission errors (403/404).
 
-### 1. Retrieving Submissions & Grades (`get_user_grades`)
+### 1. Retrieving Submissions & Grades (`get_courses_course_id_students_submissions`)
 This tool retrieves a list of student submissions for a given course.
 - **For Students**:
   - **Usage**: Omit the `student_id` or `student_ids[]` parameters.
@@ -18,27 +18,27 @@ This tool retrieves a list of student submissions for a given course.
   - **Usage**: You **MUST** specify the student IDs. Pass `student_ids[]=all` to retrieve submissions for all students in the course, or pass a specific student's ID (e.g. `student_ids[]=123`).
   - **Behavior**: Retrieves the grade roster. Note the `user_id` field in the response list to identify each student.
 
-### 2. Modifying Grades or Comments (`grade_or_comment_submission`)
+### 2. Modifying Grades or Comments (`put_courses_course_id_assignments_assignment_id_submissions_user_id`)
 - **Usage**: Call with `course_id`, `assignment_id`, and `user_id` (the student's user ID).
 - **Behavior**: Updates the grade and/or adds a text comment.
 - > [!WARNING]
-  > Never pass the teacher's own user ID as the `user_id` parameter here. Canvas will reject it with a 404 or 403 error. Always resolve the student's Canvas user ID dynamically (e.g. from `get_user_grades` or `list_users`) first.
+  > Never pass the teacher's own user ID as the `user_id` parameter here. Canvas will reject it with a 404 or 403 error. Always resolve the student's Canvas user ID dynamically (e.g. from `get_courses_course_id_students_submissions` or `get_courses_course_id_users`) first.
 
 ---
 
 ## Tool Reference
 
 ### 1. Submitting Work (Student)
-- **`submit_assignment`**: Submits an assignment.
+- **`post_courses_course_id_assignments_assignment_id_submissions`**: Submits an assignment.
   - *Parameters*: `course_id`, `assignment_id`, `submission[submission_type]` (e.g., `online_text_entry`, `online_url`, `online_upload`), `submission[body]` (for text entries), `submission[url]` (for URLs).
 
 ### 2. Reviewing Work (Teacher/TA)
-- **`get_submission`**: Retrieves details of a single student's submission.
+- **`get_courses_course_id_assignments_assignment_id_submissions_user_id`**: Retrieves details of a single student's submission.
   - *Parameters*: `course_id`, `assignment_id`, `user_id` (Student ID), `include[]` (e.g. `submission_comments`).
   - *Usage*: Use this to read text submissions, check attachments, or retrieve the history of submission comments.
 
 ### 3. Grading & Feedback (Teacher/TA)
-- **`grade_or_comment_submission`**: Sets a grade or adds a textual feedback comment.
+- **`put_courses_course_id_assignments_assignment_id_submissions_user_id`**: Sets a grade or adds a textual feedback comment.
   - *Parameters*: `course_id`, `assignment_id`, `user_id` (Student ID), `submission[posted_grade]` (e.g. `"A"`, `"95"`, `"complete"`), `comment[text_comment]` (Optional text feedback).
 
 ### 4. Gradebook Customization (Teacher/TA)

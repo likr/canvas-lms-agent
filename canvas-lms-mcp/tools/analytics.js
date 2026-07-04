@@ -17,6 +17,10 @@ const definitions = [
         "term_id": {
           "type": "string",
           "description": "Path parameter: term_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -34,6 +38,10 @@ const definitions = [
         "account_id": {
           "type": "string",
           "description": "Path parameter: account_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -50,6 +58,10 @@ const definitions = [
         "account_id": {
           "type": "string",
           "description": "Path parameter: account_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -70,6 +82,10 @@ const definitions = [
         "term_id": {
           "type": "string",
           "description": "Path parameter: term_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -87,6 +103,10 @@ const definitions = [
         "account_id": {
           "type": "string",
           "description": "Path parameter: account_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -103,6 +123,10 @@ const definitions = [
         "account_id": {
           "type": "string",
           "description": "Path parameter: account_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -123,6 +147,10 @@ const definitions = [
         "term_id": {
           "type": "string",
           "description": "Path parameter: term_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -140,6 +168,10 @@ const definitions = [
         "account_id": {
           "type": "string",
           "description": "Path parameter: account_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -156,6 +188,10 @@ const definitions = [
         "account_id": {
           "type": "string",
           "description": "Path parameter: account_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -176,6 +212,10 @@ const definitions = [
         "term_id": {
           "type": "string",
           "description": "Path parameter: term_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -193,6 +233,10 @@ const definitions = [
         "account_id": {
           "type": "string",
           "description": "Path parameter: account_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -209,6 +253,10 @@ const definitions = [
         "account_id": {
           "type": "string",
           "description": "Path parameter: account_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -225,6 +273,10 @@ const definitions = [
         "course_id": {
           "type": "string",
           "description": "Path parameter: course_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -245,6 +297,10 @@ const definitions = [
         "async": {
           "type": "boolean",
           "description": "<p>If async is true, then the course\\_assignments call can happen asynch-<br>ronously and MAY return a response containing a progress\\_url key instead<br>of an assignments array. If it does, then it is the caller's<br>responsibility to poll the API again to see if the progress is complete.<br>If the data is ready (possibly even on the first async call) then it<br>will be passed back normally, as documented in the example response.</p>"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -269,6 +325,10 @@ const definitions = [
         "student_id": {
           "type": "string",
           "description": "If set, returns only the specified student."
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -289,6 +349,10 @@ const definitions = [
         "student_id": {
           "type": "string",
           "description": "Path parameter: student_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -310,6 +374,10 @@ const definitions = [
         "student_id": {
           "type": "string",
           "description": "Path parameter: student_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
@@ -331,6 +399,10 @@ const definitions = [
         "student_id": {
           "type": "string",
           "description": "Path parameter: student_id"
+        },
+        "fetch_all_pages": {
+          "type": "boolean",
+          "description": "Optional: Set to true to automatically paginate and return all pages of results. Default is false."
         }
       },
       "required": [
