@@ -27,6 +27,22 @@ const definitions = [
       required: ["course_id"],
     },
   },
+  {
+    name: "create_discussion_topic",
+    description: "Creates a new discussion topic or announcement.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        course_id: { type: "number", description: "The unique ID of the Canvas course." },
+        title: { type: "string", description: "The title of the discussion topic." },
+        message: { type: "string", description: "Optional. The message body of the discussion topic." },
+        published: { type: "boolean", description: "Optional. Published state." },
+        discussion_type: { type: "string", description: "Optional. side_comment, threaded, not_threaded." },
+        is_announcement: { type: "boolean", description: "Optional. Set to true to create an announcement." },
+      },
+      required: ["course_id", "title"],
+    },
+  },
 ];
 
 const handlers = {
@@ -67,6 +83,30 @@ const handlers = {
       locked: a.locked,
       pinned: a.pinned,
     }));
+  },
+
+  create_discussion_topic: async (client, args) => {
+    const { course_id: courseId, title, message, published, discussion_type, is_announcement } = args;
+    if (!courseId || !title) {
+      throw new Error("Missing required arguments: course_id, title");
+    }
+
+    const payload = { title };
+    if (message !== undefined) payload.message = message;
+    if (published !== undefined) payload.published = published;
+    if (discussion_type !== undefined) payload.discussion_type = discussion_type;
+    if (is_announcement !== undefined) payload.is_announcement = is_announcement;
+
+    const response = await client.post(`/api/v1/courses/${courseId}/discussion_topics`, payload);
+    const t = response.data || {};
+    return {
+      id: t.id,
+      title: t.title,
+      message: t.message,
+      posted_at: t.posted_at,
+      discussion_type: t.discussion_type,
+      is_announcement: t.is_announcement,
+    };
   },
 };
 

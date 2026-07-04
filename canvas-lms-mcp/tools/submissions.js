@@ -47,6 +47,19 @@ const definitions = [
       required: ["course_id", "assignment_id", "user_id"],
     },
   },
+  {
+    name: "get_submission",
+    description: "Retrieves a single student's submission details for an assignment.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        course_id: { type: "number", description: "The unique ID of the Canvas course." },
+        assignment_id: { type: "number", description: "The unique ID of the assignment." },
+        user_id: { type: "number", description: "The Canvas user ID of the student." },
+      },
+      required: ["course_id", "assignment_id", "user_id"],
+    },
+  },
 ];
 
 const handlers = {
@@ -122,6 +135,29 @@ const handlers = {
       grade: sub.grade,
       score: sub.score,
       graded_at: sub.graded_at,
+    };
+  },
+
+  get_submission: async (client, args) => {
+    const { course_id: courseId, assignment_id: assignmentId, user_id: userId } = args;
+    if (!courseId || !assignmentId || !userId) {
+      throw new Error("Missing required arguments: course_id, assignment_id, user_id");
+    }
+    const response = await client.get(
+      `/api/v1/courses/${courseId}/assignments/${assignmentId}/submissions/${userId}`
+    );
+    const sub = response.data || {};
+    return {
+      id: sub.id,
+      assignment_id: sub.assignment_id,
+      user_id: sub.user_id,
+      grade: sub.grade,
+      score: sub.score,
+      submitted_at: sub.submitted_at,
+      graded_at: sub.graded_at,
+      submission_type: sub.submission_type,
+      url: sub.url,
+      body: sub.body,
     };
   },
 };

@@ -101,3 +101,40 @@ test("grade_or_comment_submission updates grade and comment", async () => {
     graded_at: "2026-07-04T12:00:00Z",
   });
 });
+
+test("get_submission tool calls correct endpoint", async () => {
+  let calledUrl = null;
+  const mockClient = {
+    get: async (url) => {
+      calledUrl = url;
+      return {
+        data: {
+          id: 999,
+          assignment_id: 301,
+          user_id: 54477,
+          grade: "A-",
+          score: 93,
+          submitted_at: "2026-07-04T11:00:00Z",
+          graded_at: "2026-07-04T12:00:00Z",
+          submission_type: "online_text_entry",
+          url: null,
+          body: "Hello",
+        },
+      };
+    },
+  };
+  const result = await submissions.handlers.get_submission(mockClient, { course_id: 101, assignment_id: 301, user_id: 54477 });
+  assert.strictEqual(calledUrl, "/api/v1/courses/101/assignments/301/submissions/54477");
+  assert.deepStrictEqual(result, {
+    id: 999,
+    assignment_id: 301,
+    user_id: 54477,
+    grade: "A-",
+    score: 93,
+    submitted_at: "2026-07-04T11:00:00Z",
+    graded_at: "2026-07-04T12:00:00Z",
+    submission_type: "online_text_entry",
+    url: null,
+    body: "Hello",
+  });
+});

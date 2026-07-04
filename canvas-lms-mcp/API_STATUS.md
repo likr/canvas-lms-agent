@@ -22,3 +22,21 @@ This document tracks the implementation and test status of all Model Context Pro
 | 16 | `list_enrollments` | List enrollments and inspect roles in a course | `GET /api/v1/courses/:id/enrollments` | Enrollments | `tools/enrollments.js` | `[x]` Done | `[x]` Verified |
 | 17 | `list_calendar_events` | List calendar events for courses or users | `GET /api/v1/calendar_events` | Calendar | `tools/calendar.js` | `[x]` Done | `[x]` Verified |
 | 18 | `list_rubrics` | List rubrics associated with a course | `GET /api/v1/courses/:id/rubrics` | Rubrics | `tools/rubrics.js` | `[x]` Done | `[x]` Verified |
+| 19 | `get_course` | Get details of a specific course | `GET /api/v1/courses/:id` | Courses | `tools/courses.js` | `[x]` Done | `[x]` Verified |
+| 20 | `get_assignment` | Retrieves details of a specific assignment | `GET /api/v1/courses/:course_id/assignments/:id` | Assignments | `tools/assignments.js` | `[x]` Done | `[x]` Verified |
+| 21 | `create_assignment` | Creates a new assignment for a course | `POST /api/v1/courses/:course_id/assignments` | Assignments | `tools/assignments.js` | `[x]` Done | `[x]` Verified |
+| 22 | `update_assignment` | Updates an existing assignment | `PUT /api/v1/courses/:course_id/assignments/:id` | Assignments | `tools/assignments.js` | `[x]` Done | `[x]` Verified |
+| 23 | `delete_assignment` | Deletes an assignment | `DELETE /api/v1/courses/:course_id/assignments/:id` | Assignments | `tools/assignments.js` | `[x]` Done | `[x]` Verified |
+| 24 | `get_submission` | Retrieves a single student's submission details | `GET /api/v1/courses/:course_id/assignments/:assignment_id/submissions/:user_id` | Submissions | `tools/submissions.js` | `[x]` Done | `[x]` Verified |
+| 25 | `get_module` | Retrieves details of a specific module | `GET /api/v1/courses/:course_id/modules/:id` | Modules | `tools/modules.js` | `[x]` Done | `[x]` Verified |
+| 26 | `create_module` | Creates a new module for a course | `POST /api/v1/courses/:course_id/modules` | Modules | `tools/modules.js` | `[x]` Done | `[x]` Verified |
+| 27 | `update_module` | Updates an existing module | `PUT /api/v1/courses/:course_id/modules/:id` | Modules | `tools/modules.js` | `[x]` Done | `[x]` Verified |
+| 28 | `delete_module` | Deletes a module | `DELETE /api/v1/courses/:course_id/modules/:id` | Modules | `tools/modules.js` | `[x]` Done | `[x]` Verified |
+| 29 | `create_page` | Creates a new wiki page | `POST /api/v1/courses/:course_id/pages` | Pages | `tools/pages.js` | `[x]` Done | `[x]` Verified |
+| 30 | `update_page` | Updates an existing wiki page | `PUT /api/v1/courses/:course_id/pages/:url_or_id` | Pages | `tools/pages.js` | `[x]` Done | `[x]` Verified |
+| 31 | `delete_page` | Deletes a wiki page | `DELETE /api/v1/courses/:course_id/pages/:url_or_id` | Pages | `tools/pages.js` | `[x]` Done | `[x]` Verified |
+| 32 | `get_quiz` | Retrieves details of a specific quiz | `GET /api/v1/courses/:course_id/quizzes/:id` | Quizzes | `tools/quizzes.js` | `[x]` Done | `[x]` Verified |
+| 33 | `create_quiz` | Creates a new quiz for a course | `POST /api/v1/courses/:course_id/quizzes` | Quizzes | `tools/quizzes.js` | `[x]` Done | `[x]` Verified |
+| 34 | `update_quiz` | Updates an existing quiz | `PUT /api/v1/courses/:course_id/quizzes/:id` | Quizzes | `tools/quizzes.js` | `[x]` Done | `[x]` Verified |
+| 35 | `delete_quiz` | Deletes a quiz | `DELETE /api/v1/courses/:course_id/quizzes/:id` | Quizzes | `tools/quizzes.js` | `[x]` Done | `[x]` Verified |
+| 36 | `create_discussion_topic` | Creates a new discussion topic or announcement | `POST /api/v1/courses/:course_id/discussion_topics` | Discussions | `tools/discussions.js` | `[x]` Done | `[x]` Verified |
