@@ -47,5 +47,9 @@ When a Canvas LMS task is requested, perform operations in the following logical
 5. **Retrieve Grades / Submissions**:
    - Call `get_user_grades` for the course ID.
    - **Role-Based Behavior**:
-     - **For Teachers / TA / Staff**: If the user is enrolled as a teacher/staff in the course, the tool will automatically return submissions for **all** students in the course. You can check a specific student's grades by passing their `student_id` in arguments.
+     - **For Teachers / TA / Staff**: If the user is enrolled as a teacher/staff in the course, the tool will automatically return submissions for **all** students in the course. You can check a specific student's grades by passing their `student_id` in arguments. Note the `user_id` field from the result to identify students.
      - **For Students**: Omit the `student_id` argument to retrieve the calling student's own grades/submissions.
+
+6. **Grade / Modify Submissions**:
+   - **Grading and Feedback**: If you are a teacher/TA and need to grade or write a textual comment on a student's submission, call `grade_or_comment_submission` with `course_id`, `assignment_id`, `user_id` (student's user ID), and optional `posted_grade` (e.g. `A-`, `35`) or `text_comment`.
+   - **Student Submissions**: If you are a student and want to submit a text entry or URL assignment, call `submit_assignment` with `course_id`, `assignment_id`, `submission_type` (e.g. `online_text_entry`, `online_url`), and the appropriate `body` or `url` content.

@@ -46,7 +46,11 @@ def test_mcp_server():
         tool_names = [t.get("name") for t in tools]
         print(f"Available tools: {tool_names}")
         
-        expected_tools = ["get_current_user", "list_courses", "list_assignments", "get_user_grades"]
+        expected_tools = [
+            "get_current_user", "list_courses", "list_assignments", "get_user_grades",
+            "list_modules", "list_files", "list_discussion_topics", "list_announcements",
+            "list_pages", "get_page", "list_quizzes", "grade_or_comment_submission", "submit_assignment"
+        ]
         for expected in expected_tools:
             assert expected in tool_names, f"Expected tool '{expected}' is missing!"
         print("PASS: tools/list test successful.")
@@ -308,6 +312,61 @@ def test_mcp_server():
             print(f"Found {len(quizzes_data)} quizzes.")
             if quizzes_data:
                 print(f"First quiz: {quizzes_data[0]}")
+                
+            # Step 13: Test submit_assignment (gracefully handle expected role/parameter errors)
+            call_submit = {
+                "jsonrpc": "2.0",
+                "method": "tools/call",
+                "params": {
+                    "name": "submit_assignment",
+                    "arguments": {
+                        "course_id": course_id,
+                        "assignment_id": 150469, # 授業内テスト1
+                        "submission_type": "online_text_entry",
+                        "body": "Test submission content"
+                    }
+                },
+                "id": 13
+            }
+            print(f"Testing submit_assignment for course {course_id}...")
+            proc.stdin.write(json.dumps(call_submit) + "\n")
+            proc.stdin.flush()
+            stdout_line = proc.stdout.readline()
+            call_resp = json.loads(stdout_line)
+            result = call_resp.get("result", {})
+            if result.get("isError", False):
+                print(f"submit_assignment returned expected API error or restriction: {result.get('content', [])[0].get('text')}")
+            else:
+                submit_data = json.loads(result.get("content", [])[0].get("text", "{}"))
+                print(f"Success submit_assignment: {submit_data}")
+
+            # Step 14: Test grade_or_comment_submission (gracefully handle expected role/parameter errors)
+            student_id = grades_data[0].get("user_id") if (grades_data and grades_data[0].get("user_id")) else 32362
+            call_grade = {
+                "jsonrpc": "2.0",
+                "method": "tools/call",
+                "params": {
+                    "name": "grade_or_comment_submission",
+                    "arguments": {
+                        "course_id": course_id,
+                        "assignment_id": 150469, # 授業内テスト1
+                        "user_id": student_id,
+                        "text_comment": "Automated verification comment"
+                    }
+                },
+                "id": 14
+            }
+            print(f"Testing grade_or_comment_submission for course {course_id} and student {student_id}...")
+            proc.stdin.write(json.dumps(call_grade) + "\n")
+            proc.stdin.flush()
+            stdout_line = proc.stdout.readline()
+            call_resp = json.loads(stdout_line)
+            result = call_resp.get("result", {})
+            if result.get("isError", False):
+                print(f"grade_or_comment_submission returned expected API error: {result.get('content', [])[0].get('text')}")
+            else:
+                grade_data = json.loads(result.get("content", [])[0].get("text", "{}"))
+                print(f"Success grade_or_comment_submission: {grade_data}")
                 
         else:
             print("No active courses found to perform full testing.")
