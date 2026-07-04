@@ -8,3 +8,11 @@
   - The stdio MCP transport uses `stdout` for JSON-RPC communication. Absolutely NO non-JSON-RPC text should ever be printed to `stdout`.
   - All initialization messages, diagnostic prints, or debug statements inside MCP server code MUST be written to `console.error` (which pipes to `stderr`).
   - When starting a Node.js MCP server using npm script execution in subprocess configurations, always use the `--silent` flag (e.g. `npm --silent --prefix ... start`) to suppress npm startup headers that corrupt the JSON-RPC stream.
+
+## Canvas LMS API Integration & Testing Guidelines
+- **Role-Adaptive Submissions Handling**:
+  - When querying student submissions, inspect the user's course enrollment. Teachers must query `student_ids[]=all` to fetch all submissions, whereas students query their own grades by omitting the `student_ids[]` parameter.
+  - Modifying a grade or writing feedback comments requires the student's unique `user_id`. Do not pass the teacher's own `user_id` to student submission endpoints, as Canvas will reject it with a 404 Not Found or 403 Forbidden.
+- **Dynamic Test ID Resolution**:
+  - Avoid hardcoding static student IDs or user IDs in verification scripts.
+  - Retrieve lists dynamically (e.g. fetching grades/courses first), select a valid student `user_id` from the active response data, and pass it dynamically to subsequent write/grading test cases.
