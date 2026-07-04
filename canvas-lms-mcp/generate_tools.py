@@ -4,9 +4,9 @@ import json
 
 # Paths
 WORKSPACE_DIR = "/home/likr/src/likr-sandbox/canvas-lms-agent"
-UNIMPLEMENTED_FILE = os.path.join(WORKSPACE_DIR, "canvas-lms-mcp/unimplemented_endpoints.txt")
 DOCS_DIR = os.path.join(WORKSPACE_DIR, "docs/services/canvas/resources")
-OUTPUT_FILE = os.path.join(WORKSPACE_DIR, "canvas-lms-mcp/tools/auto_generated.js")
+TOOLS_DIR = os.path.join(WORKSPACE_DIR, "canvas-lms-mcp/tools")
+TESTS_DIR = os.path.join(WORKSPACE_DIR, "canvas-lms-mcp/tests")
 
 def clean_tool_name(method, path):
     # Remove prefix /api/v1, /api/lti, /api
@@ -16,7 +16,7 @@ def clean_tool_name(method, path):
             cleaned = cleaned[len(prefix):]
             break
     
-    # Replace parameter patterns :param, {param}, *param
+    # Replace parameter patterns :param, {param}, *param (removing symbol, leaving param name)
     cleaned = re.sub(r':[a-zA-Z0-9_]+', lambda m: m.group(0)[1:], cleaned)
     cleaned = re.sub(r'\{([a-zA-Z0-9_]+)\}', r'\1', cleaned)
     cleaned = re.sub(r'\*([a-zA-Z0-9_]+)', r'\1', cleaned)
@@ -27,41 +27,19 @@ def clean_tool_name(method, path):
     # Remove multiple underscores and leading/trailing underscores
     cleaned = re.sub(r'_+', '_', cleaned).strip('_')
     
-    return f"auto_{method.lower()}_{cleaned}"
+    return f"{method.lower()}_{cleaned}"
 
-def parse_unimplemented_endpoints():
-    endpoints = {}
-    current_doc = None
-    
-    if not os.path.exists(UNIMPLEMENTED_FILE):
-        print(f"Error: {UNIMPLEMENTED_FILE} not found.")
-        return endpoints
+def get_safe_var_name(category):
+    # Replace hyphens/dots etc with underscore, ensure it's a valid JS identifier
+    safe = re.sub(r'[^a-zA-Z0-9_]', '_', category)
+    # Suffix to prevent conflict with local variables (like 'result') and JS keywords
+    return f"{safe}Module"
 
-    with open(UNIMPLEMENTED_FILE, "r", encoding="utf-8") as f:
-        for line in f:
-            line = line.strip()
-            if line.startswith("### "):
-                current_doc = line[4:].strip()
-            elif line.startswith("- ") and current_doc:
-                # Format: - METHOD PATH
-                parts = line[2:].strip().split(" ", 1)
-                if len(parts) == 2:
-                    method, path = parts
-                    if current_doc not in endpoints:
-                        endpoints[current_doc] = []
-                    endpoints[current_doc].append((method.strip(), path.strip()))
-    return endpoints
-
-def parse_markdown_doc(doc_name, target_endpoints):
-    doc_path = os.path.join(DOCS_DIR, doc_name)
-    if not os.path.exists(doc_path):
-        return {}
-
+def parse_markdown_doc(doc_path):
     with open(doc_path, "r", encoding="utf-8") as f:
         content = f.read()
 
     # Split content by markdown headers of endpoints (#### `METHOD PATH`)
-    # We want to keep the headers so we split but preserve
     pattern = r'(####\s+`(?:GET|POST|PUT|DELETE)\s+[^`]+`)'
     sections = re.split(pattern, content)
     
@@ -79,17 +57,6 @@ def parse_markdown_doc(doc_name, target_endpoints):
         method = match.group(1)
         path = match.group(2).strip()
         
-        # Check if this endpoint is in our target list
-        # Normalize paths for matching
-        is_target = False
-        for target_method, target_path in target_endpoints:
-            if target_method == method and target_path == path:
-                is_target = True
-                break
-        
-        if not is_target:
-            continue
-            
         # Parse description (paragraphs before parameters table or next section)
         desc_lines = []
         body_lines = body.strip().split("\n")
@@ -115,7 +82,6 @@ def parse_markdown_doc(doc_name, target_endpoints):
                 desc_lines.append(line)
         
         description = "\n".join(desc_lines).strip()
-        # Clean description HTML/Markdown
         description = re.sub(r'<[^>]+>', '', description) # remove html tags
         description = re.sub(r'\s+', ' ', description) # normalize whitespace
         if len(description) > 500:
@@ -140,8 +106,6 @@ def parse_markdown_doc(doc_name, target_endpoints):
                 required.append(p)
                 
         # Parse table parameters
-        # Table format: | Parameter | Type | Description |
-        # Skip headers: separator line "| --- | --- | --- |" and header line "| Parameter | Type |"
         for pline in param_lines:
             pline = pline.strip()
             if "Parameter" in pline or "---" in pline:
@@ -181,19 +145,79 @@ def parse_markdown_doc(doc_name, target_endpoints):
         
     return parsed_endpoints
 
-def main():
-    print("Parsing unimplemented endpoints list...")
-    unimplemented = parse_unimplemented_endpoints()
+def make_test_case(category_var, tool_name, method, path, info):
+    path_params = re.findall(r':([a-zA-Z0-9_]+)', path)
+    path_params += re.findall(r'\{([a-zA-Z0-9_]+)\}', path)
+    path_params += re.findall(r'\*([a-zA-Z0-9_]+)', path)
     
-    definitions = []
-    handlers_code = []
-    
-    total_parsed = 0
-    for doc_name, targets in unimplemented.items():
-        print(f"Parsing document {doc_name} for {len(targets)} targets...")
-        doc_parsed = parse_markdown_doc(doc_name, targets)
+    args_dict = {}
+    expected_url = path
+    for p in path_params:
+        val = f"test_{p}"
+        args_dict[p] = val
+        expected_url = expected_url.replace(f":{p}", val)
+        expected_url = expected_url.replace(f"{{{p}}}", val)
+        expected_url = expected_url.replace(f"*{p}", val)
         
-        for (method, path), info in doc_parsed.items():
+    other_params = {}
+    for name, prop in info["properties"].items():
+        if name not in path_params:
+            ptype = prop.get("type", "string")
+            if ptype == "number":
+                other_params[name] = 123
+            elif ptype == "boolean":
+                other_params[name] = True
+            elif ptype == "array":
+                other_params[name] = ["test_val"]
+            else:
+                other_params[name] = "test_val"
+            break
+            
+    all_args = {**args_dict, **other_params}
+    method_lower = method.lower()
+    config_field = "params" if method_lower in ["get", "delete"] else "data"
+    
+    return f"""test("{tool_name} calls correct endpoint", async () => {{
+  let calledConfig = null;
+  const mockClient = async (config) => {{
+    calledConfig = config;
+    return {{ data: {{ success: true }} }};
+  }};
+
+  const handler = {category_var}.handlers.{tool_name};
+  assert.ok(handler, "Handler {tool_name} should be defined");
+
+  const result = await handler(mockClient, {json.dumps(all_args)});
+
+  assert.strictEqual(calledConfig.method, "{method_lower}");
+  assert.strictEqual(calledConfig.url, "{expected_url}");
+  assert.deepStrictEqual(calledConfig.{config_field}, {json.dumps(other_params)});
+  assert.deepStrictEqual(result, {{ success: true }});
+}});"""
+
+def main():
+    print("Scanning documentation directory...")
+    categories = []
+    
+    for filename in sorted(os.listdir(DOCS_DIR)):
+        if not filename.endswith(".md"):
+            continue
+            
+        doc_path = os.path.join(DOCS_DIR, filename)
+        category = filename[:-3] # remove .md
+        
+        parsed = parse_markdown_doc(doc_path)
+        if not parsed:
+            continue
+            
+        categories.append(category)
+        category_var = get_safe_var_name(category)
+        
+        definitions = []
+        handlers_code = []
+        tests_code = []
+        
+        for (method, path), info in parsed.items():
             tool_name = clean_tool_name(method, path)
             
             # Construct definition
@@ -216,66 +240,17 @@ def main():
                 f'    return genericHandler(client, "{method}", "{path}", args);\n'
                 f'  }}'
             )
-            total_parsed += 1
-
-    print(f"Successfully parsed {total_parsed} tools.")
-    
-    # Write the output file
-    handlers_joined = ",\n".join(handlers_code)
-    js_content = f"""// Auto-generated MCP Tools for Canvas LMS API
+            
+            # Construct test case code
+            tests_code.append(make_test_case(category_var, tool_name, method, path, info))
+            
+        # Write Category JS file
+        js_path = os.path.join(TOOLS_DIR, f"{category}.js")
+        handlers_joined = ",\n".join(handlers_code)
+        js_content = f"""// Auto-generated MCP Tools for Canvas LMS API
 // Generated by generate_tools.py - DO NOT EDIT MANUALLY
 
-const genericHandler = async (client, method, pathPattern, args) => {{
-  let url = pathPattern;
-  const pathParams = [];
-  
-  // Replace path parameters (e.g. :user_id, {{user_id}}, *path)
-  url = url.replace(/:([a-zA-Z0-9_]+)/g, (match, p1) => {{
-    pathParams.push(p1);
-    if (args[p1] !== undefined && args[p1] !== null) {{
-      return encodeURIComponent(args[p1]);
-    }}
-    throw new Error(`Missing required path parameter: ${{p1}}`);
-  }});
-  
-  url = url.replace(/\\{{([a-zA-Z0-9_]+)\\}}/g, (match, p1) => {{
-    pathParams.push(p1);
-    if (args[p1] !== undefined && args[p1] !== null) {{
-      return encodeURIComponent(args[p1]);
-    }}
-    throw new Error(`Missing required path parameter: ${{p1}}`);
-  }});
-
-  url = url.replace(/\\*([a-zA-Z0-9_]+)/g, (match, p1) => {{
-    pathParams.push(p1);
-    if (args[p1] !== undefined && args[p1] !== null) {{
-      // For wildcard paths, we might not want to URL encode slashes
-      return args[p1];
-    }}
-    throw new Error(`Missing required path parameter: ${{p1}}`);
-  }});
-
-  const payload = {{}};
-  for (const key in args) {{
-    if (!pathParams.includes(key)) {{
-      payload[key] = args[key];
-    }}
-  }}
-
-  const config = {{
-    method: method.toLowerCase(),
-    url: url
-  }};
-
-  if (config.method === 'get' || config.method === 'delete') {{
-    config.params = payload;
-  }} else {{
-    config.data = payload;
-  }}
-
-  const response = await client(config);
-  return response.data;
-}};
+const {{ genericHandler }} = require("./helper");
 
 const definitions = {json.dumps(definitions, indent=2)};
 
@@ -288,11 +263,64 @@ module.exports = {{
   handlers
 }};
 """
+        with open(js_path, "w", encoding="utf-8") as f:
+            f.write(js_content)
+            
+        # Write Category Test file
+        test_path = os.path.join(TESTS_DIR, f"{category}.test.js")
+        tests_joined = "\n\n".join(tests_code)
+        test_content = f"""// Auto-generated tests for {category}
+// Generated by generate_tools.py - DO NOT EDIT MANUALLY
+
+const test = require("node:test");
+const assert = require("node:assert");
+const {category_var} = require("../tools/{category}");
+
+{tests_joined}
+"""
+        with open(test_path, "w", encoding="utf-8") as f:
+            f.write(test_content)
+            
+        print(f"Generated tools and tests for: {category} (var: {category_var})")
+
+    # Write index.js for tools
+    requires_code = []
+    merges_code = []
     
-    with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
-        f.write(js_content)
+    for category in categories:
+        category_var = get_safe_var_name(category)
+        requires_code.append(f'const {category_var} = require("./{category}");')
+        merges_code.append(f'  ...{category_var}.definitions,')
         
-    print(f"Generated {OUTPUT_FILE} successfully.")
+    handlers_merges_code = [f'  ...{get_safe_var_name(category)}.handlers,' for category in categories]
+    
+    requires_joined = "\n".join(requires_code)
+    merges_joined = "\n".join(merges_code)
+    handlers_merges_joined = "\n".join(handlers_merges_code)
+    
+    index_content = f"""// Auto-generated MCP Tools Index
+// Generated by generate_tools.py - DO NOT EDIT MANUALLY
+
+{requires_joined}
+
+const allDefinitions = [
+{merges_joined}
+];
+
+const allHandlers = {{
+{handlers_merges_joined}
+}};
+
+module.exports = {{
+  allDefinitions,
+  allHandlers,
+}};
+"""
+    index_path = os.path.join(TOOLS_DIR, "index.js")
+    with open(index_path, "w", encoding="utf-8") as f:
+        f.write(index_content)
+        
+    print(f"Successfully generated index.js with {len(categories)} categories.")
 
 if __name__ == "__main__":
     main()

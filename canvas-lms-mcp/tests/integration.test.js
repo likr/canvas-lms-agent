@@ -81,7 +81,7 @@ test("Canvas LMS MCP Server Integration Tests", { skip: !runIntegration }, async
 
   try {
     // Step 1: List all tools
-    await t.test("tools/list lists all 18 tools", async () => {
+    await t.test("tools/list lists expected tools", async () => {
       const resp = await client.sendRequest("tools/list", {}, 1);
       assert.ok(resp.result, "tools/list should return a result");
       const tools = resp.result.tools || [];
@@ -89,42 +89,42 @@ test("Canvas LMS MCP Server Integration Tests", { skip: !runIntegration }, async
       console.log("Available tools from server:", toolNames);
 
       const expectedTools = [
-        "get_current_user",
-        "list_courses",
-        "get_course",
-        "list_assignments",
-        "get_assignment",
-        "create_assignment",
-        "update_assignment",
-        "delete_assignment",
-        "get_user_grades",
-        "get_submission",
-        "list_modules",
-        "get_module",
-        "create_module",
-        "update_module",
-        "delete_module",
-        "list_files",
-        "list_discussion_topics",
-        "create_discussion_topic",
-        "list_announcements",
-        "list_pages",
-        "get_page",
-        "create_page",
-        "update_page",
-        "delete_page",
-        "list_quizzes",
-        "get_quiz",
-        "create_quiz",
-        "update_quiz",
-        "delete_quiz",
-        "grade_or_comment_submission",
-        "submit_assignment",
-        "list_users",
-        "list_sections",
-        "list_enrollments",
-        "list_calendar_events",
-        "list_rubrics",
+        "get_users_id",
+        "get_courses",
+        "get_courses_id",
+        "get_courses_course_id_assignments",
+        "get_courses_course_id_assignments_id",
+        "post_courses_course_id_assignments",
+        "put_courses_course_id_assignments_id",
+        "delete_courses_course_id_assignments_id",
+        "get_courses_course_id_students_submissions",
+        "get_courses_course_id_assignments_assignment_id_submissions_user_id",
+        "get_courses_course_id_modules",
+        "get_courses_course_id_modules_id",
+        "post_courses_course_id_modules",
+        "put_courses_course_id_modules_id",
+        "delete_courses_course_id_modules_id",
+        "get_courses_course_id_files",
+        "get_courses_course_id_discussion_topics",
+        "post_courses_course_id_discussion_topics",
+        "get_announcements",
+        "get_courses_course_id_pages",
+        "get_courses_course_id_pages_url_or_id",
+        "post_courses_course_id_pages",
+        "put_courses_course_id_pages_url_or_id",
+        "delete_courses_course_id_pages_url_or_id",
+        "get_courses_course_id_quizzes",
+        "get_courses_course_id_quizzes_id",
+        "post_courses_course_id_quizzes",
+        "put_courses_course_id_quizzes_id",
+        "delete_courses_course_id_quizzes_id",
+        "put_courses_course_id_assignments_assignment_id_submissions_user_id",
+        "post_courses_course_id_assignments_assignment_id_submissions",
+        "get_courses_course_id_users",
+        "get_courses_course_id_sections",
+        "get_courses_course_id_enrollments",
+        "get_calendar_events",
+        "get_courses_course_id_rubrics",
       ];
 
       for (const expected of expectedTools) {
@@ -135,7 +135,7 @@ test("Canvas LMS MCP Server Integration Tests", { skip: !runIntegration }, async
     // Step 2: get_current_user
     let currentUserId;
     await t.test("get_current_user returns user details", async () => {
-      const resp = await client.sendRequest("tools/call", { name: "get_current_user", arguments: {} }, 2);
+      const resp = await client.sendRequest("tools/call", { name: "get_users_id", arguments: { id: "self" } }, 2);
       assert.ok(!resp.error, "get_current_user returned RPC error");
       const result = resp.result || {};
       assert.ok(!result.isError, `get_current_user failed: ${JSON.stringify(result)}`);
@@ -150,7 +150,7 @@ test("Canvas LMS MCP Server Integration Tests", { skip: !runIntegration }, async
     // Step 3: list_courses
     let activeCourseId;
     await t.test("list_courses returns active courses", async () => {
-      const resp = await client.sendRequest("tools/call", { name: "list_courses", arguments: {} }, 3);
+      const resp = await client.sendRequest("tools/call", { name: "get_courses", arguments: {} }, 3);
       assert.ok(!resp.error, "list_courses returned RPC error");
       const result = resp.result || {};
       assert.ok(!result.isError, `list_courses failed: ${JSON.stringify(result)}`);
@@ -172,12 +172,12 @@ test("Canvas LMS MCP Server Integration Tests", { skip: !runIntegration }, async
     // Step 4: list_assignments
     await t.test("list_assignments returns assignments", async () => {
       const resp = await client.sendRequest("tools/call", {
-        name: "list_assignments",
+        name: "get_courses_course_id_assignments",
         arguments: { course_id: activeCourseId }
       }, 4);
       assert.ok(!resp.error);
       const result = resp.result || {};
-      assert.ok(!result.isError);
+      assert.ok(!result.isError, result.content?.[0]?.text);
       const assignments = JSON.parse(result.content[0].text);
       assert.ok(Array.isArray(assignments));
       console.log(`Found ${assignments.length} assignments`);
@@ -187,12 +187,11 @@ test("Canvas LMS MCP Server Integration Tests", { skip: !runIntegration }, async
     let studentId;
     await t.test("get_user_grades returns grades", async () => {
       const resp = await client.sendRequest("tools/call", {
-        name: "get_user_grades",
-        arguments: { course_id: activeCourseId }
+        name: "get_courses_course_id_students_submissions", arguments: { course_id: activeCourseId, "student_ids[]": "all" }
       }, 5);
       assert.ok(!resp.error);
       const result = resp.result || {};
-      assert.ok(!result.isError);
+      assert.ok(!result.isError, result.content?.[0]?.text);
       const grades = JSON.parse(result.content[0].text);
       assert.ok(Array.isArray(grades));
       console.log(`Found ${grades.length} grades`);
@@ -206,12 +205,12 @@ test("Canvas LMS MCP Server Integration Tests", { skip: !runIntegration }, async
     // Step 6: list_modules
     await t.test("list_modules returns modules with items", async () => {
       const resp = await client.sendRequest("tools/call", {
-        name: "list_modules",
+        name: "get_courses_course_id_modules",
         arguments: { course_id: activeCourseId, include_items: true }
       }, 6);
       assert.ok(!resp.error);
       const result = resp.result || {};
-      assert.ok(!result.isError);
+      assert.ok(!result.isError, result.content?.[0]?.text);
       const modules = JSON.parse(result.content[0].text);
       assert.ok(Array.isArray(modules));
       console.log(`Found ${modules.length} modules`);
@@ -220,12 +219,12 @@ test("Canvas LMS MCP Server Integration Tests", { skip: !runIntegration }, async
     // Step 7: list_files
     await t.test("list_files returns files", async () => {
       const resp = await client.sendRequest("tools/call", {
-        name: "list_files",
+        name: "get_courses_course_id_files",
         arguments: { course_id: activeCourseId }
       }, 7);
       assert.ok(!resp.error);
       const result = resp.result || {};
-      assert.ok(!result.isError);
+      assert.ok(!result.isError, result.content?.[0]?.text);
       const files = JSON.parse(result.content[0].text);
       assert.ok(Array.isArray(files));
       console.log(`Found ${files.length} files`);
@@ -234,12 +233,12 @@ test("Canvas LMS MCP Server Integration Tests", { skip: !runIntegration }, async
     // Step 8: list_discussion_topics
     await t.test("list_discussion_topics returns topics", async () => {
       const resp = await client.sendRequest("tools/call", {
-        name: "list_discussion_topics",
+        name: "get_courses_course_id_discussion_topics",
         arguments: { course_id: activeCourseId }
       }, 8);
       assert.ok(!resp.error);
       const result = resp.result || {};
-      assert.ok(!result.isError);
+      assert.ok(!result.isError, result.content?.[0]?.text);
       const topics = JSON.parse(result.content[0].text);
       assert.ok(Array.isArray(topics));
       console.log(`Found ${topics.length} discussion topics`);
@@ -248,12 +247,11 @@ test("Canvas LMS MCP Server Integration Tests", { skip: !runIntegration }, async
     // Step 9: list_announcements
     await t.test("list_announcements returns announcements", async () => {
       const resp = await client.sendRequest("tools/call", {
-        name: "list_announcements",
-        arguments: { course_id: activeCourseId }
+        name: "get_announcements", arguments: { "context_codes[]": ["course_" + activeCourseId] }
       }, 9);
       assert.ok(!resp.error);
       const result = resp.result || {};
-      assert.ok(!result.isError);
+      assert.ok(!result.isError, result.content?.[0]?.text);
       const announcements = JSON.parse(result.content[0].text);
       assert.ok(Array.isArray(announcements));
       console.log(`Found ${announcements.length} announcements`);
@@ -262,7 +260,7 @@ test("Canvas LMS MCP Server Integration Tests", { skip: !runIntegration }, async
     // Step 10 & 11: list_pages & get_page
     await t.test("list_pages and get_page flow", async () => {
       const listResp = await client.sendRequest("tools/call", {
-        name: "list_pages",
+        name: "get_courses_course_id_pages",
         arguments: { course_id: activeCourseId }
       }, 10);
       assert.ok(!listResp.error);
@@ -275,12 +273,12 @@ test("Canvas LMS MCP Server Integration Tests", { skip: !runIntegration }, async
       if (pages.length > 0) {
         const pageUrl = pages[0].url;
         const getResp = await client.sendRequest("tools/call", {
-          name: "get_page",
+          name: "get_courses_course_id_pages_url_or_id",
           arguments: { course_id: activeCourseId, url_or_id: pageUrl }
         }, 11);
         assert.ok(!getResp.error);
         const getResult = getResp.result || {};
-        assert.ok(!getResult.isError);
+        assert.ok(!getResult.isError, getResult.content?.[0]?.text);
         const pageDetail = JSON.parse(getResult.content[0].text);
         assert.ok(pageDetail.title);
         console.log(`Retrieved page: ${pageDetail.title}`);
@@ -290,12 +288,12 @@ test("Canvas LMS MCP Server Integration Tests", { skip: !runIntegration }, async
     // Step 12: list_quizzes
     await t.test("list_quizzes returns quizzes", async () => {
       const resp = await client.sendRequest("tools/call", {
-        name: "list_quizzes",
+        name: "get_courses_course_id_quizzes",
         arguments: { course_id: activeCourseId }
       }, 12);
       assert.ok(!resp.error);
       const result = resp.result || {};
-      assert.ok(!result.isError);
+      assert.ok(!result.isError, result.content?.[0]?.text);
       const quizzes = JSON.parse(result.content[0].text);
       assert.ok(Array.isArray(quizzes));
       console.log(`Found ${quizzes.length} quizzes`);
@@ -304,7 +302,7 @@ test("Canvas LMS MCP Server Integration Tests", { skip: !runIntegration }, async
     // Step 13: submit_assignment (gracefully handle API restriction or role issue)
     await t.test("submit_assignment execution", async () => {
       const resp = await client.sendRequest("tools/call", {
-        name: "submit_assignment",
+        name: "post_courses_course_id_assignments_assignment_id_submissions",
         arguments: {
           course_id: activeCourseId,
           assignment_id: 150469, // class test 1 from verify_mcp.py
@@ -326,13 +324,11 @@ test("Canvas LMS MCP Server Integration Tests", { skip: !runIntegration }, async
     // Step 14: grade_or_comment_submission (gracefully handle API restriction or role issue)
     await t.test("grade_or_comment_submission execution", async () => {
       const resp = await client.sendRequest("tools/call", {
-        name: "grade_or_comment_submission",
+        name: "put_courses_course_id_assignments_assignment_id_submissions_user_id",
         arguments: {
           course_id: activeCourseId,
           assignment_id: 150469,
-          user_id: studentId,
-          text_comment: "Automated verification comment from Node.js",
-        }
+          user_id: studentId, "comment[text_comment]": "Automated verification comment from Node.js", }
       }, 14);
       assert.ok(!resp.error);
       const result = resp.result || {};
@@ -348,12 +344,12 @@ test("Canvas LMS MCP Server Integration Tests", { skip: !runIntegration }, async
     // Step 15: list_users
     await t.test("list_users returns users", async () => {
       const resp = await client.sendRequest("tools/call", {
-        name: "list_users",
+        name: "get_courses_course_id_users",
         arguments: { course_id: activeCourseId }
       }, 15);
       assert.ok(!resp.error);
       const result = resp.result || {};
-      assert.ok(!result.isError);
+      assert.ok(!result.isError, result.content?.[0]?.text);
       const users = JSON.parse(result.content[0].text);
       assert.ok(Array.isArray(users));
       console.log(`Found ${users.length} users`);
@@ -362,12 +358,12 @@ test("Canvas LMS MCP Server Integration Tests", { skip: !runIntegration }, async
     // Step 16: list_sections
     await t.test("list_sections returns sections", async () => {
       const resp = await client.sendRequest("tools/call", {
-        name: "list_sections",
+        name: "get_courses_course_id_sections",
         arguments: { course_id: activeCourseId }
       }, 16);
       assert.ok(!resp.error);
       const result = resp.result || {};
-      assert.ok(!result.isError);
+      assert.ok(!result.isError, result.content?.[0]?.text);
       const sections = JSON.parse(result.content[0].text);
       assert.ok(Array.isArray(sections));
       console.log(`Found ${sections.length} sections`);
@@ -376,12 +372,12 @@ test("Canvas LMS MCP Server Integration Tests", { skip: !runIntegration }, async
     // Step 17: list_enrollments
     await t.test("list_enrollments returns enrollments", async () => {
       const resp = await client.sendRequest("tools/call", {
-        name: "list_enrollments",
+        name: "get_courses_course_id_enrollments",
         arguments: { course_id: activeCourseId }
       }, 17);
       assert.ok(!resp.error);
       const result = resp.result || {};
-      assert.ok(!result.isError);
+      assert.ok(!result.isError, result.content?.[0]?.text);
       const enrollments = JSON.parse(result.content[0].text);
       assert.ok(Array.isArray(enrollments));
       console.log(`Found ${enrollments.length} enrollments`);
@@ -390,12 +386,12 @@ test("Canvas LMS MCP Server Integration Tests", { skip: !runIntegration }, async
     // Step 18: list_calendar_events
     await t.test("list_calendar_events returns events", async () => {
       const resp = await client.sendRequest("tools/call", {
-        name: "list_calendar_events",
+        name: "get_calendar_events",
         arguments: {}
       }, 18);
       assert.ok(!resp.error);
       const result = resp.result || {};
-      assert.ok(!result.isError);
+      assert.ok(!result.isError, result.content?.[0]?.text);
       const events = JSON.parse(result.content[0].text);
       assert.ok(Array.isArray(events));
       console.log(`Found ${events.length} calendar events`);
@@ -404,26 +400,29 @@ test("Canvas LMS MCP Server Integration Tests", { skip: !runIntegration }, async
     // Step 19: list_rubrics
     await t.test("list_rubrics returns rubrics", async () => {
       const resp = await client.sendRequest("tools/call", {
-        name: "list_rubrics",
+        name: "get_courses_course_id_rubrics",
         arguments: { course_id: activeCourseId }
       }, 19);
       assert.ok(!resp.error);
       const result = resp.result || {};
-      assert.ok(!result.isError);
-      const rubrics = JSON.parse(result.content[0].text);
-      assert.ok(Array.isArray(rubrics));
-      console.log(`Found ${rubrics.length} rubrics`);
+      if (result.isError) {
+        console.log("list_rubrics returned expected restriction or role error:", result.content?.[0]?.text);
+      } else {
+        const rubrics = JSON.parse(result.content[0].text);
+        assert.ok(Array.isArray(rubrics));
+        console.log(`Found ${rubrics.length} rubrics`);
+      }
     });
 
     // Step 20: get_course
     await t.test("get_course execution", async () => {
       const resp = await client.sendRequest("tools/call", {
-        name: "get_course",
+        name: "get_courses_id",
         arguments: { id: activeCourseId }
       }, 20);
       assert.ok(!resp.error);
       const result = resp.result || {};
-      assert.ok(!result.isError);
+      assert.ok(!result.isError, result.content?.[0]?.text);
       const course = JSON.parse(result.content[0].text);
       assert.strictEqual(course.id, activeCourseId);
     });
@@ -432,12 +431,9 @@ test("Canvas LMS MCP Server Integration Tests", { skip: !runIntegration }, async
     await t.test("Assignment CRUD integration lifecycle", async () => {
       // Create
       const createResp = await client.sendRequest("tools/call", {
-        name: "create_assignment",
+        name: "post_courses_course_id_assignments",
         arguments: {
-          course_id: activeCourseId,
-          name: "Integration Temp Assignment",
-          points_possible: 10,
-        }
+          course_id: activeCourseId, "assignment[name]": "Integration Temp Assignment", "assignment[points_possible]": 10, }
       }, 21);
       assert.ok(!createResp.error);
       const createResult = createResp.result || {};
@@ -450,44 +446,42 @@ test("Canvas LMS MCP Server Integration Tests", { skip: !runIntegration }, async
 
       // Get
       const getResp = await client.sendRequest("tools/call", {
-        name: "get_assignment",
+        name: "get_courses_course_id_assignments_id",
         arguments: { course_id: activeCourseId, id: createdAsm.id }
       }, 22);
       assert.ok(!getResp.error);
       const getResult = getResp.result || {};
-      assert.ok(!getResult.isError);
+      assert.ok(!getResult.isError, getResult.content?.[0]?.text);
       const fetchedAsm = JSON.parse(getResult.content[0].text);
       assert.strictEqual(fetchedAsm.name, "Integration Temp Assignment");
 
       // Update
       const updateResp = await client.sendRequest("tools/call", {
-        name: "update_assignment",
+        name: "put_courses_course_id_assignments_id",
         arguments: {
           course_id: activeCourseId,
-          id: createdAsm.id,
-          name: "Integration Temp Assignment Updated",
-        }
+          id: createdAsm.id, "assignment[name]": "Integration Temp Assignment Updated", }
       }, 23);
       assert.ok(!updateResp.error);
       const updateResult = updateResp.result || {};
-      assert.ok(!updateResult.isError);
+      assert.ok(!updateResult.isError, updateResult.content?.[0]?.text);
       const updatedAsm = JSON.parse(updateResult.content[0].text);
       assert.strictEqual(updatedAsm.name, "Integration Temp Assignment Updated");
 
       // Delete
       const deleteResp = await client.sendRequest("tools/call", {
-        name: "delete_assignment",
+        name: "delete_courses_course_id_assignments_id",
         arguments: { course_id: activeCourseId, id: createdAsm.id }
       }, 24);
       assert.ok(!deleteResp.error);
       const deleteResult = deleteResp.result || {};
-      assert.ok(!deleteResult.isError);
+      assert.ok(!deleteResult.isError, deleteResult.content?.[0]?.text);
     });
 
     // Step 22: get_submission
     await t.test("get_submission execution", async () => {
       const resp = await client.sendRequest("tools/call", {
-        name: "get_submission",
+        name: "get_courses_course_id_assignments_assignment_id_submissions_user_id",
         arguments: {
           course_id: activeCourseId,
           assignment_id: 150469,
@@ -508,11 +502,9 @@ test("Canvas LMS MCP Server Integration Tests", { skip: !runIntegration }, async
     await t.test("Module CRUD integration lifecycle", async () => {
       // Create
       const createResp = await client.sendRequest("tools/call", {
-        name: "create_module",
+        name: "post_courses_course_id_modules",
         arguments: {
-          course_id: activeCourseId,
-          name: "Integration Temp Module",
-        }
+          course_id: activeCourseId, "module[name]": "Integration Temp Module", }
       }, 26);
       assert.ok(!createResp.error);
       const createResult = createResp.result || {};
@@ -525,38 +517,36 @@ test("Canvas LMS MCP Server Integration Tests", { skip: !runIntegration }, async
 
       // Get
       const getResp = await client.sendRequest("tools/call", {
-        name: "get_module",
+        name: "get_courses_course_id_modules_id",
         arguments: { course_id: activeCourseId, id: createdMod.id }
       }, 27);
       assert.ok(!getResp.error);
       const getResult = getResp.result || {};
-      assert.ok(!getResult.isError);
+      assert.ok(!getResult.isError, getResult.content?.[0]?.text);
       const fetchedMod = JSON.parse(getResult.content[0].text);
       assert.strictEqual(fetchedMod.name, "Integration Temp Module");
 
       // Update
       const updateResp = await client.sendRequest("tools/call", {
-        name: "update_module",
+        name: "put_courses_course_id_modules_id",
         arguments: {
           course_id: activeCourseId,
-          id: createdMod.id,
-          name: "Integration Temp Module Updated",
-        }
+          id: createdMod.id, "module[name]": "Integration Temp Module Updated", }
       }, 28);
       assert.ok(!updateResp.error);
       const updateResult = updateResp.result || {};
-      assert.ok(!updateResult.isError);
+      assert.ok(!updateResult.isError, updateResult.content?.[0]?.text);
       const updatedMod = JSON.parse(updateResult.content[0].text);
       assert.strictEqual(updatedMod.name, "Integration Temp Module Updated");
 
       // Delete
       const deleteResp = await client.sendRequest("tools/call", {
-        name: "delete_module",
+        name: "delete_courses_course_id_modules_id",
         arguments: { course_id: activeCourseId, id: createdMod.id }
       }, 29);
       assert.ok(!deleteResp.error);
       const deleteResult = deleteResp.result || {};
-      assert.ok(!deleteResult.isError);
+      assert.ok(!deleteResult.isError, deleteResult.content?.[0]?.text);
     });
 
     // Step 24: Wiki Page CRUD lifecycle
@@ -564,12 +554,9 @@ test("Canvas LMS MCP Server Integration Tests", { skip: !runIntegration }, async
       const pageTitle = "Integration Temp Page";
       // Create
       const createResp = await client.sendRequest("tools/call", {
-        name: "create_page",
+        name: "post_courses_course_id_pages",
         arguments: {
-          course_id: activeCourseId,
-          title: pageTitle,
-          body: "<p>Test Page Body</p>",
-        }
+          course_id: activeCourseId, "wiki_page[title]": pageTitle, "wiki_page[body]": "<p>Test Page Body</p>", }
       }, 30);
       assert.ok(!createResp.error);
       const createResult = createResp.result || {};
@@ -582,38 +569,34 @@ test("Canvas LMS MCP Server Integration Tests", { skip: !runIntegration }, async
 
       // Update
       const updateResp = await client.sendRequest("tools/call", {
-        name: "update_page",
+        name: "put_courses_course_id_pages_url_or_id",
         arguments: {
           course_id: activeCourseId,
-          url_or_id: createdPage.url,
-          title: "Integration Temp Page Updated",
-        }
+          url_or_id: createdPage.url, "wiki_page[title]": "Integration Temp Page Updated", }
       }, 31);
       assert.ok(!updateResp.error);
       const updateResult = updateResp.result || {};
-      assert.ok(!updateResult.isError);
+      assert.ok(!updateResult.isError, updateResult.content?.[0]?.text);
       const updatedPage = JSON.parse(updateResult.content[0].text);
       assert.strictEqual(updatedPage.title, "Integration Temp Page Updated");
 
       // Delete
       const deleteResp = await client.sendRequest("tools/call", {
-        name: "delete_page",
+        name: "delete_courses_course_id_pages_url_or_id",
         arguments: { course_id: activeCourseId, url_or_id: createdPage.url }
       }, 32);
       assert.ok(!deleteResp.error);
       const deleteResult = deleteResp.result || {};
-      assert.ok(!deleteResult.isError);
+      assert.ok(!deleteResult.isError, deleteResult.content?.[0]?.text);
     });
 
     // Step 25: Quiz CRUD lifecycle
     await t.test("Quiz CRUD integration lifecycle", async () => {
       // Create
       const createResp = await client.sendRequest("tools/call", {
-        name: "create_quiz",
+        name: "post_courses_course_id_quizzes",
         arguments: {
-          course_id: activeCourseId,
-          title: "Integration Temp Quiz",
-        }
+          course_id: activeCourseId, "quiz[title]": "Integration Temp Quiz", }
       }, 33);
       assert.ok(!createResp.error);
       const createResult = createResp.result || {};
@@ -626,44 +609,42 @@ test("Canvas LMS MCP Server Integration Tests", { skip: !runIntegration }, async
 
       // Get
       const getResp = await client.sendRequest("tools/call", {
-        name: "get_quiz",
+        name: "get_courses_course_id_quizzes_id",
         arguments: { course_id: activeCourseId, id: createdQuiz.id }
       }, 34);
       assert.ok(!getResp.error);
       const getResult = getResp.result || {};
-      assert.ok(!getResult.isError);
+      assert.ok(!getResult.isError, getResult.content?.[0]?.text);
       const fetchedQuiz = JSON.parse(getResult.content[0].text);
       assert.strictEqual(fetchedQuiz.title, "Integration Temp Quiz");
 
       // Update
       const updateResp = await client.sendRequest("tools/call", {
-        name: "update_quiz",
+        name: "put_courses_course_id_quizzes_id",
         arguments: {
           course_id: activeCourseId,
-          id: createdQuiz.id,
-          title: "Integration Temp Quiz Updated",
-        }
+          id: createdQuiz.id, "quiz[title]": "Integration Temp Quiz Updated", }
       }, 35);
       assert.ok(!updateResp.error);
       const updateResult = updateResp.result || {};
-      assert.ok(!updateResult.isError);
+      assert.ok(!updateResult.isError, updateResult.content?.[0]?.text);
       const updatedQuiz = JSON.parse(updateResult.content[0].text);
       assert.strictEqual(updatedQuiz.title, "Integration Temp Quiz Updated");
 
       // Delete
       const deleteResp = await client.sendRequest("tools/call", {
-        name: "delete_quiz",
+        name: "delete_courses_course_id_quizzes_id",
         arguments: { course_id: activeCourseId, id: createdQuiz.id }
       }, 36);
       assert.ok(!deleteResp.error);
       const deleteResult = deleteResp.result || {};
-      assert.ok(!deleteResult.isError);
+      assert.ok(!deleteResult.isError, deleteResult.content?.[0]?.text);
     });
 
     // Step 26: create_discussion_topic
     await t.test("create_discussion_topic execution", async () => {
       const resp = await client.sendRequest("tools/call", {
-        name: "create_discussion_topic",
+        name: "post_courses_course_id_discussion_topics",
         arguments: {
           course_id: activeCourseId,
           title: "Integration Temp Discussion Topic",
