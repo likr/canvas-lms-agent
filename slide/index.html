@@ -302,7 +302,8 @@
     <!-- Page 13: Canvas LMS API -->
     <hd-slide>
       <div slot="header" class="hd-text-weight-semibold hd-muted hd-size-6">Canvas LMS API</div>
-      <div slot="footer" class="hd-text-weight-normal hd-muted hd-size-6">Google Antigravity SDK &amp; Canvas LMS MCP</div>
+      <div slot="footer" class="hd-text-weight-normal hd-muted hd-size-6">Google Antigravity SDK &amp; Canvas LMS MCP
+      </div>
       <hd-layout>
         <h2 slot="heading">公式APIでできること</h2>
         <div>
@@ -328,7 +329,7 @@
       <div slot="footer" class="hd-text-weight-normal hd-muted hd-size-6">Google Antigravity SDK &amp; Canvas LMS MCP
       </div>
       <hd-layout-split ratio="1:1">
-        <h2 slot="heading">システムの裏側（技術構成）</h2>
+        <h2 slot="heading">技術構成</h2>
         <hd-box slot="left" variant="main">
           <h3 slot="heading">canvas-lms-mcp</h3>
           <div class="hd-p-3">
@@ -356,22 +357,31 @@
     <!-- Page 15: Try Now -->
     <hd-slide>
       <div slot="header" class="hd-text-weight-semibold hd-muted hd-size-6">Try Now</div>
-      <div slot="footer" class="hd-text-weight-normal hd-muted hd-size-6">Google Antigravity SDK &amp; Canvas LMS MCP
-      </div>
-      <hd-layout>
+      <div slot="footer" class="hd-text-weight-normal hd-muted hd-size-6">Google Antigravity SDK &amp; Canvas LMS MCP</div>
+      <hd-layout-split ratio="1:1">
         <h2 slot="heading">今すぐ使ってみよう！</h2>
-        <div>
-          <p class="hd-mb-3 hd-size-4">
-            セットアップは一瞬！お手元のAIエージェントにすぐ導入できます。
-          </p>
-          <ul>
-            <li class="hd-mb-2"><strong>3ステップで導入:</strong> MCP設定にサーバーを登録 ➡️ トークンを入力 ➡️ 即実行！</li>
-            <li class="hd-mb-2"><strong>置くだけ簡単:</strong> <code class="hd-code">.agents/skills/canvas-lms</code>
-              を配置するだけで、AIが勝手に賢くなります。</li>
-            <li class="hd-mb-2"><strong>マルチエージェント対応:</strong> Claude Desktop、VS Code、Antigravity SDK などの各環境で動作！</li>
-          </ul>
-        </div>
-      </hd-layout>
+        <hd-box slot="left" variant="main">
+          <h3 slot="heading">起動＆インストール</h3>
+          <div class="hd-p-3">
+            <p class="hd-mb-2 hd-text-weight-semibold">1. MCPサーバーを動かす</p>
+            <pre class="hd-mb-3"><code class="language-bash">npx -y @likr/canvas-lms-mcp</code></pre>
+            <p class="hd-mb-2 hd-text-weight-semibold">2. エージェントへ指示書を追加</p>
+            <pre><code class="language-bash">npx skills add likr/canvas-lms-agent@canvas-lms</code></pre>
+          </div>
+        </hd-box>
+        <hd-box slot="right" variant="accent">
+          <h3 slot="heading">必要な設定（環境変数）</h3>
+          <div class="hd-p-3">
+            <ul>
+              <li class="hd-mb-2"><strong><code class="hd-code">CANVAS_BASE_URL</code>:</strong><br>Canvas LMSのドメインURL</li>
+              <li class="hd-mb-2"><strong><code class="hd-code">CANVAS_API_TOKEN</code>:</strong><br>個人用アクセストークン</li>
+            </ul>
+            <hd-callout class="hd-mt-3 hd-size-5">
+              Claude Desktop、Cursor、Cline 等に設定を追加するだけで、すぐに手元のAIが動き出します！
+            </hd-callout>
+          </div>
+        </hd-box>
+      </hd-layout-split>
     </hd-slide>
 
     <!-- Page 16: Warning Slide (Repeat) -->
