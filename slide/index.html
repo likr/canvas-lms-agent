@@ -110,8 +110,10 @@
     }
 
     .slide-black-white {
-      --hd-slide-background-color: var(--hd-theme-text-color);
-      --hd-slide-text-color: var(--hd-theme-background-color);
+      --hd-slide-background-color: #000000 !important;
+      --hd-slide-text-color: #ffffff !important;
+      background-color: #000000 !important;
+      color: #ffffff !important;
     }
 
     .slide-rainbow {
@@ -222,9 +224,9 @@
     </hd-slide>
 
     <!-- Page 4: Image Slide (Idea) -->
-    <hd-slide class="slide-white-black slide-no-padding">
+    <hd-slide center class="slide-white-black">
       <img src="https://stat.ameba.jp/user_images/20181209/09/orange-cosme/f3/10/j/o0322026214317686886.jpg" alt="Idea"
-        class="full-page-image">
+        class="centered-image">
     </hd-slide>
 
     <!-- Page 5: Pain Point 1 -->
@@ -243,7 +245,7 @@
     </hd-slide>
 
     <!-- Page 8: Speeches Image (Robot & Human) -->
-    <hd-slide center class="slide-white-black slide-no-padding">
+    <hd-slide center class="slide-white-black">
       <img src="./robot_homework_joke.png" alt="Robot homework joke" class="centered-image">
     </hd-slide>
 
@@ -263,24 +265,23 @@
     </hd-slide>
 
     <!-- Page 11: Demo Slide -->
-    <hd-slide center class="slide-white-black">
+    <hd-slide center class="slide-black-white">
       <div class="huge-text">デモ</div>
     </hd-slide>
 
     <!-- Page 12: Agent Customization -->
     <hd-slide>
       <div slot="header" class="hd-text-weight-semibold hd-muted hd-size-6">エージェントカスタマイズ</div>
-      <div slot="footer" class="hd-text-weight-normal hd-muted hd-size-6">Google Antigravity SDK &amp; Canvas LMS MCP
-      </div>
+      <div slot="footer" class="hd-text-weight-normal hd-muted hd-size-6">Google Antigravity SDK &amp; Canvas LMS MCP</div>
       <hd-layout-split ratio="1:1">
-        <h2 slot="heading">エージェントカスタマイズ</h2>
+        <h2 slot="heading">エージェントの賢さはどう作る？</h2>
         <hd-box slot="left" variant="main">
-          <h3 slot="heading">Model Context Protocol</h3>
+          <h3 slot="heading">Model Context Protocol (MCP)</h3>
           <div class="hd-p-3">
             <ul>
-              <li class="hd-mb-2"><strong>オープン標準プロトコル:</strong> LLMがローカルまたはリモートのツールやデータにアクセスするための統一基準。</li>
-              <li class="hd-mb-2"><strong>動的クライアント連携:</strong> サーバーが提供するAPIエンドポイントとパラメータのスキーマ情報を動的に公開。</li>
-              <li class="hd-mb-2"><strong>安全性の担保:</strong> 認証鍵や接続情報をMCPサーバー側で隠蔽し、安全に実行環境に接続します。</li>
+              <li class="hd-mb-2"><strong>共通の規格！:</strong> AIがツールやデータに触るための統一的なルールです。</li>
+              <li class="hd-mb-2"><strong>API情報を自動公開:</strong> 必要なエンドポイントやパラメータ構成をAIにダイレクトに伝達。</li>
+              <li class="hd-mb-2"><strong>接続情報を隠蔽:</strong> トークンなどを隠したまま、安全な実行環境で動かせます。</li>
             </ul>
           </div>
         </hd-box>
@@ -288,9 +289,9 @@
           <h3 slot="heading">Agent Skills</h3>
           <div class="hd-p-3">
             <ul>
-              <li class="hd-mb-2"><strong>パッケージ化された指示:</strong> エージェントに必要な手順書（SKILL.md）、スクリプト、参照資料を格納。</li>
-              <li class="hd-mb-2"><strong>行動ガイドのインポート:</strong> ワークスペース検知により、関連するスキルが自動的にエージェントに供給されます。</li>
-              <li class="hd-mb-2"><strong>効率的なツール運用:</strong> ハマりやすい手順やルールを事前に教え込むことで、不要な試行錯誤をカット。</li>
+              <li class="hd-mb-2"><strong>指示書をパッケージ化:</strong> ガイドライン（<code class="hd-code">SKILL.md</code>）やスクリプトを同梱。</li>
+              <li class="hd-mb-2"><strong>勝手にインポート:</strong> フォルダを検知して、AIが手順を自動でロードします。</li>
+              <li class="hd-mb-2"><strong>試行錯誤を撲滅:</strong> ハマりやすい手順を事前に叩き込んで、AIの無駄なエラーをカット！</li>
             </ul>
           </div>
         </hd-box>
@@ -300,20 +301,19 @@
     <!-- Page 13: Canvas LMS API -->
     <hd-slide>
       <div slot="header" class="hd-text-weight-semibold hd-muted hd-size-6">Canvas LMS API</div>
-      <div slot="footer" class="hd-text-weight-normal hd-muted hd-size-6">Google Antigravity SDK &amp; Canvas LMS MCP
-      </div>
+      <div slot="footer" class="hd-text-weight-normal hd-muted hd-size-6">Google Antigravity SDK &amp; Canvas LMS MCP</div>
       <hd-layout>
-        <h2 slot="heading">Canvas LMS API</h2>
+        <h2 slot="heading">何ができる？ Canvas LMS API</h2>
         <div>
           <p class="hd-mb-3 hd-size-4">
-            Canvas LMSでは多種多様な操作を行うためのWeb APIが公式に公開されています。
+            学校や大学で大活躍の Canvas LMS は、超強力な公式Web APIを提供しています！
           </p>
           <hd-callout variant="main">
-            アクセストークンをエージェントに認識させることで、コースの操作から採点管理まであらゆるオペレーションを自動化可能です。
+            トークンをエージェントに渡すだけで、課題の確認から採点フィードバックまで完全自動化！
           </hd-callout>
           <ul class="hd-mt-3">
-            <li class="hd-mb-2"><strong>トークンによる認可:</strong> 環境変数等でアクセストークンを設定し、安全にプログラムからCanvasを操作。</li>
-            <li class="hd-mb-2"><strong>実行可能操作:</strong> コースの一覧確認、課題情報の収集、ディスカッション投稿、学生提出物の採点やフィードバック書き込み。</li>
+            <li class="hd-mb-2"><strong>超カンタン接続:</strong> 環境変数にトークンを設定するだけで、すぐ準備完了。</li>
+            <li class="hd-mb-2"><strong>できること色々:</strong> コースの一覧取得、課題の回収、ディスカッション投稿、学生への評価入力など。</li>
           </ul>
         </div>
       </hd-layout>
@@ -322,18 +322,16 @@
     <!-- Page 14: Technical Composition -->
     <hd-slide>
       <div slot="header" class="hd-text-weight-semibold hd-muted hd-size-6">技術構成</div>
-      <div slot="footer" class="hd-text-weight-normal hd-muted hd-size-6">Google Antigravity SDK &amp; Canvas LMS MCP
-      </div>
+      <div slot="footer" class="hd-text-weight-normal hd-muted hd-size-6">Google Antigravity SDK &amp; Canvas LMS MCP</div>
       <hd-layout-split ratio="1:1">
-        <h2 slot="heading">技術構成</h2>
+        <h2 slot="heading">システムの裏側（技術構成）</h2>
         <hd-box slot="left" variant="main">
           <h3 slot="heading">canvas-lms-mcp</h3>
           <div class="hd-p-3">
             <ul>
-              <li class="hd-mb-2"><strong>汎用ツール構成:</strong> <code class="hd-code">search-canvas-api</code> と <code
-                  class="hd-code">call-canvas-api</code> の2ツールに集約。</li>
-              <li class="hd-mb-2"><strong>1000超のAPI操作:</strong> エンドポイント一覧をAIに参照させ、無数の操作を動的かつ汎用的にカバーします。</li>
-              <li class="hd-mb-2"><strong>メタデータの統合:</strong> 軽量でありながら網羅性の高いAPI呼び出し基盤を実現。</li>
+              <li class="hd-mb-2"><strong>たったの2ツールに集約:</strong> 検索用の <code class="hd-code">search-canvas-api</code> と、実行用の <code class="hd-code">call-canvas-api</code> だけ！</li>
+              <li class="hd-mb-2"><strong>1000超のAPI操作に対応:</strong> エンドポイント一覧をAIが動的に探し、パラメータを自動で組み立てます。</li>
+              <li class="hd-mb-2"><strong>超スッキリ設計:</strong> ツールを大量に実装する必要がなく、壊れにくい最強の基盤です。</li>
             </ul>
           </div>
         </hd-box>
@@ -341,9 +339,9 @@
           <h3 slot="heading">canvas-lms スキル</h3>
           <div class="hd-p-3">
             <ul>
-              <li class="hd-mb-2"><strong>ノウハウの共有:</strong> エージェントが効果的にMCPを叩くためのガイドライン（SKILL.md）を内包。</li>
-              <li class="hd-mb-2"><strong>ページネーション・役割対応:</strong> 複数ページのデータ取得や、教員/学生権限ごとのパラメータ分岐を詳細に指示。</li>
-              <li class="hd-mb-2"><strong>動的解決ルール:</strong> 静的IDのハードコードを排し、動的なID取得と連携を行う手順を確立。</li>
+              <li class="hd-mb-2"><strong>ノウハウ指示書:</strong> AIが正しくAPIを呼び出すための「コツ」をまとめたガイド。</li>
+              <li class="hd-mb-2"><strong>実運用レベル of カバー:</strong> 複数ページの取得方法や、教員・学生ごとのパラメータ違いもクリア。</li>
+              <li class="hd-mb-2"><strong>動的ID解決:</strong> ハードコードは一切なし！APIから自動で欲しいIDを特定して次に繋ぎます。</li>
             </ul>
           </div>
         </hd-box>
@@ -353,20 +351,17 @@
     <!-- Page 15: Try Now -->
     <hd-slide>
       <div slot="header" class="hd-text-weight-semibold hd-muted hd-size-6">Try Now</div>
-      <div slot="footer" class="hd-text-weight-normal hd-muted hd-size-6">Google Antigravity SDK &amp; Canvas LMS MCP
-      </div>
+      <div slot="footer" class="hd-text-weight-normal hd-muted hd-size-6">Google Antigravity SDK &amp; Canvas LMS MCP</div>
       <hd-layout>
-        <h2 slot="heading">Try Now</h2>
+        <h2 slot="heading">今すぐ使ってみよう！</h2>
         <div>
           <p class="hd-mb-3 hd-size-4">
-            設定とインストールを行うことで、すぐにお手元のエージェントで利用できます。
+            セットアップは一瞬！お手元のAIエージェントにすぐ導入できます。
           </p>
           <ul>
-            <li class="hd-mb-2"><strong>簡単導入:</strong> MCP設定ファイルにサーバー定義を追加し、お持ちのアクセストークンを流し込むだけ。</li>
-            <li class="hd-mb-2"><strong>スキルの配置:</strong> プロジェクトの <code class="hd-code">.agents/skills/canvas-lms</code>
-              を読み込ませてガイドラインを適用。</li>
-            <li class="hd-mb-2"><strong>マルチエージェント対応:</strong> Claude Desktop / VS Code Extension, Antigravity SDK, Codex
-              などで動作。</li>
+            <li class="hd-mb-2"><strong>3ステップで導入:</strong> MCP設定にサーバーを登録 ➡️ トークンを入力 ➡️ 即実行！</li>
+            <li class="hd-mb-2"><strong>置くだけ簡単:</strong> <code class="hd-code">.agents/skills/canvas-lms</code> を配置するだけで、AIが勝手に賢くなります。</li>
+            <li class="hd-mb-2"><strong>マルチエージェント対応:</strong> Claude Desktop、VS Code、Antigravity SDK などの各環境で動作！</li>
           </ul>
         </div>
       </hd-layout>
