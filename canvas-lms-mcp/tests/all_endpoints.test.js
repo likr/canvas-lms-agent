@@ -8,9 +8,13 @@ const endpointsPath = path.join(__dirname, "../tools/endpoints.json");
 const endpoints = JSON.parse(fs.readFileSync(endpointsPath, "utf-8"));
 
 test("call_canvas_api can execute all generated endpoints", async () => {
-  const handler = allHandlers.call_canvas_api;
-
   for (const ep of endpoints) {
+    const handlerName = `call_canvas_api_${ep.method.toLowerCase()}`;
+    const handler = allHandlers[handlerName];
+    if (!handler) {
+      throw new Error(`Handler not found for endpoint: ${ep.method} ${ep.path}`);
+    }
+
     let calledConfig = null;
     const mockClient = async (config) => {
       calledConfig = config;
@@ -53,7 +57,6 @@ test("call_canvas_api can execute all generated endpoints", async () => {
     }
 
     const result = await handler(mockClient, {
-      method: ep.method,
       path: testPath,
       query_params: Object.keys(queryParams).length > 0 ? queryParams : undefined,
       body_params: Object.keys(bodyParams).length > 0 ? bodyParams : undefined

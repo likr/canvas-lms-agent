@@ -27,16 +27,20 @@ Make sure the following environment variables are supplied:
 ## Tool Configuration & Pagination Guidelines
 
 ### Dynamic Tool Execution
-The `canvas-lms` skill no longer uses direct endpoint tools (like `GET /api/v1/courses`). Instead, it provides two primary dynamic tools:
+The `canvas-lms` skill no longer uses direct endpoint tools (like `GET /api/v1/courses`). Instead, it provides a set of dynamic tools:
 1. `search_canvas_api`: Use this to look up the exact HTTP method and API path based on keywords (e.g., query="courses").
-2. `call_canvas_api`: Use this to execute the API call, supplying the `method`, `path`, `query_params`, and `body_params`.
+2. Method-specific execution tools: Use these to execute the API call based on the HTTP method of the endpoint:
+   - `call_canvas_api_get`: For `GET` requests. Takes `path` and `query_params`.
+   - `call_canvas_api_post`: For `POST` requests. Takes `path`, `query_params`, and `body_params`.
+   - `call_canvas_api_put`: For `PUT` requests. Takes `path`, `query_params`, and `body_params`.
+   - `call_canvas_api_delete`: For `DELETE` requests. Takes `path` and `query_params`.
 
-**Note:** The detailed guides (e.g., `student_guide.md`, `teacher_guide.md`) document the REST API endpoints and methods (e.g., "Use `GET /api/v1/courses`"). When you see these, you must call them using the `call_canvas_api` tool. If an endpoint isn't listed or you are unsure, use `search_canvas_api` to look it up.
+**Note:** The detailed guides (e.g., `student_guide.md`, `teacher_guide.md`) document the REST API endpoints and methods (e.g., "Use `GET /api/v1/courses`"). When you see these, you must call them using the corresponding method-specific tool (e.g., `call_canvas_api_get` for `GET /api/v1/courses`). If an endpoint isn't listed or you are unsure, use `search_canvas_api` to look it up.
 
 ### Pagination
-Canvas API pagination must be handled manually by the agent. The `call_canvas_api` tool does NOT automatically fetch all pages.
+Canvas API pagination must be handled manually by the agent. The execution tools (e.g., `call_canvas_api_get`) do NOT automatically fetch all pages.
 - When you expect multiple results, provide `page` and `per_page` within `query_params` (e.g., `query_params: { page: 1, per_page: 50 }`).
-- If the length of the array returned by `call_canvas_api` is equal to your `per_page` value, assume there is a next page. Increment `page` and fetch again if you need more records.
+- If the length of the array returned by the API call is equal to your `per_page` value, assume there is a next page. Increment `page` and fetch again if you need more records.
 
 ---
 

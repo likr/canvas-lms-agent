@@ -17,10 +17,10 @@
   - Avoid hardcoding static student IDs or user IDs in verification scripts.
   - Retrieve lists dynamically (e.g. fetching grades/courses first), select a valid student `user_id` from the active response data, and pass it dynamically to subsequent write/grading test cases.
 - **Dynamic Tool Usage**:
-  - The legacy individual endpoint tools (e.g., `get_courses`) are no longer exposed. Instead, you must use `search_canvas_api` to look up the correct path and method, and `call_canvas_api` to execute the request. Note that reference guides now directly document the REST API endpoints (e.g., `GET /api/v1/courses`); you can pass these directly to `call_canvas_api`.
+  - The legacy individual endpoint tools (e.g., `get_courses`) are no longer exposed. Instead, you must use `search_canvas_api` to look up the correct path and method, and use the method-specific execution tool (`call_canvas_api_get`, `call_canvas_api_post`, `call_canvas_api_put`, `call_canvas_api_delete`) to execute the request. Note that reference guides now directly document the REST API endpoints (e.g., `GET /api/v1/courses`); you can call them using the corresponding tool (e.g., `call_canvas_api_get`).
   - Do not create manual tool implementations; any new Canvas API capabilities must be introduced by updating the API definition markdown files in `docs/services/canvas/resources/` and running the `generate_tools.py` script.
 - **Manual Pagination**:
-  - The `call_canvas_api` tool does not auto-paginate. You must handle pagination manually by passing `page` and `per_page` in `query_params`. If the returned array length equals `per_page`, increment the `page` number and fetch again if more results are needed.
+  - The execution tools (e.g., `call_canvas_api_get`) do not auto-paginate. You must handle pagination manually by passing `page` and `per_page` in `query_params`. If the returned array length equals `per_page`, increment the `page` number and fetch again if more results are needed.
 
 ## Git Workflow & Branch Policy
 - **Branch Protection & Development Branch (`dev`)**: Direct pushes/commits to protected branches (e.g. `master` or main release branches) are restricted. Perform all future feature development, testing, and documentation edits on the `dev` branch.
