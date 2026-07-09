@@ -9,8 +9,8 @@ test("search_canvas_api returns matching results", async () => {
   assert.ok(result.total_matches > 0, "Total matches should be > 0");
 });
 
-test("call_canvas_api formats GET request correctly", async () => {
-  const handler = allHandlers.call_canvas_api;
+test("call_canvas_api_get formats GET request correctly", async () => {
+  const handler = allHandlers.call_canvas_api_get;
   let calledConfig = null;
   const mockClient = async (config) => {
     calledConfig = config;
@@ -18,7 +18,6 @@ test("call_canvas_api formats GET request correctly", async () => {
   };
 
   const result = await handler(mockClient, {
-    method: "GET",
     path: "/api/v1/courses/1",
     query_params: { include: ["term"] },
   });
@@ -29,8 +28,8 @@ test("call_canvas_api formats GET request correctly", async () => {
   assert.deepStrictEqual(result, { success: true });
 });
 
-test("call_canvas_api formats POST request correctly", async () => {
-  const handler = allHandlers.call_canvas_api;
+test("call_canvas_api_post formats POST request correctly", async () => {
+  const handler = allHandlers.call_canvas_api_post;
   let calledConfig = null;
   const mockClient = async (config) => {
     calledConfig = config;
@@ -38,7 +37,6 @@ test("call_canvas_api formats POST request correctly", async () => {
   };
 
   const result = await handler(mockClient, {
-    method: "POST",
     path: "/api/v1/courses",
     body_params: { course: { name: "New Course" } },
   });
@@ -47,5 +45,41 @@ test("call_canvas_api formats POST request correctly", async () => {
   assert.strictEqual(calledConfig.url, "/api/v1/courses");
   assert.deepStrictEqual(calledConfig.data, { course: { name: "New Course" } });
   assert.deepStrictEqual(result, { created: true });
+});
+
+test("call_canvas_api_put formats PUT request correctly", async () => {
+  const handler = allHandlers.call_canvas_api_put;
+  let calledConfig = null;
+  const mockClient = async (config) => {
+    calledConfig = config;
+    return { data: { updated: true } };
+  };
+
+  const result = await handler(mockClient, {
+    path: "/api/v1/courses/1",
+    body_params: { course: { name: "Updated Course" } },
+  });
+
+  assert.strictEqual(calledConfig.method, "put");
+  assert.strictEqual(calledConfig.url, "/api/v1/courses/1");
+  assert.deepStrictEqual(calledConfig.data, { course: { name: "Updated Course" } });
+  assert.deepStrictEqual(result, { updated: true });
+});
+
+test("call_canvas_api_delete formats DELETE request correctly", async () => {
+  const handler = allHandlers.call_canvas_api_delete;
+  let calledConfig = null;
+  const mockClient = async (config) => {
+    calledConfig = config;
+    return { data: { deleted: true } };
+  };
+
+  const result = await handler(mockClient, {
+    path: "/api/v1/courses/1",
+  });
+
+  assert.strictEqual(calledConfig.method, "delete");
+  assert.strictEqual(calledConfig.url, "/api/v1/courses/1");
+  assert.deepStrictEqual(result, { deleted: true });
 });
 
